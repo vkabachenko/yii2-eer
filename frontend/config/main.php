@@ -29,5 +29,10 @@ return [
             'errorAction' => 'site/error',
         ],
     ],
+    'modules' => [
+        'program' => [
+            'class' => 'frontend\modules\program\Module',
+        ],
+    ],
     'params' => $params,
 ];
