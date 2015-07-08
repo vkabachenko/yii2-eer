@@ -15,19 +15,19 @@ function ajaxModal(link,header) {
 // all click handlers in grid buttons
 function clickHandlers() {
     $('.actionView').click(function(){
-        return ajaxModal(this,'View country');
+        return ajaxModal(this,'Просмотр');
     });
 
     $('.actionUpdate').click(function(){
-        return ajaxModal(this,'Update country');
+        return ajaxModal(this,'Редактирование');
     });
 
     $('#actionCreate').click(function(){
-        return ajaxModal(this,'New country');
+        return ajaxModal(this,'Создание');
     });
 
     $('.actionDelete').click(function(){
-        return ajaxModal(this,'Remove country');
+        return ajaxModal(this,'Удаление');
     });
 }
 

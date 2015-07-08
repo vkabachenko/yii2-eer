@@ -33,7 +33,7 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Главная', 'url' => ['faculty/main/index']],
+                ['label' => 'Главная', 'url' => ['/faculty/main/index']],
             ];
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

@@ -1,12 +1,36 @@
-<div class="program-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
-</div>
+<?php
+
+/* @var $faculty Faculty */
+
+use frontend\modules\program\helpers\AccordionContent;
+use yii\jui\Accordion;
+use yii\helpers\Html;
+use frontend\modules\program\assets\AccordionAsset;
+use common\models\Faculty;
+
+AccordionAsset::register($this);
+
+$this->title = 'Образовательные программы';
+$this->params['breadcrumbs'][] = $this->title;
+
+echo Html::tag('h2',$this->title);
+echo Html::tag('h3','Факультет: '.$faculty->name);
+
+    $accordion = new AccordionContent();
+    $items = $accordion->items($faculty->id);
+
+if (count($items) == 0) {
+    echo Html::tag('p','Нет образовательных программ');
+}
+else {
+
+    echo Accordion::widget([
+         'items' => $items,
+         'clientOptions' => [
+            'event' => 'mouseover'
+         ],
+         'options' => [
+             'id' => 'accordionContainer'
+         ]
+         ]);
+}

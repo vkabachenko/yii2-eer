@@ -20,39 +20,5 @@ use yii\widgets\ActiveForm;
 
 <?php ActiveForm::end(); ?>
 
-
-<!-- Additional -->
-
-<!-- Js script for ajax submitting form -->
-
-<?php
-
-$script =
-    <<<JS
-
-$('#updateForm').on('beforeSubmit',function(){ // runs after validation
-
-    $.post( // method - post
-        $(this).attr('action'), // url in form's action
-        $(this).serialize(),    // all form's data - to query string
-        function(data) {            // update action returns success
-                    var interval = data ? 1000 : 0; //timeout interval for creation - 1 sec
-                    $('#modalWindow .modal-body').html(data); // alert message if needed
-                    // show alert message and hide
-                    setTimeout(function(){
-                        $('#modalWindow').modal('hide'); // hide modal window
-                        $.pjax.reload({container:"#pjaxWrap"}); // reload grid
-                    },interval);
-        });
-
-    return false; // stops further submitting actions
-
-});
-
-JS;
-
-$this->registerJs($script);
-
-
-
+<?php require(Yii::$app->basePath.'/views/grid/update.php'); ?>
 

@@ -24,6 +24,7 @@ use Yii;
  */
 class Program extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -87,6 +88,16 @@ class Program extends \yii\db\ActiveRecord
         return $this->hasMany(ProgramFile::className(), ['id_program' => 'id']);
     }
 */
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+      public function getProgramHeaders()
+        {
+            return $this->hasMany(ProgramHeader::className(), ['id_program' => 'id']);
+        }
+
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

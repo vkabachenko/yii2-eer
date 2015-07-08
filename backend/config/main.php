@@ -16,6 +16,9 @@ return [
         'faculty' => [
             'class' => 'backend\modules\faculty\Module',
         ],
+        'program' => [
+            'class' => 'backend\modules\program\Module',
+        ],
     ],
     'components' => [
         'user' => [

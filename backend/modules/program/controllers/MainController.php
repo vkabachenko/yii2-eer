@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\modules\faculty\controllers;
+namespace backend\modules\program\controllers;
 
 use Yii;
 use backend\controllers\GridController;
@@ -9,7 +9,8 @@ use yii\data\ActiveDataProvider;
 class MainController extends GridController
 {
     public function init() {
-        $this->_model = 'common\models\Faculty';
+        $this->_model = 'common\models\Program';
+        $this->_idParentName = 'id_faculty';
     }
 
 
@@ -18,7 +19,7 @@ class MainController extends GridController
         return new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['name' => SORT_ASC,]
+                'defaultOrder' => ['code' => SORT_ASC,]
             ],
             'pagination' => false,
         ]);

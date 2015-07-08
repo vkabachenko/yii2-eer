@@ -1,0 +1,46 @@
+<!-- дополнение к grid/index -->
+
+<!-- Additional  -->
+
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
+use backend\assets\GridAsset;
+
+GridAsset::register($this);
+?>
+
+<!-- Modal window declaration -->
+<?php Modal::begin([
+    'id' => 'modalWindow',
+    'header' => '<h2>Header</h2>',
+]); ?>
+
+<?php Modal::end(); ?>
+<!-- End of modal window declaration -->
+
+<!-- functions for grid buttons actions -->
+<?php
+
+
+function actionUpdate($url,$model,$key) {
+    $url = Url::to(['update','id' => $key]);
+    return Html::a('<span class="glyphicon glyphicon-pencil"></span>',
+        $url,[
+            'class' => 'actionUpdate',
+            'data-pjax' => '0',
+        ]);
+}
+
+function actionDelete($url,$model,$key) {
+    $url = Url::to(['delete','id' => $key]);
+    return Html::a('<span class="glyphicon glyphicon-trash"></span>',
+        $url,[
+            'class' => 'actionDelete',
+            'data-pjax' => '0',
+        ]);
+}
+
+
+

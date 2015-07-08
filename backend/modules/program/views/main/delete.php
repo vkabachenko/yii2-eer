@@ -1,11 +1,11 @@
 <?php
 use yii\helpers\Html;
 /* @var $this yii\web\View */
-/* @var $model common\models\Faculty */
+/* @var $model common\models\Program */
 
 ?>
 <p>
-    Удалить запись о факультете <?= $model->name ?> ?
+    Удалить запись об образовательной программе <?= $model->name ?> ?
 </p>
 
 <?= Html::a('Удалить',['delete','id' => $model->id],

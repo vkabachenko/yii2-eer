@@ -1,6 +1,7 @@
 <?php
 
 use yii\widgets\ListView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /** @var $provider yii\data\ActiveDataProvider */
@@ -10,7 +11,7 @@ $this->title = 'Факультеты';
 
 ?>
 
-    <h2>Факультеты</h2>
+    <?= Html::tag('h2',$this->title); ?>
     <?= ListView::widget([
         'dataProvider' => $provider,
         'itemView' => '_faculty',

@@ -1,0 +1,7 @@
+#accordionContainer a  {
+    color:#337ab7;
+}
+#accordionContainer .accordionContent {
+    font-weight: bold;
+    margin-right: 20px;
+}
