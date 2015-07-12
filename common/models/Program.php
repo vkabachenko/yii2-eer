@@ -83,11 +83,21 @@ class Program extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getProgramFiles()
+    public function getProgramFiles()
     {
         return $this->hasMany(ProgramFile::className(), ['id_program' => 'id']);
     }
-*/
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(File::className(), ['id' => 'id_file'])
+               ->via('programFiles');
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

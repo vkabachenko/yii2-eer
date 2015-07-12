@@ -19,6 +19,9 @@ return [
         'program' => [
             'class' => 'backend\modules\program\Module',
         ],
+        'file' => [
+            'class' => 'backend\modules\file\Module',
+        ],
     ],
     'components' => [
         'user' => [

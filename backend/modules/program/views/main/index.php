@@ -8,6 +8,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $provider yii\data\ActiveDataProvider */
 /* @var $idParent integer */
+/* @var $fileControllerName string */
 
 require(Yii::$app->basePath.'/views/grid/index.php');
 
@@ -58,10 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}',
+            'template' => '{update}{delete}{file}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
+                'file' => 'actionFile',
             ]
         ],
     ],

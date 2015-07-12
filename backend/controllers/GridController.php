@@ -1,7 +1,6 @@
 <?php
 
 // предок для всех контроллеров, использующих GridView
-// самостоятельно не используется!
 
 namespace backend\controllers;
 
@@ -9,12 +8,12 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class GridController extends Controller
+abstract class GridController extends Controller
 {
     protected $_model; // Какая модель используется в контроллере
     protected $_idParentName; // имя id родительской таблицы
 
-
+    abstract protected function createProvider($query);
 
     public function actionIndex($idParent = null)
     {
@@ -96,6 +95,7 @@ class GridController extends Controller
         ]);
     }
 
+
     /**
      * Finds the model based on its primary key value or create a new model
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -114,10 +114,5 @@ class GridController extends Controller
         }
     }
 
-    protected function createProvider($query) {
-
-        return null;
-
-    }
 
 }

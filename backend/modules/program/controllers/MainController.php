@@ -9,8 +9,10 @@ use yii\data\ActiveDataProvider;
 class MainController extends GridController
 {
     public function init() {
+
         $this->_model = 'common\models\Program';
         $this->_idParentName = 'id_faculty';
+
     }
 
 

@@ -7,14 +7,12 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $provider yii\data\ActiveDataProvider */
+/* @var $idParent integer */
 
-require(Yii::$app->basePath.'/views/grid/index.php');
+require(Yii::$app->basePath.'/views/grid/index.php'); ?>
 
-$this->title = 'Факультеты';
-?>
-<h2>Факультеты</h2>
 <p>
-    <?= Html::a('Новый факультет', ['create'],
+    <?= Html::a('Новый файл', ['create','idParent' => $idParent],
         [
             'class' => 'btn btn-success',
             'id' => 'actionCreate',
@@ -26,13 +24,12 @@ $this->title = 'Факультеты';
     'dataProvider' => $provider,
     'columns' => [
         [ // column for name attribute as a link
-            'attribute' => 'name',
+            'attribute' => 'title',
             'format' => 'raw',
             'value' => function($model, $key, $index, $column) {
-                return Html::a(Html::encode($model->name),
-                    Url::to(['/program','idParent' => $model->id, ]),
-                    ['data-pjax' => '0']);
-                }
+                return Html::a(Html::encode($model->title),
+                    Url::to(['/file/main/download','id' => $model->id, ]),
+                    ['data-pjax' => '0']);                }
         ],
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',

@@ -14,9 +14,6 @@ function ajaxModal(link,header) {
 
 // all click handlers in grid buttons
 function clickHandlers() {
-    $('.actionView').click(function(){
-        return ajaxModal(this,'Просмотр');
-    });
 
     $('.actionUpdate').click(function(){
         return ajaxModal(this,'Редактирование');

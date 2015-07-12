@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\modules\faculty\controllers;
 
 use Yii;
@@ -11,10 +10,7 @@ class MainController extends GridController
     public function init() {
         $this->_model = 'common\models\Faculty';
     }
-
-
     protected function createProvider($query) {
-
         return new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -22,6 +18,5 @@ class MainController extends GridController
             ],
             'pagination' => false,
         ]);
-
     }
 }
