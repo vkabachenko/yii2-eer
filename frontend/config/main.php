@@ -33,6 +33,9 @@ return [
         'program' => [
             'class' => 'frontend\modules\program\Module',
         ],
+        'file' => [
+            'class' => 'frontend\modules\file\Module',
+        ],
     ],
     'params' => $params,
 ];

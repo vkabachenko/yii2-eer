@@ -3,6 +3,7 @@
 namespace frontend\modules\program\helpers;
 
 use common\models\Program;
+use common\models\ProgramFile;
 use common\models\ProgramHeader;
 use yii\base\Object;
 use yii\helpers\Html;
@@ -58,9 +59,24 @@ class AccordionContent extends Object
         $attributes = array_diff($this->model->attributes(),
                         $this->defaultAttributes, $this->disabledAttributes);
         $content = $this->concatAttributes($attributes, true, '<br/>');
+        $content .= $this->modelFiles();
 
         return $content;
     }
+
+    // link to files related to model
+    private function modelFiles()
+    {
+        if (ProgramFile::find()->where(['id_program' => $this->model->id])->exists()) {
+            return Html::a('Документы',
+                        ['/file/program','id' => $this->model->id],
+                        ['class' => 'linkedFiles']);
+        }
+        else {
+            return '';
+        }
+    }
+
 
     public function items($id_faculty) {
 

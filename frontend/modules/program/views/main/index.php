@@ -7,6 +7,7 @@ use yii\jui\Accordion;
 use yii\helpers\Html;
 use frontend\modules\program\assets\AccordionAsset;
 use common\models\Faculty;
+use yii\bootstrap\Modal;
 
 AccordionAsset::register($this);
 
@@ -34,3 +35,12 @@ else {
          ]
          ]);
 }
+
+
+// Modal window declaration
+Modal::begin([
+    'id' => 'modalWindow',
+    'header' => '<h2>Документы</h2>',
+]);
+
+Modal::end();

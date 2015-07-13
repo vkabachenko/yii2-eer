@@ -10,7 +10,7 @@ class AccordionAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $js = [
-
+        'js/listFiles.js'
     ];
     public $css = [
         'css/accordion.css'
