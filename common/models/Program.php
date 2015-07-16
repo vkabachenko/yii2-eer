@@ -66,20 +66,27 @@ class Program extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getDisciplines()
+    public function getDisciplines()
     {
         return $this->hasMany(Discipline::className(), ['id_program' => 'id']);
     }
-*/
 
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getIdFaculty()
+    public function getDisciplineNames()
+    {
+        return $this->hasMany(DisciplineName::className(), ['id_program' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdFaculty()
     {
         return $this->hasOne(Faculty::className(), ['id' => 'id_faculty']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -111,10 +118,10 @@ class Program extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getStudentEducations()
+    public function getStudentEducations()
     {
         return $this->hasMany(StudentEducation::className(), ['id_program' => 'id']);
     }
-*/
+
 
 }

@@ -48,28 +48,28 @@ class Faculty extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    /*
+
     public function getPrograms()
     {
         return $this->hasMany(Program::className(), ['id_faculty' => 'id']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    /*
+
     public function getStudentEducations()
     {
         return $this->hasMany(StudentEducation::className(), ['id_faculty' => 'id']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    /*
+
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['id_faculty' => 'id']);
     }
-    */
+
 }

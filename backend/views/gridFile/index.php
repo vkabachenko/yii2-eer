@@ -14,8 +14,7 @@ require(Yii::$app->basePath.'/views/grid/index.php'); ?>
 <p>
     <?= Html::a('Новый файл', ['create','idParent' => $idParent],
         [
-            'class' => 'btn btn-success',
-            'id' => 'actionCreate',
+            'class' => 'btn btn-success actionCreate',
         ]) ?>
 </p>
 

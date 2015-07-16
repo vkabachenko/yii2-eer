@@ -9,13 +9,6 @@ use common\models\File;
 
 class ProgramController extends GridFileController
 {
-    public function init() {
-
-        parent::init();
-        $this->_idParentName = 'id_program';
-
-    }
-
 
     protected function createQuery($idParent) {
 

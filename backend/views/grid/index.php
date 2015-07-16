@@ -46,7 +46,7 @@ function actionDelete($url,$model,$key) {
 // manage files. Not via ajax
 function actionFile($url,$model,$key) {
     /* @var $model yii\db\ActiveRecord */
-    $controller = $model->tableName();
+    $controller = strtr($model->tableName(),'_','-');
     $url = Url::to(["/file/$controller",'idParent' => $key]);
     return Html::a('<span class="glyphicon glyphicon-file"></span>',
         $url,[

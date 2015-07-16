@@ -24,8 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <p>
     <?= Html::a('Новая программа', ['create','idParent' =>$idParent ],
         [
-            'class' => 'btn btn-success',
-            'id' => 'actionCreate',
+            'class' => 'btn btn-success actionCreate',
         ]) ?>
 </p>
 
@@ -39,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'format' => 'raw',
             'value' => function($model, $key, $index, $column) {
                 return Html::a(Html::encode($model->name),
-                    Url::to(['/discipline/main/index','idParent' => $model->id, ]),
+                    ['/discipline','idParent' => $model->id, ],
                     ['data-pjax' => '0']);                }
         ],
         'profile',

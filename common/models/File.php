@@ -67,11 +67,11 @@ class File extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getDisciplineFiles()
+    public function getDisciplineFiles()
     {
         return $this->hasMany(DisciplineFile::className(), ['id_file' => 'id']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -83,19 +83,19 @@ class File extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getStudentPortfolios()
+   public function getStudentPortfolios()
     {
         return $this->hasMany(StudentPortfolio::className(), ['id_file' => 'id']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */
-/*    public function getStudentResultFiles()
+    public function getStudentResultFiles()
     {
         return $this->hasMany(StudentResultFile::className(), ['id_file' => 'id']);
     }
-*/
+
     /**
      * @inheritdoc
      */

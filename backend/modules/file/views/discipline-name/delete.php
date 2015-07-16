@@ -1,0 +1,1 @@
+<?php require(Yii::$app->basePath.'/views/gridFile/delete.php'); ?>

@@ -13,7 +13,7 @@ trait AttributeTrait
         $decode = \Yii::$app->params['decode'];
         $key = $model->$fieldName;
 
-        if (isset($decode[$complexName]))
+        if ($key !== null && isset($decode[$complexName]))
             return $decode[$complexName][$key];
         else
             return  $key;

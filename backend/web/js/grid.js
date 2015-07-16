@@ -19,7 +19,7 @@ function clickHandlers() {
         return ajaxModal(this,'Редактирование');
     });
 
-    $('#actionCreate').click(function(){
+    $('.actionCreate').click(function(){
         return ajaxModal(this,'Создание');
     });
 

@@ -11,6 +11,8 @@ return [
     'decode' => [
         'program.level' => ['бакалавриат','магистратура','специалитет','аспирантура'],
         'program.form' => ['очное','заочное'],
+        'discipline.kind' => ['дисциплина', 'практика', 'ГИА'],
+        'discipline.block' => ['базовый','вариативный','ДПВ'], // см. common/models/Discipline
     ],
 
 

@@ -22,6 +22,9 @@ return [
         'file' => [
             'class' => 'backend\modules\file\Module',
         ],
+        'discipline' => [
+            'class' => 'backend\modules\discipline\Module',
+        ],
     ],
     'components' => [
         'user' => [

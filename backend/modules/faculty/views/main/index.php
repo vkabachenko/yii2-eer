@@ -16,8 +16,7 @@ $this->title = 'Факультеты';
 <p>
     <?= Html::a('Новый факультет', ['create'],
         [
-            'class' => 'btn btn-success',
-            'id' => 'actionCreate',
+            'class' => 'btn btn-success actionCreate',
         ]) ?>
 </p>
 
