@@ -52,6 +52,8 @@ class DisciplineName extends \yii\db\ActiveRecord
             'name' => 'Наименование',
             'disciplineCode' => 'Шифр',
             'disciplineSemesters' => 'Семестры',
+            'kind' => 'Вид',
+            'block' => 'Блок',
         ];
     }
 
@@ -106,6 +108,23 @@ class DisciplineName extends \yii\db\ActiveRecord
         return implode(', ',$semesters);
     }
 
+    /**
+     * getter for kind
+     */
+    public function getKind() {
+
+        return $this->idDiscipline->kind;
+
+    }
+
+    /**
+     * getter for block
+     */
+    public function getBlock() {
+
+        return $this->idDiscipline->block;
+
+    }
 
     /**
      * @return \yii\db\ActiveQuery

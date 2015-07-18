@@ -49,7 +49,7 @@ class AccordionContent extends Object
         }
 
         return Html::a($this->concatAttributes($attributes),
-                    Url::to(['/disciplines','id_program' => $this->model->id,]));
+                    Url::to(['/discipline','id_program' => $this->model->id,]));
     }
 
     // program description
@@ -69,7 +69,7 @@ class AccordionContent extends Object
     {
         if (ProgramFile::find()->where(['id_program' => $this->model->id])->exists()) {
             return Html::a('Документы',
-                        ['/file/program','id' => $this->model->id],
+                        ['/file/main/program','id' => $this->model->id],
                         ['class' => 'linkedFiles']);
         }
         else {

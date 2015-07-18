@@ -1,19 +1,18 @@
 <?php
 
-namespace frontend\modules\program\assets;
+namespace frontend\assets;
 
 use yii\web\AssetBundle;
 
 
-class AccordionAsset extends AssetBundle
+class FilesAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-        'css/accordion.css'
+    public $js = [
+        'js/listFiles.js'
     ];
     public $depends = [
         'frontend\assets\AppAsset', // after layout scripts
-        'frontend\assets\FilesAsset',
     ];
 }
