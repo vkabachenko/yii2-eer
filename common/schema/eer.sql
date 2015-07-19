@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 16 2015 г., 10:00
+-- Время создания: Июл 19 2015 г., 09:22
 -- Версия сервера: 5.5.43
 -- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `discipline` (
   `block` tinyint(4) NOT NULL COMMENT 'блок (базовый/вариативный/ДПВ)',
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `discipline`
@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS `discipline` (
 
 INSERT INTO `discipline` (`id`, `id_program`, `code`, `kind`, `block`) VALUES
 (1, 4, '0011', 0, 2),
-(4, 4, '004', 0, 1);
+(4, 4, '004', 0, 1),
+(5, 4, '005', 1, 0),
+(6, 1, '006', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `discipline_file` (
   PRIMARY KEY (`id`),
   KEY `id_file` (`id_file`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `discipline_file`
@@ -81,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `discipline_name` (
   PRIMARY KEY (`id`),
   KEY `id_discipline` (`id_discipline`),
   KEY `id_program_main` (`id_program_main`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `discipline_name`
@@ -91,7 +93,9 @@ INSERT INTO `discipline_name` (`id`, `id_program_main`, `id_discipline`, `suffix
 (1, 4, 1, '1', 'Программа 1 - 11'),
 (2, 4, 1, '2', 'Программа 1-2'),
 (6, 4, 1, '3', 'Программа 4'),
-(7, 4, 4, '', 'Программа 5');
+(7, 4, 4, '', 'Программа 5'),
+(8, 4, 5, '', 'Программа 5-1'),
+(9, 1, 6, '', 'Программа 6');
 
 -- --------------------------------------------------------
 
@@ -173,7 +177,8 @@ CREATE TABLE IF NOT EXISTS `file` (
 INSERT INTO `file` (`id`, `title`, `document`, `filename`, `role`) VALUES
 (7, 'evp0105.png', 'evp0105.png', 'adxRZm102FPMONRr8MSu_3DasGi2kcAT.png', NULL),
 (9, 'yj', 'Снимок экрана от 2015-01-21 21:44:03.png', 'Hape0P2tUjCe6R9PREIi4Ad-s6BmjhD8.png', NULL),
-(11, 'yj', 'WP_20141228_009.jpg', 'HxnnCKKJkZqrZQz4Kn1uCbIPQ5NlNLgj.jpg', NULL);
+(11, 'yj', 'WP_20141228_009.jpg', 'HxnnCKKJkZqrZQz4Kn1uCbIPQ5NlNLgj.jpg', NULL),
+(12, 'WP_20141228_004.jpg', 'WP_20141228_004.jpg', 'EoQfs38WbvItDxHVPDWxzoLw_cfVwJUb.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `program_file` (
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `program_file`
@@ -225,7 +230,8 @@ CREATE TABLE IF NOT EXISTS `program_file` (
 
 INSERT INTO `program_file` (`id`, `id_program`, `id_file`) VALUES
 (3, 4, 7),
-(5, 4, 9);
+(5, 4, 9),
+(6, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -273,13 +279,11 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор',
   `id_student` int(11) NOT NULL COMMENT 'Ид студента',
   `year` int(11) NOT NULL COMMENT 'Год обучения',
-  `id_faculty` int(11) NOT NULL COMMENT 'Ид факультета',
   `id_program` int(11) NOT NULL COMMENT 'Ид образовательной программы',
   `course` tinyint(4) NOT NULL COMMENT 'Курс',
   `group` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Группа',
   PRIMARY KEY (`id`),
   KEY `id_student` (`id_student`),
-  KEY `id_faculty` (`id_faculty`),
   KEY `id_program` (`id_program`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=1 ;
 
@@ -431,7 +435,6 @@ ALTER TABLE `program_header`
 --
 ALTER TABLE `student_education`
   ADD CONSTRAINT `student_education_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_education_ibfk_2` FOREIGN KEY (`id_faculty`) REFERENCES `faculty` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_education_ibfk_3` FOREIGN KEY (`id_program`) REFERENCES `program` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

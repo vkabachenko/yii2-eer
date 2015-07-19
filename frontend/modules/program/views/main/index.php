@@ -35,6 +35,5 @@ else {
          ]);
 }
 
-require(Yii::$app->basePath.'/views/modal.php');
 
 

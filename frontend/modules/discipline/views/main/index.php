@@ -3,12 +3,10 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use common\models\DisciplineSemester;
-use frontend\assets\FilesAsset;
 
 /* @var $program common\models\Program */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $searchModel frontend\modules\discipline\models\DisciplineSearch */
-FilesAsset::register($this);
 
 $this->title = 'Дисциплины';
 $this->params['breadcrumbs'][] = [
@@ -89,6 +87,5 @@ $this->params['breadcrumbs'][] = $this->title;
     'summary' => ''
 ]);
 
-require(Yii::$app->basePath.'/views/modal.php');
 
 ?>

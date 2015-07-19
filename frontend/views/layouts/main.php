@@ -5,11 +5,14 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use common\helpers\YearHelper;
+use yii\bootstrap\Modal;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -33,7 +36,10 @@ AppAsset::register($this);
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Главная', 'url' => ['/site/index']],
+                ['label' => 'Учебный год '.YearHelper::getEducationYear(),
+                 'url' => ['/site/year'],
+                 'linkOptions' => ['id' => 'year']
+                ],
 
             ];
 
@@ -58,6 +64,17 @@ AppAsset::register($this);
         <p class="pull-left">&copy; ПсковГУ <?= date('Y') ?></p>
         </div>
     </footer>
+
+    <?php
+
+    // Modal window declaration
+    Modal::begin([
+        'id' => 'modalWindow',
+        'header' => '<h2></h2>',
+    ]);
+
+    Modal::end();
+    ?>
 
     <?php $this->endBody() ?>
 </body>

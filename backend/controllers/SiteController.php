@@ -22,6 +22,7 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'year' => 'common\actions\YearAction',
         ];
     }
 

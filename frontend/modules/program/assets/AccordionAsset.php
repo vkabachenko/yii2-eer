@@ -14,6 +14,5 @@ class AccordionAsset extends AssetBundle
     ];
     public $depends = [
         'frontend\assets\AppAsset', // after layout scripts
-        'frontend\assets\FilesAsset',
     ];
 }

@@ -5,20 +5,11 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\Modal;
 use backend\assets\GridAsset;
 
 GridAsset::register($this);
 ?>
 
-<!-- Modal window declaration -->
-<?php Modal::begin([
-    'id' => 'modalWindow',
-    'header' => '<h2>Header</h2>',
-]); ?>
-
-<?php Modal::end(); ?>
-<!-- End of modal window declaration -->
 
 <!-- functions for grid buttons actions -->
 <?php
