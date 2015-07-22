@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 19 2015 г., 09:22
--- Версия сервера: 5.5.43
+-- Время создания: Июл 22 2015 г., 13:47
+-- Версия сервера: 5.5.44
 -- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `program` (
   `comment` text COLLATE utf8_unicode_ci COMMENT 'прочая информация',
   PRIMARY KEY (`id`),
   KEY `id_faculty` (`id_faculty`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Образовательная программа' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Образовательная программа' AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `program`
@@ -207,7 +207,9 @@ CREATE TABLE IF NOT EXISTS `program` (
 INSERT INTO `program` (`id`, `id_faculty`, `code`, `name`, `level`, `form`, `profile`, `standard`, `comment`) VALUES
 (1, 1, '44.03.01', 'Педагогическое образование', 0, 0, 'Химия', NULL, '4 года'),
 (2, 1, '44.03.01', 'Педагогическое образование', 0, 0, 'Биология и химия', NULL, '5 лет'),
-(4, 1, '06.03.01', 'Биология', 0, 0, 'Биоэкология', '', '');
+(4, 1, '06.03.01', 'Биология', 0, 0, 'Биоэкология', '', ''),
+(5, 2, '02', 'ИСФ Программа 2', 0, 0, '', '', ''),
+(6, 2, '01', 'ИСФ Программа 1', 0, 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -244,15 +246,16 @@ CREATE TABLE IF NOT EXISTS `program_header` (
   `id_program` int(11) NOT NULL COMMENT 'Ид программы',
   `field_shown` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название показываемого поля',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_program_field_shown` (`id_program`,`field_shown`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Поля в заголовке программы в списке, кроме обязательных code и name' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Поля в заголовке программы в списке, кроме обязательных code и name' AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `program_header`
 --
 
 INSERT INTO `program_header` (`id`, `id_program`, `field_shown`) VALUES
-(1, 1, 'profile'),
+(4, 1, 'profile'),
 (2, 2, 'profile');
 
 -- --------------------------------------------------------
@@ -267,7 +270,14 @@ CREATE TABLE IF NOT EXISTS `student` (
   `email` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `student`
+--
+
+INSERT INTO `student` (`id`, `name`, `email`) VALUES
+(1, 'Иванов И И', 'ivanov@test.com');
 
 -- --------------------------------------------------------
 
@@ -280,12 +290,21 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   `id_student` int(11) NOT NULL COMMENT 'Ид студента',
   `year` int(11) NOT NULL COMMENT 'Год обучения',
   `id_program` int(11) NOT NULL COMMENT 'Ид образовательной программы',
-  `course` tinyint(4) NOT NULL COMMENT 'Курс',
+  `course` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Курс',
   `group` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Группа',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_student_year` (`id_student`,`year`),
   KEY `id_student` (`id_student`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=5 ;
+
+--
+-- Дамп данных таблицы `student_education`
+--
+
+INSERT INTO `student_education` (`id`, `id_student`, `year`, `id_program`, `course`, `group`) VALUES
+(1, 1, 2015, 4, 2, '77'),
+(4, 1, 2014, 4, 1, '77');
 
 -- --------------------------------------------------------
 

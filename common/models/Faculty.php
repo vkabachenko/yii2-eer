@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "faculty".
@@ -70,6 +71,13 @@ class Faculty extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['id_faculty' => 'id']);
+    }
+
+    public static function getFacultyList()
+    {
+
+        $faculties = static::find()->orderBy('name')->all();
+        return ArrayHelper::map($faculties,'id','name');
     }
 
 }

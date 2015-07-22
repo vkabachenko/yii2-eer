@@ -13,9 +13,14 @@ use common\models\Discipline;
 
 require(Yii::$app->basePath.'/views/grid/index.php');
 
+$this->registerCss(".programContent {
+        font-weight: bold;
+        margin-right: 20px;
+        }");
+
 $program = Program::findOne($idParent);
 
-$this->title = 'Дисциплины';
+$this->title = 'Отображение наименования';
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
     'url' => ['/program',
@@ -24,50 +29,40 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h2>Дисциплины</h2>
+<h2>Отображение наименования</h2>
 <h3>
-    Образовательная программа: <?= "$program->fullName" ?>
+    Образовательная программа: <?= $program->fullName ?>
 </h3>
+<p>
+    <?= $program->fullContent ?>
+</p>
 
 <p>
-    <?= Html::a('Новая дисциплина', ['create','idParent' =>$idParent ],
+    <?= Html::a('Новое поле в наименовании', ['create','idParent' =>$idParent ],
         [
             'class' => 'btn btn-success actionCreate',
         ]) ?>
-    <?php
-    if (Discipline::find()->
-        where(['block' => Discipline::DISCIPLINE_CHOICE])->exists()) {
-        echo Html::a('Дополнительная дисциплина по выбору', ['create-additive','idParent' =>$idParent ],
-        [
-            'class' => 'btn btn-success actionCreate',
-        ]);
-    }
-    ?>
 </p>
 
 <?php Pjax::begin(['options' => ['id' =>'pjaxWrap']]); ?>
 <?= GridView::widget([
     'dataProvider' => $provider,
     'columns' => [
-        'disciplineCode',
-        'name',
         [
-            'attribute' => 'disciplineSemesters',
-            'format' => 'raw',
+            'attribute' => 'field_shown',
+            'format' => 'text',
             'value' => function($model, $key, $index, $column) {
-                    return Html::a(
-                        $model->disciplineSemesters ? $model->disciplineSemesters : 'Не заполнено',
-                        ['semester/index','idParent' => $model->id_discipline],
-                        ['data-pjax' => '0']);
+                        $program = new Program();
+                        $labels = $program->attributeLabels();
+                    return $labels[$model->field_shown];
                 }
             ],
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}{file}',
+            'template' => '{update}{delete}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
-                'file' => 'actionFile',
             ]
         ],
     ],

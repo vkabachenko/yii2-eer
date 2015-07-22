@@ -25,6 +25,9 @@ return [
         'discipline' => [
             'class' => 'backend\modules\discipline\Module',
         ],
+        'student' => [
+            'class' => 'backend\modules\student\Module',
+        ],
     ],
     'components' => [
         'user' => [

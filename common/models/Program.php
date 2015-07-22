@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Html;
+use common\traits\AttributeTrait;
 
 /**
  * This is the model class for table "program".
@@ -25,6 +27,11 @@ use Yii;
 class Program extends \yii\db\ActiveRecord
 {
 
+    use AttributeTrait;
+    // для составления полного имени программы и полного описания программы
+    private $defaultAttributes = ['code','name'];
+    private $disabledAttributes = ['id','id_faculty'];
+
     /**
      * @inheritdoc
      */
@@ -32,6 +39,14 @@ class Program extends \yii\db\ActiveRecord
     {
         return 'program';
     }
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return ['fullName'];
+    }
+
 
     /**
      * @inheritdoc
@@ -121,6 +136,50 @@ class Program extends \yii\db\ActiveRecord
     public function getStudentEducations()
     {
         return $this->hasMany(StudentEducation::className(), ['id_program' => 'id']);
+    }
+
+    public function getFullName()
+    {
+        $attributes = $this->defaultAttributes;
+        $additiveHeaders = $this->programHeaders;
+        foreach($additiveHeaders as $header) {
+            $attributes[] = $header->field_shown;
+        }
+
+        return $this->concatAttributes($attributes);
+    }
+
+    public function getFullContent()
+    {
+
+        $attributes = $this->availableAttributes();
+        return $this->concatAttributes($attributes, true, '<br/>');
+
+    }
+
+    public function availableAttributes() {
+
+        return array_diff($this->attributes(),
+            $this->defaultAttributes, $this->disabledAttributes);
+
+    }
+
+
+    private function concatAttributes($attributes, $isLabel=false, $betweenAttr = " " )
+    {
+        $labels = $this->attributeLabels();
+        $content = '';
+        foreach($attributes as $attribute) {
+            if ($this->$attribute !== null) {
+                $label = $isLabel ? Html::tag('span',$labels[$attribute],
+                    ['class' => 'programContent'])
+                    : '';
+                $content .= $label.
+                    $this->attributeValue($this, $attribute).
+                    $betweenAttr;
+            }
+        }
+        return $content;
     }
 
 

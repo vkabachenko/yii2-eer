@@ -15,7 +15,7 @@ require(Yii::$app->basePath.'/views/grid/index.php');
 
 $program = Program::findOne($idParent);
 
-$this->title = 'Дисциплины';
+$this->title = 'Студенты';
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
     'url' => ['/program',
@@ -24,24 +24,20 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h2>Дисциплины</h2>
+<h2>Студенты</h2>
 <h3>
     Образовательная программа: <?= "$program->fullName" ?>
 </h3>
 
 <p>
-    <?= Html::a('Новая дисциплина', ['create','idParent' =>$idParent ],
+    <?= Html::a('Новый студент', ['create','idParent' =>$idParent ],
         [
             'class' => 'btn btn-success actionCreate',
         ]) ?>
     <?php
-    if (Discipline::find()->
-        where(['block' => Discipline::DISCIPLINE_CHOICE])->exists()) {
-        echo Html::a('Дополнительная дисциплина по выбору', ['create-additive','idParent' =>$idParent ],
-        [
-            'class' => 'btn btn-success actionCreate',
-        ]);
-    }
+
+    // TBD: Перевести всех на след курс
+
     ?>
 </p>
 
@@ -49,25 +45,22 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= GridView::widget([
     'dataProvider' => $provider,
     'columns' => [
-        'disciplineCode',
-        'name',
-        [
-            'attribute' => 'disciplineSemesters',
+        [ // column for name attribute as a link
+            'attribute' => 'studentName',
             'format' => 'raw',
             'value' => function($model, $key, $index, $column) {
-                    return Html::a(
-                        $model->disciplineSemesters ? $model->disciplineSemesters : 'Не заполнено',
-                        ['semester/index','idParent' => $model->id_discipline],
-                        ['data-pjax' => '0']);
-                }
-            ],
+                    return Html::a(Html::encode($model->studentName),
+                        ['/student/history/index','idParent' => $model->id_student, ],
+                        ['data-pjax' => '0']);                }
+        ],
+        'course',
+        'group',
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}{file}',
+            'template' => '{update}{delete}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
-                'file' => 'actionFile',
             ]
         ],
     ],

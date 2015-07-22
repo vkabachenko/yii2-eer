@@ -4,51 +4,23 @@ namespace frontend\modules\program\helpers;
 
 use common\models\Program;
 use common\models\ProgramFile;
-use common\models\ProgramHeader;
 use yii\base\Object;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\traits\AttributeTrait;
 
 // sets items array for Accordion widget from the model Program
 class AccordionContent extends Object
 {
-    use AttributeTrait;
+
     /* @var $model Program */
     private $model;
-    private $defaultAttributes = ['code','name'];
-    private $disabledAttributes = ['id','id_faculty'];
-
-
-    private function concatAttributes($attributes, $isLabel=false, $betweenAttr = " " )
-    {
-        $labels = $this->model->attributeLabels();
-        $content = '';
-        foreach($attributes as $attribute) {
-            if ($this->model->$attribute !== null) {
-              $label = $isLabel ? Html::tag('span',$labels[$attribute],
-                                ['class' => 'accordionContent'])
-                                : '';
-              $content .= $label.
-                       $this->attributeValue($this->model, $attribute).
-                       $betweenAttr;
-            }
-        }
-        return $content;
-    }
 
     // create Disciplines link
 
     private function disciplinesLink()
     {
-        /* @var $header ProgramHeader */
-        $attributes = $this->defaultAttributes;
-        $additiveHeaders = $this->model->programHeaders;
-        foreach($additiveHeaders as $header) {
-            $attributes[] = $header->field_shown;
-        }
 
-        return Html::a($this->concatAttributes($attributes),
+        return Html::a($this->model->fullName,
                     Url::to(['/discipline','id_program' => $this->model->id,]));
     }
 
@@ -56,12 +28,8 @@ class AccordionContent extends Object
     private function programContent()
     {
 
-        $attributes = array_diff($this->model->attributes(),
-                        $this->defaultAttributes, $this->disabledAttributes);
-        $content = $this->concatAttributes($attributes, true, '<br/>');
-        $content .= $this->modelFiles();
+        return $this->model->fullContent.$this->modelFiles();
 
-        return $content;
     }
 
     // link to files related to model
@@ -76,7 +44,6 @@ class AccordionContent extends Object
             return '';
         }
     }
-
 
     public function items($id_faculty) {
 

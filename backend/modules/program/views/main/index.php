@@ -32,7 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= GridView::widget([
     'dataProvider' => $provider,
     'columns' => [
-        'code',
+        [ // column for code attribute as a link
+            'attribute' => 'code',
+            'format' => 'raw',
+            'value' => function($model, $key, $index, $column) {
+                    return Html::a(Html::encode($model->code),
+                        ['/student','idParent' => $model->id, ],
+                        ['data-pjax' => '0']);                }
+        ],
         [ // column for name attribute as a link
             'attribute' => 'name',
             'format' => 'raw',
@@ -58,17 +65,32 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}{file}',
+            'template' => '{update}{delete}{file}{name}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
                 'file' => 'actionFile',
+                'name' => 'actionName',
             ]
         ],
     ],
 ]); ?>
 
 <?php Pjax::end(); ?>
+
+<?php
+// отображение названия программы. Без Ajax
+function actionName($url,$model,$key) {
+/* @var $model yii\db\ActiveRecord */
+
+$url = Url::to(['name/index','idParent' => $key]);
+return Html::a('<span class="glyphicon glyphicon-tags"></span>',
+$url,[
+'class' => 'actionName',
+'data-pjax' => '0',
+]);
+}
+?>
 
 
 

@@ -31,7 +31,9 @@ class ProgramHeader extends \yii\db\ActiveRecord
         return [
             [['id_program', 'field_shown'], 'required'],
             [['id_program'], 'integer'],
-            [['field_shown'], 'string', 'max' => 255]
+            [['field_shown'], 'string', 'max' => 255],
+            [['id_program','field_shown'],'unique','targetAttribute' => ['id_program','field_shown']],
+
         ];
     }
 
@@ -43,7 +45,7 @@ class ProgramHeader extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_program' => 'Id Program',
-            'field_shown' => 'Field Shown',
+            'field_shown' => 'Дополнительное поле в названии',
         ];
     }
 
@@ -54,4 +56,12 @@ class ProgramHeader extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Program::className(), ['id' => 'id_program']);
     }
+
+    public function getFieldShownLabel()
+    {
+        $program = new Program();
+        $labels = $program->attributeLabels();
+        return $labels[$this->field_shown];
+    }
+
 }
