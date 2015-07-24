@@ -28,12 +28,12 @@ class AccordionContent extends Object
     private function programContent()
     {
 
-        return $this->model->fullContent.$this->modelFiles();
+        return $this->model->fullContent.$this->linkFiles().$this->linkStudents();
 
     }
 
     // link to files related to model
-    private function modelFiles()
+    private function linkFiles()
     {
         if (ProgramFile::find()->where(['id_program' => $this->model->id])->exists()) {
             return Html::a('Документы',
@@ -43,6 +43,14 @@ class AccordionContent extends Object
         else {
             return '';
         }
+    }
+
+    // link to students related to model
+    private function linkStudents()
+    {
+            return Html::a('Студенты',
+                ['/student','id_program' => $this->model->id],
+                ['class' => 'programLinks']);
     }
 
     public function items($id_faculty) {

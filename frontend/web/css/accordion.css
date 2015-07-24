@@ -1,5 +1,6 @@
-#accordionContainer a  {
+#accordionContainer a.programLinks  {
     color:#337ab7;
+    display:block;
 }
 #accordionContainer .programContent {
     font-weight: bold;

@@ -45,7 +45,7 @@ class ProgramHeader extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_program' => 'Id Program',
-            'field_shown' => 'Дополнительное поле в названии',
+            'field_shown' => 'Дополнительное поле в наименовании',
         ];
     }
 

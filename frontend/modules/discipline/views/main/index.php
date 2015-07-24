@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h2>Дисциплины</h2>
 <h3>
-    Образовательная программа: <?= "$program->code $program->name $program->profile" ?>
+    Образовательная программа: <?= "$program->fullName" ?>
 </h3>
 
 <?= GridView::widget([

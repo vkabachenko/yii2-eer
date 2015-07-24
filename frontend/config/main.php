@@ -39,6 +39,9 @@ return [
         'discipline' => [
             'class' => 'frontend\modules\discipline\Module',
         ],
+        'student' => [
+            'class' => 'frontend\modules\student\Module',
+        ],
     ],
     'params' => $params,
 ];

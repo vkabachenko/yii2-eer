@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 22 2015 г., 13:47
+-- Время создания: Июл 24 2015 г., 08:16
 -- Версия сервера: 5.5.44
 -- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
 
@@ -270,14 +270,16 @@ CREATE TABLE IF NOT EXISTS `student` (
   `email` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `student`
 --
 
 INSERT INTO `student` (`id`, `name`, `email`) VALUES
-(1, 'Иванов И И', 'ivanov@test.com');
+(1, 'Иванов И И', 'ivanov@test.com'),
+(2, 'Иванова А А', 'ivanova@test.com'),
+(3, 'Петрова И И', 'petrova@test.com');
 
 -- --------------------------------------------------------
 
@@ -296,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   UNIQUE KEY `id_student_year` (`id_student`,`year`),
   KEY `id_student` (`id_student`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `student_education`
@@ -304,7 +306,9 @@ CREATE TABLE IF NOT EXISTS `student_education` (
 
 INSERT INTO `student_education` (`id`, `id_student`, `year`, `id_program`, `course`, `group`) VALUES
 (1, 1, 2015, 4, 2, '77'),
-(4, 1, 2014, 4, 1, '77');
+(4, 1, 2014, 4, 1, '77'),
+(5, 2, 2015, 4, 1, ''),
+(6, 3, 2015, 4, 2, '77');
 
 -- --------------------------------------------------------
 

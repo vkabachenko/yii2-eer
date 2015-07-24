@@ -6,6 +6,7 @@ use common\helpers\YearHelper;
 use Yii;
 
 use backend\controllers\GridController;
+use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use common\models\Student;
 use common\models\StudentEducation;
@@ -65,9 +66,7 @@ class MainController  extends GridController
         $student = new Student();
         $studentEducation = new StudentEducation();
 
-
         $studentEducation->id_program = $idParent;
-
         if ($student->load(Yii::$app->request->post()) && $student->save()) {
             $studentEducation->load(Yii::$app->request->post());
             $studentEducation->id_student = $student->id;

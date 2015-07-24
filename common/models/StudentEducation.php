@@ -39,6 +39,7 @@ class StudentEducation extends \yii\db\ActiveRecord
             [['id_student', 'year', 'id_program'], 'required'],
             [['id_student', 'year', 'id_program'], 'integer'],
             [['course'], 'integer','min' => 1],
+            ['course', 'default','value' => 1],
             [['group'], 'string', 'max' => 20],
             [['id_student','year'],'unique','targetAttribute' => ['id_student','year']],
         ];
