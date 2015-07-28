@@ -66,4 +66,6 @@ class DisciplineSemester extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StudentResult::className(), ['id_discipline_semester' => 'id']);
     }
+
+
 }

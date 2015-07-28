@@ -7,6 +7,7 @@ namespace backend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 abstract class GridFileController extends GridController
 {
@@ -22,6 +23,9 @@ abstract class GridFileController extends GridController
 
     public function actionIndex($idParent = null)
     {
+        if ($idParent == null) {
+            throw new NotFoundHttpException('Нет исходной записи для размещения файлов.');
+        }
 
         $query = $this->createQuery($idParent);
         $provider = $this->createProvider($query);

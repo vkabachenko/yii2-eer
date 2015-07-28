@@ -81,5 +81,18 @@ class Discipline extends \yii\db\ActiveRecord
         return $this->hasMany(DisciplineSemester::className(), ['id_discipline' => 'id']);
     }
 
+    public function getFullName()
+    {
+        if ($this->block == self::DISCIPLINE_CHOICE) {
+            return "$this->code Дисциплина по выбору";
+        }
+        else {
+            /* @var $disciplineName DisciplineName */
+            $disciplineName = DisciplineName::findOne(['id_discipline' => $this->id]);
+            return $disciplineName ? "$this->code $disciplineName->name" : 'Not found';
+        }
+
+    }
+
 
 }

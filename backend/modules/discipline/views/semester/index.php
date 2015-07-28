@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 use common\models\Program;
 use common\models\Discipline;
-use common\helpers\DisciplineHelper;
 
 /* @var $this yii\web\View */
 /* @var $provider yii\data\ActiveDataProvider */
@@ -17,7 +16,6 @@ require(Yii::$app->basePath.'/views/grid/index.php');
 
 $discipline = Discipline::findOne($idParent);
 $program = Program::findOne($discipline->id_program);
-$disciplineHelper = new DisciplineHelper(['id' => $idParent]);
 
 $this->title = 'Семестры';
 
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h2>Семестры</h2>
 <h3>
-    Дисциплина: <?= "$discipline->code $disciplineHelper->name" ?>
+    Дисциплина: <?= $discipline->fullName ?>
 </h3>
 
 <p>

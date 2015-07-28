@@ -57,13 +57,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'group',
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}',
+            'template' => '{update}{delete}{results}{portfolio}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
+                'results' => 'actionResults',
+                'portfolio' => 'actionPortfolio',
             ]
         ],
     ],
 ]); ?>
 
 <?php Pjax::end(); ?>
+
+<?php
+
+// manage results. Not via ajax
+function actionResults($url,$model,$key) {
+    /* @var $model yii\db\ActiveRecord */
+    $url = ["results/index",'id' => $key];
+    return Html::a('<span class="glyphicon glyphicon-star"></span>',
+        $url,[
+            'class' => 'actionResults',
+            'data-pjax' => '0',
+        ]);
+}
+
+// manage portfolio. Not via ajax
+function actionPortfolio($url,$model,$key) {
+    /* @var $model yii\db\ActiveRecord */
+    $url = ["portfolio/index",'id' => $model->id_student];
+    return Html::a('<span class="glyphicon glyphicon-user"></span>',
+        $url,[
+            'class' => 'actionPortfolio',
+            'data-pjax' => '0',
+        ]);
+}
+
+
+?>
