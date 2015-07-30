@@ -74,8 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         if ($disciplineSemester) {
                             $content .= Html::a($semester,
                                [
-                                 '/student/result/index',
-                                 'id_discipline_semester' => $disciplineSemester->id ],
+                                 '/student/result/discipline',
+                                 'id' => $disciplineSemester->id ],
                                 ['style'=>'margin-right:10px;']);
                         }
                     }

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model, $key, $index, $column) {
                     return Html::a($index + 1,[
                         '/student/result/index',
-                        'id_student_education' => $model->id]);
+                        'id' => $model->id]);
                 }
         ],
         [

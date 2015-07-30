@@ -34,6 +34,13 @@ class MainController extends Controller
 
     }
 
+    public function actionResult($id)
+    {
+
+        return $this->renderFiles('common\models\StudentResult', $id);
+
+    }
+
     private function renderFiles($_model, $id)
     {
 

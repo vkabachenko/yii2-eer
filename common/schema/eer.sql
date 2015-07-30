@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 28 2015 г., 08:54
+-- Время создания: Июл 30 2015 г., 09:17
 -- Версия сервера: 5.5.44
 -- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
 
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `filename` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Уникальное имя файла в системе',
   `role` tinyint(4) DEFAULT NULL COMMENT 'Ограничение доступа к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=21 ;
 
 --
 -- Дамп данных таблицы `file`
@@ -379,7 +379,8 @@ CREATE TABLE IF NOT EXISTS `student_result` (
 --
 
 INSERT INTO `student_result` (`id`, `id_student_education`, `id_discipline_semester`, `passing_date`, `examiner`, `rating`, `assesment`) VALUES
-(2, 1, 6, '2015-07-02', '', 200, '5');
+(2, 1, 6, '2015-07-02', '', 200, '5'),
+(3, 1, 2, NULL, '', NULL, '4');
 
 -- --------------------------------------------------------
 
@@ -394,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `student_result_file` (
   PRIMARY KEY (`id`),
   KEY `id_student_result` (`id_student_result`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `student_result_file`
