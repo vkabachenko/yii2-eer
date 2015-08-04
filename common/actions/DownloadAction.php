@@ -10,9 +10,10 @@ use yii\web\NotFoundHttpException;
 
 class DownloadAction extends Action
 {
-    public function run($id) {
+    public function run($id, $modelFile = '\common\models\File') {
         /* @var $model File */
-        $model = File::findOne($id);
+        $model = new $modelFile;
+        $model = $model->findOne($id);
         $path = Yii::getAlias('@frontend/web/files').'/'.$model->filename;
 
         if (file_exists($path)) {

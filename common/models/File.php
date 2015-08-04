@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use backend\behaviors\FileBehavior;
 
 /**
  * This is the model class for table "file".
@@ -21,7 +22,15 @@ use yii\web\UploadedFile;
  */
 class File extends \yii\db\ActiveRecord
 {
-    public $savedFile; // сохраняемый файл при загрузке
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            FileBehavior::className()
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -36,17 +45,10 @@ class File extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-
+        return array_merge($this->ruleFile(),[
             [['role'], 'integer'],
             [['title'], 'string', 'max' => 250],
-            [['savedFile'],'safe'],
-            [['savedFile'],'file',
-             'extensions' => ['jpg', 'gif', 'png', 'pdf', 'txt',
-                              'doc', 'docx', 'xls', 'xlsx', 'ppt',
-                              'pptx', 'zip'],
-            ]
-        ];
+        ]);
     }
 
     /**
@@ -54,14 +56,13 @@ class File extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        return array_merge($this->nameFile(),[
             'id' => 'ID',
             'title' => 'Описание',
             'document' => 'Оригинальное имя',
             'filename' => 'Системное имя',
             'role' => 'Роль',
-            'savedFile' => 'Загрузить файл'
-        ];
+        ]);
     }
 
     /**
@@ -102,21 +103,8 @@ class File extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $file = UploadedFile::getInstance($this, 'savedFile');
-            if ($file) {
-                $this->deleteFile();
-                $this->document = $file->name;
-
-                $fileName = explode('.', $this->document);
-                $ext = end($fileName);
-
-                $this->filename = Yii::$app->security->generateRandomString().".{$ext}";
-
-                $this->title = $this->title ?: $this->document;
-                $path = Yii::getAlias('@frontend/web/files').'/'.$this->filename;
-                $file->saveAs($path);
-            }
-
+            $this->saveFile();
+            $this->title = $this->title ?: $this->document;
             return $this->filename ? true : false;
         } else {
             return false;
@@ -132,15 +120,6 @@ class File extends \yii\db\ActiveRecord
             return false;
         $this->deleteFile(); // удалили модель? удаляем и файл
         return true;
-    }
-
-
-    private function deleteFile()
-    {
-        $path = Yii::getAlias('@frontend/web/files').'/'.$this->filename;
-        if(is_file($path))
-            unlink($path);
-
     }
 
 }

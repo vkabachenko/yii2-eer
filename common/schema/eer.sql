@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 30 2015 г., 09:17
+-- Время создания: Авг 04 2015 г., 12:13
 -- Версия сервера: 5.5.44
 -- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
 
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `filename` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Уникальное имя файла в системе',
   `role` tinyint(4) DEFAULT NULL COMMENT 'Ограничение доступа к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=23 ;
 
 --
 -- Дамп данных таблицы `file`
@@ -180,10 +180,11 @@ CREATE TABLE IF NOT EXISTS `file` (
 
 INSERT INTO `file` (`id`, `title`, `document`, `filename`, `role`) VALUES
 (7, 'evp0105.png', 'evp0105.png', 'adxRZm102FPMONRr8MSu_3DasGi2kcAT.png', NULL),
-(9, 'yj', 'Снимок экрана от 2015-01-21 21:44:03.png', 'Hape0P2tUjCe6R9PREIi4Ad-s6BmjhD8.png', NULL),
 (11, 'yj', 'WP_20141228_009.jpg', 'HxnnCKKJkZqrZQz4Kn1uCbIPQ5NlNLgj.jpg', NULL),
 (12, 'WP_20141228_004.jpg', 'WP_20141228_004.jpg', 'EoQfs38WbvItDxHVPDWxzoLw_cfVwJUb.jpg', NULL),
-(20, 'Результат', 'WP_20141228_008.jpg', 'RKwMCo_GSJiEgBYSUfoJrQ6C_aLzE2Cu.jpg', NULL);
+(20, 'Результат', 'WP_20141228_008.jpg', 'RKwMCo_GSJiEgBYSUfoJrQ6C_aLzE2Cu.jpg', NULL),
+(21, 'Новый файл', 'WP_20150107_001.jpg', 'vzTCsYL9A4IIbmSyqcnxTqSziWsQ5rCQ.jpg', NULL),
+(22, 'Пед обр файл', 'WP_20141228_008.jpg', 'kz3UcTdtwWm6yk4CO0mUGIgUYUGwruGd.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `program_file` (
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `program_file`
@@ -237,8 +238,9 @@ CREATE TABLE IF NOT EXISTS `program_file` (
 
 INSERT INTO `program_file` (`id`, `id_program`, `id_file`) VALUES
 (3, 4, 7),
-(5, 4, 9),
-(6, 1, 12);
+(6, 1, 12),
+(7, 4, 21),
+(8, 2, 22);
 
 -- --------------------------------------------------------
 
@@ -343,16 +345,30 @@ CREATE TABLE IF NOT EXISTS `student_portfolio` (
   `removable` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Whether the node is removable (any children below will be moved as siblings before deletion)',
   `removable_all` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Whether the node is removable along with descendants',
   `id_student` int(11) NOT NULL COMMENT 'Ид студента',
-  `id_file` int(11) DEFAULT NULL COMMENT 'Ид файла',
+  `document` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `filename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tbl_tree_NK1` (`root`),
   KEY `tbl_tree_NK2` (`lft`),
   KEY `tbl_tree_NK3` (`rgt`),
   KEY `tbl_tree_NK4` (`lvl`),
   KEY `tbl_tree_NK5` (`active`),
-  KEY `id_student` (`id_student`),
-  KEY `id_file` (`id_file`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=1 ;
+  KEY `id_student` (`id_student`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=12 ;
+
+--
+-- Дамп данных таблицы `student_portfolio`
+--
+
+INSERT INTO `student_portfolio` (`id`, `root`, `lft`, `rgt`, `lvl`, `name`, `icon`, `icon_type`, `active`, `selected`, `disabled`, `readonly`, `visible`, `collapsed`, `movable_u`, `movable_d`, `movable_l`, `movable_r`, `removable`, `removable_all`, `id_student`, `document`, `filename`) VALUES
+(4, 4, 1, 4, 0, 'Учеба', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 'WP_20141228_004.jpg', 'bINPW1wjRpoSlqCnAqNgcKLuUv-70OZl.jpg'),
+(5, 4, 2, 3, 1, 'Биология', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, NULL, NULL),
+(6, 6, 1, 8, 0, 'Учеба Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
+(7, 6, 2, 7, 1, 'Биология Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
+(8, 6, 3, 4, 2, 'Ботаника Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
+(9, 6, 5, 6, 2, 'Анатомия Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
+(10, 10, 1, 4, 0, 'Производство', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, NULL, NULL),
+(11, 10, 2, 3, 1, 'Производство1', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, 'evp0105.png', 'xU4tiNZubXGo8kzg7FkbcQ9GaBl2JAi2.png');
 
 -- --------------------------------------------------------
 
@@ -485,8 +501,7 @@ ALTER TABLE `student_education`
 -- Ограничения внешнего ключа таблицы `student_portfolio`
 --
 ALTER TABLE `student_portfolio`
-  ADD CONSTRAINT `student_portfolio_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_portfolio_ibfk_2` FOREIGN KEY (`id_file`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `student_portfolio_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `student_result`
