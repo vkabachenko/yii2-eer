@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model, $key, $index, $column) {
                     return Html::a($model->studentName,[
                         '/student/portfolio/index',
-                        'id_student' => $model->id_student]);
+                        'id' => $model->id_student]);
                 }
         ],
         'course',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0ea89ce00ef54edd84f26d02be54ea2",
+    "hash": "502bd743ec7787e24c6380f284378abc",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -386,6 +386,54 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "fortawesome/font-awesome",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "38c229650be0127f31eb89bd644223445ffe19e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/38c229650be0127f31eb89bd644223445ffe19e3",
+                "reference": "38c229650be0127f31eb89bd644223445ffe19e3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "jekyll": "1.0.2",
+                "lessc": "1.4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OFL-1.1",
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Gandy",
+                    "email": "dave@fontawesome.io",
+                    "homepage": "http://twitter.com/davegandy",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The iconic font and CSS framework",
+            "homepage": "http://fontawesome.io/",
+            "keywords": [
+                "FontAwesome",
+                "awesome",
+                "bootstrap",
+                "font",
+                "icon"
+            ],
+            "time": "2015-07-31 04:49:37"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.7.7",
             "source": {
@@ -437,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-tree-manager.git",
-                "reference": "bacbc0b423eeb9e0744f31ae40108b0a15ff4419"
+                "reference": "59cb41bda38247c56d2a4e5a40c3101377b4810f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/bacbc0b423eeb9e0744f31ae40108b0a15ff4419",
-                "reference": "bacbc0b423eeb9e0744f31ae40108b0a15ff4419",
+                "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/59cb41bda38247c56d2a4e5a40c3101377b4810f",
+                "reference": "59cb41bda38247c56d2a4e5a40c3101377b4810f",
                 "shasum": ""
             },
             "require": {
@@ -480,7 +528,7 @@
                 "tree",
                 "treeview"
             ],
-            "time": "2015-07-28 14:39:27"
+            "time": "2015-08-03 07:59:30"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -588,12 +636,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "ac7adf53f1bc2226028ff0aa916b60d8beb8c4e2"
+                "reference": "d9ca44e2eb6b6d35b6517a474d9bfde2900835a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ac7adf53f1bc2226028ff0aa916b60d8beb8c4e2",
-                "reference": "ac7adf53f1bc2226028ff0aa916b60d8beb8c4e2",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d9ca44e2eb6b6d35b6517a474d9bfde2900835a6",
+                "reference": "d9ca44e2eb6b6d35b6517a474d9bfde2900835a6",
                 "shasum": ""
             },
             "require": {
@@ -668,7 +716,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-07-31 00:19:23"
+            "time": "2015-08-04 14:08:38"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1127,12 +1175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "039bf69706f629dcabdf613f985a90cc10603843"
+                "reference": "552f9cb837b1ae0ab5e904aef7366ff191233a5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/039bf69706f629dcabdf613f985a90cc10603843",
-                "reference": "039bf69706f629dcabdf613f985a90cc10603843",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/552f9cb837b1ae0ab5e904aef7366ff191233a5a",
+                "reference": "552f9cb837b1ae0ab5e904aef7366ff191233a5a",
                 "shasum": ""
             },
             "require": {
@@ -1172,7 +1220,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-07-28 06:19:22"
+            "time": "2015-08-02 17:00:44"
         }
     ],
     "aliases": [],
