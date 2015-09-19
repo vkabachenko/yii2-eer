@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 if ($node->filename) {
     echo Html::tag('p',Html::a($node->document,[
-                       'download',
+                       '/student/portfolio/download',
                        'id' => $node->id,
                        'modelFile' => '\common\models\StudentPortfolio']));
 }

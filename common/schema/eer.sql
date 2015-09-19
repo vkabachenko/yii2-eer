@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Авг 04 2015 г., 12:13
+-- Время создания: Сен 19 2015 г., 19:27
 -- Версия сервера: 5.5.44
--- Версия PHP: 5.4.43-1+deb.sury.org~precise+1
+-- Версия PHP: 5.4.45-1+deb.sury.org~precise+1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `discipline` (
   `block` tinyint(4) NOT NULL COMMENT 'блок (базовый/вариативный/ДПВ)',
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `discipline`
@@ -45,7 +45,8 @@ INSERT INTO `discipline` (`id`, `id_program`, `code`, `kind`, `block`) VALUES
 (4, 4, '004', 0, 1),
 (5, 4, '005', 1, 0),
 (6, 1, '006', 2, 1),
-(7, 4, '008', 0, 0);
+(7, 4, '008', 0, 0),
+(9, 6, '001', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -60,14 +61,16 @@ CREATE TABLE IF NOT EXISTS `discipline_file` (
   PRIMARY KEY (`id`),
   KEY `id_file` (`id_file`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `discipline_file`
 --
 
 INSERT INTO `discipline_file` (`id`, `id_discipline_name`, `id_file`) VALUES
-(2, 1, 11);
+(2, 1, 11),
+(4, 7, 27),
+(5, 13, 28);
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `discipline_name` (
   PRIMARY KEY (`id`),
   KEY `id_discipline` (`id_discipline`),
   KEY `id_program_main` (`id_program_main`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `discipline_name`
@@ -97,7 +100,8 @@ INSERT INTO `discipline_name` (`id`, `id_program_main`, `id_discipline`, `suffix
 (7, 4, 4, '', 'Программа 5'),
 (8, 4, 5, '', 'Программа 5-1'),
 (9, 1, 6, '', 'Программа 6'),
-(10, 4, 7, '', 'Биология растений');
+(10, 4, 7, '', 'Биология растений'),
+(13, 6, 9, '', 'Строительная дисциплина');
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `discipline_semester` (
   `max_rating` int(11) DEFAULT NULL COMMENT 'Макс. рейтинг дисциплины в семестре',
   PRIMARY KEY (`id`),
   KEY `id_discipline` (`id_discipline`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Семестры изучаемой дисциплины' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Семестры изучаемой дисциплины' AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `discipline_semester`
@@ -124,7 +128,8 @@ INSERT INTO `discipline_semester` (`id`, `id_discipline`, `course`, `semester`, 
 (2, 1, 2, 3, 200),
 (6, 4, 2, 3, 200),
 (7, 5, 1, 1, NULL),
-(8, 7, 2, 4, NULL);
+(8, 7, 2, 4, NULL),
+(10, 9, 1, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -170,21 +175,25 @@ CREATE TABLE IF NOT EXISTS `file` (
   `title` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Название для пользователя',
   `document` varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название файла реальное',
   `filename` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Уникальное имя файла в системе',
-  `role` tinyint(4) DEFAULT NULL COMMENT 'Ограничение доступа к файлу',
+  `free_access` tinyint(1) NOT NULL COMMENT 'Ограничение доступа к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=31 ;
 
 --
 -- Дамп данных таблицы `file`
 --
 
-INSERT INTO `file` (`id`, `title`, `document`, `filename`, `role`) VALUES
-(7, 'evp0105.png', 'evp0105.png', 'adxRZm102FPMONRr8MSu_3DasGi2kcAT.png', NULL),
-(11, 'yj', 'WP_20141228_009.jpg', 'HxnnCKKJkZqrZQz4Kn1uCbIPQ5NlNLgj.jpg', NULL),
-(12, 'WP_20141228_004.jpg', 'WP_20141228_004.jpg', 'EoQfs38WbvItDxHVPDWxzoLw_cfVwJUb.jpg', NULL),
-(20, 'Результат', 'WP_20141228_008.jpg', 'RKwMCo_GSJiEgBYSUfoJrQ6C_aLzE2Cu.jpg', NULL),
-(21, 'Новый файл', 'WP_20150107_001.jpg', 'vzTCsYL9A4IIbmSyqcnxTqSziWsQ5rCQ.jpg', NULL),
-(22, 'Пед обр файл', 'WP_20141228_008.jpg', 'kz3UcTdtwWm6yk4CO0mUGIgUYUGwruGd.jpg', NULL);
+INSERT INTO `file` (`id`, `title`, `document`, `filename`, `free_access`) VALUES
+(11, 'yj', 'WP_20141228_009.jpg', 'HxnnCKKJkZqrZQz4Kn1uCbIPQ5NlNLgj.jpg', 0),
+(12, 'WP_20141228_004.jpg', 'WP_20141228_004.jpg', 'EoQfs38WbvItDxHVPDWxzoLw_cfVwJUb.jpg', 0),
+(20, 'Результат', 'WP_20141228_008.jpg', 'RKwMCo_GSJiEgBYSUfoJrQ6C_aLzE2Cu.jpg', 0),
+(22, 'Пед обр файл', 'WP_20141228_008.jpg', 'kz3UcTdtwWm6yk4CO0mUGIgUYUGwruGd.jpg', 0),
+(23, 'WP_20141228_009.jpg', 'WP_20141228_009.jpg', 'Yxo_O8JGF2A6dBcm78ZlP980eD6ikbS5.jpg', 0),
+(24, 'evp0105.png', 'evp0105.png', '2MZqEUGwkcrTKkTXr1PjsIPF9hZ-TmAu.png', 0),
+(25, 'Новый', 'WP_20141228_009.jpg', '7QIAfTRXKTsFD0fN6zpB5BepmNqb39Mq.jpg', 1),
+(27, 'Файл дисциплины  Биология', 'Снимок экрана от 2015-01-21 21:44:03.png', '00oS7ZZo3yAjQN8fiF7nenmjwl-vR07-.png', 0),
+(28, 'Файл строительной дисципоины', 'WP_20150108_001.jpg', '0sNo4_jCEz4PkHwpogWEwywk_H4OOPy1.jpg', 0),
+(30, 'Снимок экрана от 2015-01-23 13:09:49.png', 'Снимок экрана от 2015-01-23 13:09:49.png', 'zA1LtdnfJoRbpK_YW0RVghuZCGQLJxUI.png', 0);
 
 -- --------------------------------------------------------
 
@@ -230,17 +239,18 @@ CREATE TABLE IF NOT EXISTS `program_file` (
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=12 ;
 
 --
 -- Дамп данных таблицы `program_file`
 --
 
 INSERT INTO `program_file` (`id`, `id_program`, `id_file`) VALUES
-(3, 4, 7),
 (6, 1, 12),
-(7, 4, 21),
-(8, 2, 22);
+(8, 2, 22),
+(9, 4, 23),
+(10, 4, 24),
+(11, 4, 25);
 
 -- --------------------------------------------------------
 
@@ -255,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `program_header` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_program_field_shown` (`id_program`,`field_shown`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Поля в заголовке программы в списке, кроме обязательных code и name' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Поля в заголовке программы в списке, кроме обязательных code и name' AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `program_header`
@@ -263,7 +273,8 @@ CREATE TABLE IF NOT EXISTS `program_header` (
 
 INSERT INTO `program_header` (`id`, `id_program`, `field_shown`) VALUES
 (4, 1, 'profile'),
-(2, 2, 'profile');
+(2, 2, 'profile'),
+(5, 6, 'form');
 
 -- --------------------------------------------------------
 
@@ -305,17 +316,18 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   UNIQUE KEY `id_student_year` (`id_student`,`year`),
   KEY `id_student` (`id_student`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `student_education`
 --
 
 INSERT INTO `student_education` (`id`, `id_student`, `year`, `id_program`, `course`, `group`) VALUES
-(1, 1, 2015, 4, 2, '77'),
+(1, 1, 2015, 4, 2, '78'),
 (4, 1, 2014, 4, 1, '77'),
 (5, 2, 2015, 4, 1, ''),
-(6, 3, 2015, 4, 2, '77');
+(6, 3, 2015, 4, 2, '77'),
+(8, 1, 2016, 6, 3, '33');
 
 -- --------------------------------------------------------
 
@@ -354,21 +366,23 @@ CREATE TABLE IF NOT EXISTS `student_portfolio` (
   KEY `tbl_tree_NK4` (`lvl`),
   KEY `tbl_tree_NK5` (`active`),
   KEY `id_student` (`id_student`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `student_portfolio`
 --
 
 INSERT INTO `student_portfolio` (`id`, `root`, `lft`, `rgt`, `lvl`, `name`, `icon`, `icon_type`, `active`, `selected`, `disabled`, `readonly`, `visible`, `collapsed`, `movable_u`, `movable_d`, `movable_l`, `movable_r`, `removable`, `removable_all`, `id_student`, `document`, `filename`) VALUES
-(4, 4, 1, 4, 0, 'Учеба', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 'WP_20141228_004.jpg', 'bINPW1wjRpoSlqCnAqNgcKLuUv-70OZl.jpg'),
-(5, 4, 2, 3, 1, 'Биология', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, NULL, NULL),
+(4, 4, 1, 6, 0, 'Учеба', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 'WP_20141228_004.jpg', 'bINPW1wjRpoSlqCnAqNgcKLuUv-70OZl.jpg'),
+(5, 4, 2, 3, 1, 'Биология', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 'WP_20141229_009.jpg', 'grOTlKAyvvZQ2NHrso8ppBPsklr-WjlT.jpg'),
 (6, 6, 1, 8, 0, 'Учеба Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
 (7, 6, 2, 7, 1, 'Биология Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
 (8, 6, 3, 4, 2, 'Ботаника Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
 (9, 6, 5, 6, 2, 'Анатомия Петровой', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 3, NULL, NULL),
-(10, 10, 1, 4, 0, 'Производство', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, NULL, NULL),
-(11, 10, 2, 3, 1, 'Производство1', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, 'evp0105.png', 'xU4tiNZubXGo8kzg7FkbcQ9GaBl2JAi2.png');
+(10, 10, 1, 6, 0, 'Производство', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, NULL, NULL),
+(11, 10, 2, 3, 1, 'Производство11', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, 'evp0105.png', 'xU4tiNZubXGo8kzg7FkbcQ9GaBl2JAi2.png'),
+(12, 4, 4, 5, 1, 'Ботаника', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, NULL, NULL),
+(13, 10, 4, 5, 1, 'Производство2', NULL, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 2, 'WP_20141226_001.jpg', 'MKrkKrhyDD5-MXVlEkpDwJMuOYd50pR-.jpg');
 
 -- --------------------------------------------------------
 
@@ -388,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `student_result` (
   UNIQUE KEY `id_student_discipline` (`id_student_education`,`id_discipline_semester`),
   KEY `id_student_education` (`id_student_education`),
   KEY `id_discipline_semester` (`id_discipline_semester`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `student_result`
@@ -396,7 +410,8 @@ CREATE TABLE IF NOT EXISTS `student_result` (
 
 INSERT INTO `student_result` (`id`, `id_student_education`, `id_discipline_semester`, `passing_date`, `examiner`, `rating`, `assesment`) VALUES
 (2, 1, 6, '2015-07-02', '', 200, '5'),
-(3, 1, 2, NULL, '', NULL, '4');
+(3, 1, 2, NULL, '', NULL, '4'),
+(5, 6, 8, NULL, '', 100, '5');
 
 -- --------------------------------------------------------
 
@@ -411,14 +426,15 @@ CREATE TABLE IF NOT EXISTS `student_result_file` (
   PRIMARY KEY (`id`),
   KEY `id_student_result` (`id_student_result`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `student_result_file`
 --
 
 INSERT INTO `student_result_file` (`id`, `id_student_result`, `id_file`) VALUES
-(2, 2, 20);
+(2, 2, 20),
+(4, 5, 30);
 
 -- --------------------------------------------------------
 
@@ -434,12 +450,27 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'пароль',
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'для восстановления пароля',
   `id_faculty` int(11) DEFAULT NULL COMMENT 'Ид факультет',
+  `id_student` int(11) DEFAULT NULL,
   `role` tinyint(4) NOT NULL COMMENT 'роль пользователя',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `id_faculty` (`id_faculty`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Пользователи сайта' AUTO_INCREMENT=1 ;
+  KEY `id_faculty` (`id_faculty`),
+  KEY `id_student` (`id_student`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Пользователи сайта' AUTO_INCREMENT=16 ;
+
+--
+-- Дамп данных таблицы `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `email`, `auth_key`, `password_hash`, `password_reset_token`, `id_faculty`, `id_student`, `role`) VALUES
+(4, 'admin', 'vkabachenko@gmail.com', 'GP7UhuyVzoKUR67yKpNTHR7itImd5ZKR', '$2y$13$xphg2Dp7NRmyi7ImU3h7dORetqjiablj56zwpMDslfrIxzR8WNhfK', 'k7JaooIBu1o4Ff9a4kNiGATaMM8b_Acd_1441862736', NULL, NULL, 3),
+(6, 'e1', 'e1@test.com', '47Edc5wlDU-Wn8N4WV1NCp_TXrGm0_uG', '$2y$13$1IccIp8Jzb5NNsmcCrfR9OuIUy7CdfXI3GGS6mhhDNMw1XrUZeKqG', 'ygB8RWgvBnic5g2-joZ4Vvhmo-pHabA8_1442156989', 1, NULL, 1),
+(7, 'e2', 'e2@test.com', '9VcYZ4p6mpUuYP0jtvtNAy1EgvPzMZeQ', '$2y$13$DH886DaE93Shf4Om01q/j.8.VpRMmkfeltEp9.o/IOQUTKvfiEmtq', 'LjtBzlLJxWUZA095gi2oyaCBTGzSIDEk_1442081308', 1, NULL, 2),
+(8, 'i2', 'i2@test.com', 'LVbOcMWHPpge3w2KObrvsW20Egwo-42B', '$2y$13$UU6RYLWR.vynkiMCR1C2/u3vkYZDSY8cTobKIYI5H5DiniChNnCOe', 'e1vAQqFxVhkzK8WQoryrWXeS1OIh3K7__1442330863', 2, NULL, 1),
+(9, 'i1', 'i1@test.com', 'S-ueflHkqdFJu8461tMO49nfcBILCzbG', '$2y$13$KTBFO6VwhnFjtaodBQXeO.AHPucwJqtunaFs7.OaSogBH8A87VcBK', 'wQOUWtdvAMLTkmhPchT6LJmhf4pffbDv_1442331137', 2, NULL, 2),
+(11, 'm2', 'm2@test.com', 'FEBEg3KU_E9pf_2_ZACfpsl2gdWHUsju', '$2y$13$.0PwpFAQJmAZnSqNtWPLMuH1DWWl1MmtGpHV18jIyJu8v8pHf.7pK', '4IlH1QwzSRsI74mokNNLJ7_HEHM1eWDC_1442331227', 6, NULL, 2),
+(13, 'm1', 'm1@test.com', '2eGfe9CIpEzDzQX06OpdF54jYia3tqho', '$2y$13$wJ9hbgdOhrH7sX4ckQHPeuyFeTQZ5MlCWe30YTnd7.gqJzt7oh/sy', '0wwdsQf6uCe2A_3r5dPoglUg7G3EB5ok_1442331362', 6, NULL, 1),
+(15, 'iv', 'ivanova@test.com', '8iXZAY3REaA0SyCab2Gdgd6YezeovXsj', '$2y$13$KWiH0ulXVotHoC7HpAMZ6OIse/L5HnY3PR/g0QcWhjq0cm/oWSGbq', 'k9Drxh1OiFjKyniqDay4mq9ICWNfyemm_1442597385', NULL, 2, 0);
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -521,7 +552,8 @@ ALTER TABLE `student_result_file`
 -- Ограничения внешнего ключа таблицы `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_faculty`) REFERENCES `faculty` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_faculty`) REFERENCES `faculty` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

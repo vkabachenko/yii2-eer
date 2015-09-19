@@ -16,6 +16,21 @@ use yii\web\Response;
 class HistoryController  extends GridController
 {
 
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['access']['rules'] = array_merge([
+                [
+                    'allow' => true,
+                    'actions' => ['program'],
+                    'roles' => ['updateFaculty'],
+                ],
+            ],
+            $behaviors['access']['rules'] );
+
+        return $behaviors;
+    }
+
     public function init() {
 
         $this->_model = 'common\models\StudentEducation';
@@ -66,6 +81,23 @@ class HistoryController  extends GridController
         return $programs;
 
     }
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = StudentEducation::find()->where([
+                'id_student' => $id,
+                'year' => YearHelper::getYear()
+            ])->one();
+
+            return $model->idProgram->id_faculty;
+        }
+        else {
+            $model = StudentEducation::findOne($id);
+            return $model->idProgram->id_faculty;
+        }
+    }
+
 
 
 }

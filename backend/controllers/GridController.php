@@ -7,13 +7,61 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 
 abstract class GridController extends Controller
 {
     protected $_model; // Какая модель используется в контроллере
     protected $_idParentName; // имя id родительской таблицы
 
+    /**
+     * @inheritdoc
+     */
+    /* Массив behaviors модифицирован в контроллерах /discipline/MainController
+
+    При необходимости изменения обязательно проверить!!!
+    */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index','create'],
+                        'roles' => ['updateFaculty'],
+                        'matchCallback' => function ($rule, $action) {
+                           return Yii::$app->user->can('updateFaculty',
+                             ['id_faculty' =>
+                               $this->getIdFaculty(Yii::$app->request->
+                                   get('idParent'),true)]);
+                            }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update','delete'],
+                        'roles' => ['updateFaculty'],
+                        'matchCallback' => function ($rule, $action) {
+                                return Yii::$app->user->can('updateFaculty',
+                                    ['id_faculty' =>
+                                        $this->getIdFaculty(Yii::$app->request->
+                                            get('id'))]);
+                            }
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect(['/site/login']);
+                }
+            ]
+        ];
+
+    }
+
+
     abstract protected function createProvider($query);
+
+    abstract protected function getIdFaculty($id);
 
     public function actionIndex($idParent = null)
     {
@@ -41,14 +89,14 @@ abstract class GridController extends Controller
      */
     public function actionCreate($idParent = null)
     {
-        /* @var $model \yii\db\ActiveRecord */
+            /* @var $model \yii\db\ActiveRecord */
         $model = new $this->_model;
         if ($idParent) {
             $idParentName = $this->_idParentName;
             $model->$idParentName = $idParent;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return 'Item is succesfully created.'; // alert message
         } else {
             return $this->renderAjax('update', [
@@ -83,7 +131,7 @@ abstract class GridController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+            $model = $this->findModel($id);
 
         if (Yii::$app->request->post('approve')) {
             $this->findModel($id)->delete();

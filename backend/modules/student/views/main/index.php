@@ -57,12 +57,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'group',
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}{results}{portfolio}',
+            'template' => '{update}{delete}{results}{portfolio}{user}',
             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
                 'results' => 'actionResults',
                 'portfolio' => 'actionPortfolio',
+                'user' => 'actionUser',
             ]
         ],
     ],
@@ -87,9 +88,20 @@ function actionResults($url,$model,$key) {
 function actionPortfolio($url,$model,$key) {
     /* @var $model yii\db\ActiveRecord */
     $url = ["portfolio/index",'id' => $model->id_student];
-    return Html::a('<span class="glyphicon glyphicon-user"></span>',
+    return Html::a('<span class="glyphicon glyphicon-info-sign"></span>',
         $url,[
             'class' => 'actionPortfolio',
+            'data-pjax' => '0',
+        ]);
+}
+
+// manage user. Not via ajax
+function actionUser($url,$model,$key) {
+    /* @var $model yii\db\ActiveRecord */
+    $url = ["user/index",'idParent' => $model->id_student];
+    return Html::a('<span class="glyphicon glyphicon-user"></span>',
+        $url,[
+            'class' => 'actionUser',
             'data-pjax' => '0',
         ]);
 }

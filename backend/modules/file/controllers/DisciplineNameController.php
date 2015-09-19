@@ -2,6 +2,7 @@
 
 namespace backend\modules\file\controllers;
 
+use common\models\DisciplineFile;
 use common\models\DisciplineName;
 use Yii;
 use backend\controllers\GridFileController;
@@ -30,6 +31,20 @@ class DisciplineNameController extends GridFileController
           $disciplineName->link('files',$model);
 
     }
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = DisciplineName::findOne($id);
+            return $model->idProgram->id_faculty;
+        }
+        else {
+            $model = DisciplineFile::find()->where(['id_file' => $id])->one();
+            return $this->getIdFaculty($model->id_discipline_name,true);
+        }
+    }
+
 
 
 

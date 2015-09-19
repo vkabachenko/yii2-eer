@@ -5,8 +5,40 @@ namespace backend\modules\student\controllers;
 use common\models\StudentPortfolio;
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use common\helpers\YearHelper;
+use common\models\StudentEducation;
 
 class PortfolioController extends Controller{
+
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['updateFaculty','updateStudent'],
+                        'matchCallback' => [$this,'checkStudent']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['download'],
+                        'roles' => ['updateFaculty','updateStudent'],
+                        'matchCallback' => [$this,'checkFile']
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                        $this->redirect(['/site/login']);
+                    }
+            ]
+        ];
+
+    }
+
 
 
     /**
@@ -40,5 +72,39 @@ class PortfolioController extends Controller{
     }
 
 
+    public function checkStudent($rule,$action) {
+
+           $id_student = Yii::$app->request->get('id');
+           return $this->checkAccess($id_student);
+
+    }
+
+    public function checkFile($rule,$action) {
+
+        $model = StudentPortfolio::findOne(Yii::$app->request->get('id'));
+        return $this->checkAccess($model->id_student);
+
+    }
+
+    private function checkAccess($id_student) {
+
+        if (Yii::$app->user->can('updateStudent',
+            ['id_student' => $id_student])) {
+            return true;
+        }
+        else {
+            /* @var $student StudentEducation */
+            $student = StudentEducation::find()->where([
+                'id_student' => $id_student,
+                'year' => YearHelper::getYear()
+            ])->one();
+            if (Yii::$app->user->can('updateFaculty',
+                ['id_faculty' =>
+                    $student->idProgram->id_faculty])) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

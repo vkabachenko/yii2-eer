@@ -23,7 +23,25 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
             'year' => 'common\actions\YearAction',
+            'login' => 'common\actions\LoginAction',
+            'logout' => 'common\actions\LogoutAction',
+
         ];
+    }
+
+    public function actionIndex()
+    {
+       if (Yii::$app->user->can('updateFaculty')) {
+            $this->redirect(['/faculty/main/index']);
+        }
+
+       elseif (Yii::$app->user->can('updateStudent')) {
+            $this->redirect(['/student/portfolio/index',
+                'id' => Yii::$app->user->identity->id_student]);
+        }
+        else {
+            $this->redirect(['login']);
+        }
     }
 
 }

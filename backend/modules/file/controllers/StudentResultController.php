@@ -3,6 +3,7 @@
 namespace backend\modules\file\controllers;
 
 use common\models\StudentResult;
+use common\models\StudentResultFile;
 use Yii;
 use backend\controllers\GridFileController;
 use common\models\File;
@@ -31,6 +32,18 @@ class StudentResultController extends GridFileController
 
     }
 
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            if ($id == null) return null;
+            $model = StudentResult::findOne($id);
+            return $model->idStudentEducation->idProgram->id_faculty;
+        }
+        else {
+            $model = StudentResultFile::find()->where(['id_file' => $id])->one();
+            return $this->getIdFaculty($model->id_student_result,true);
+        }
+    }
 
 
 }

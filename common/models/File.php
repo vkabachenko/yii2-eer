@@ -13,7 +13,7 @@ use backend\behaviors\FileBehavior;
  * @property string $title
  * @property string $document
  * @property string $filename
- * @property integer $role
+ * @property integer $free_access
  *
  * @property DisciplineFile[] $disciplineFiles
  * @property ProgramFile[] $programFiles
@@ -46,8 +46,8 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return array_merge($this->ruleFile(),[
-            [['role'], 'integer'],
             [['title'], 'string', 'max' => 250],
+            [['free_access'],'boolean']
         ]);
     }
 
@@ -61,7 +61,7 @@ class File extends \yii\db\ActiveRecord
             'title' => 'Описание',
             'document' => 'Оригинальное имя',
             'filename' => 'Системное имя',
-            'role' => 'Роль',
+            'free_access' => 'Свободный доступ',
         ]);
     }
 

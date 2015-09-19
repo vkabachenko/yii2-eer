@@ -2,9 +2,11 @@
 
 namespace backend\modules\program\controllers;
 
+use common\models\ProgramHeader;
 use Yii;
 use backend\controllers\GridController;
 use yii\data\ActiveDataProvider;
+use common\models\Program;
 
 class NameController extends GridController
 {
@@ -22,6 +24,19 @@ class NameController extends GridController
             'query' => $query,
             'pagination' => false,
         ]);
-
     }
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = Program::findOne($id);
+        return $model->id_faculty;
+        }
+        else {
+            $model = ProgramHeader::findOne($id);
+            return $model->idProgram->id_faculty;
+        }
+    }
+
 }

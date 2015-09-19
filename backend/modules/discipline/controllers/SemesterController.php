@@ -2,6 +2,8 @@
 
 namespace backend\modules\discipline\controllers;
 
+use common\models\Discipline;
+use common\models\DisciplineSemester;
 use Yii;
 use backend\controllers\GridController;
 use yii\data\ActiveDataProvider;
@@ -27,4 +29,18 @@ class SemesterController extends GridController
         ]);
 
     }
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = Discipline::findOne($id);
+            return $model->idProgram->id_faculty;
+        }
+        else {
+            $model = DisciplineSemester::findOne($id);
+            return $model->idDiscipline->idProgram->id_faculty;
+        }
+    }
+
 }

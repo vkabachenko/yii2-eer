@@ -9,7 +9,6 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'faculty/main/index',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
@@ -27,6 +26,9 @@ return [
         ],
         'student' => [
             'class' => 'backend\modules\student\Module',
+        ],
+        'user' => [
+            'class' => 'backend\modules\user\Module',
         ],
     ],
     'components' => [

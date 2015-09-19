@@ -6,10 +6,10 @@ use common\helpers\YearHelper;
 use Yii;
 
 use backend\controllers\GridController;
-use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use common\models\Student;
 use common\models\StudentEducation;
+use common\models\Program;
 
 class MainController  extends GridController
 {
@@ -105,5 +105,20 @@ class MainController  extends GridController
             ]);
         }
     }
+
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = Program::findOne($id);
+            return $model->id_faculty;
+        }
+        else {
+            $model = StudentEducation::findOne($id);
+            return $model->idProgram->id_faculty;
+        }
+    }
+
 
 }

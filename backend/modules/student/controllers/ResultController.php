@@ -9,8 +9,65 @@ use common\models\StudentResult;
 use yii\data\ActiveDataProvider;
 use common\helpers\ResultHelper;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use common\helpers\YearHelper;
 
 class ResultController extends Controller{
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index','update','delete'],
+                        'roles' => ['updateFaculty'],
+                        'matchCallback' => [$this,'CheckFaculty']
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                        $this->redirect(['/site/login']);
+                    }
+            ]
+        ];
+
+    }
+
+    public function CheckFaculty($rule, $action) {
+
+        /* @var $model StudentEducation */
+        switch ($action->id) {
+          case 'index': {
+              $model = StudentEducation::findOne(Yii::$app->request->get('id'));
+              $id_faculty = $model->idProgram->id_faculty;
+              break;
+            }
+            case 'update': {
+              $model = StudentEducation::findOne(Yii::$app->request->get('id_student'));
+              $id_faculty = $model->idProgram->id_faculty;
+              break;
+            }
+            case 'delete': {
+              $id = Yii::$app->request->get('id');
+              if ($id) {
+                  /* @var $result StudentResult */
+                  $result = StudentResult::findOne($id);
+                  $model = StudentEducation::findOne($result->id_student_education);
+                  $id_faculty = $model->idProgram->id_faculty;
+              }
+              else
+                  $id_faculty = null;
+              break;
+            }
+            default: $id_faculty = null;
+        }
+
+        return Yii::$app->user->can('updateFaculty',
+                     ['id_faculty' => $id_faculty]);
+
+    }
 
     public function actionIndex($id) {
         // $id - in StudentEducation

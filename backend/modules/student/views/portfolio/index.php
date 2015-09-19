@@ -8,6 +8,7 @@ use common\models\StudentPortfolio;
 use kartik\tree\Module;
 use common\models\StudentEducation;
 use common\helpers\YearHelper;
+use common\models\User;
 
 /* @var $student StudentEducation */
 $student = StudentEducation::find()->where([
@@ -17,17 +18,19 @@ $student = StudentEducation::find()->where([
 
 $this->title = 'Портфолио';
 
-$this->params['breadcrumbs'][] = [
-    'label' => 'Образовательные программы',
-    'url' => ['/program',
-        'idParent' => $student->idProgram->id_faculty],
-];
+if (Yii::$app->user->identity->role <> User::ROLE_STUDENT) {
+    $this->params['breadcrumbs'][] = [
+        'label' => 'Образовательные программы',
+        'url' => ['/program',
+            'idParent' => $student->idProgram->id_faculty],
+    ];
 
-$this->params['breadcrumbs'][] = [
-    'label' => 'Студенты',
-    'url' => ['main/index',
-        'idParent' => $student->id_program],
-];
+    $this->params['breadcrumbs'][] = [
+        'label' => 'Студенты',
+        'url' => ['main/index',
+            'idParent' => $student->id_program],
+    ];
+}
 
 $this->params['breadcrumbs'][] = $this->title;
 

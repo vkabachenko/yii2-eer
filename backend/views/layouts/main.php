@@ -1,4 +1,5 @@
 <?php
+
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -39,7 +40,20 @@ AppAsset::register($this);
                 'url' => ['/site/year'],
                 'linkOptions' => ['id' => 'year']
             ],
-            ];
+
+        ];
+
+        if (! Yii::$app->user->isGuest) {
+            $menuItems = array_merge($menuItems,[
+               ['label' => ' Управление пользователями',
+                    'url' => ['/user/main/index',
+                              'idParent' => Yii::$app->user->identity->id_faculty],
+               ],
+               ['label' => Yii::$app->user->identity->username.' - Выход',
+                'url' => ['/site/logout'],
+               ]
+            ]);
+        }
 
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

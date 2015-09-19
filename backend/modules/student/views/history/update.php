@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use common\models\Faculty;
 use backend\modules\student\assets\ProgramAsset;
+use common\models\Program;
 
 ProgramAsset::register($this);
 /* @var $this yii\web\View */
@@ -12,6 +13,11 @@ ProgramAsset::register($this);
 /* @var $form yii\widgets\ActiveForm */
 
 $facultyList = Faculty::getFacultyList();
+
+if ($model->isNewRecord) {
+    $program = Program::find()->joinWith('idFaculty')->orderBy('faculty.name')->one();
+    $model->id_program = $program->id;
+}
 
 ?>
 

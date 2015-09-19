@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 ]); ?>
 
 <?= $form->field($model, 'title')->textInput(['maxlength' => true]); ?>
-<?= $form->field($model, 'role')->textInput(); ?>
+<?= $form->field($model, 'free_access')->checkbox(); ?>
 <?php if ($model->filename)
     echo Html::tag('p',Html::a($model->document,['/file/main/download','id' => $model->id]));
 ?>

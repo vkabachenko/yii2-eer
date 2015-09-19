@@ -2,6 +2,7 @@
 
 namespace backend\modules\program\controllers;
 
+use common\models\Program;
 use Yii;
 use backend\controllers\GridController;
 use yii\data\ActiveDataProvider;
@@ -25,6 +26,18 @@ class MainController extends GridController
             ],
             'pagination' => false,
         ]);
+    }
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent)
+            return $id;
+        else {
+            $model = Program::findOne($id);
+            return $model->id_faculty;
+        }
 
     }
+
 }

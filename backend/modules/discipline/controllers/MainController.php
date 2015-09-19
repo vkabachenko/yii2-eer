@@ -2,6 +2,7 @@
 
 namespace backend\modules\discipline\controllers;
 
+use common\models\Program;
 use Yii;
 use common\models\Discipline;
 use common\models\DisciplineName;
@@ -11,6 +12,19 @@ use yii\helpers\ArrayHelper;
 
 class MainController extends GridController
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['access']['rules'][0]['actions'][] = 'create-additive';
+
+        return $behaviors;
+    }
+
 
     public function init() {
 
@@ -124,6 +138,19 @@ class MainController extends GridController
                 'discipline' => $discipline,
                 'disciplineName' => $disciplineName,
             ]);
+        }
+    }
+
+
+    protected function getIdFaculty($id, $parent = false) {
+
+        if ($parent) {
+            $model = Program::findOne($id);
+            return $model->id_faculty;
+         }
+        else {
+            $model = DisciplineName::findOne($id);
+            return $model->idProgram->id_faculty;
         }
     }
 

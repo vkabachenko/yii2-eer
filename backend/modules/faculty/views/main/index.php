@@ -13,12 +13,15 @@ require(Yii::$app->basePath.'/views/grid/index.php');
 $this->title = 'Факультеты';
 ?>
 <h2>Факультеты</h2>
+
+<?php if (Yii::$app->user->can('createDeleteFaculty')): ?>
 <p>
     <?= Html::a('Новый факультет', ['create'],
         [
             'class' => 'btn btn-success actionCreate',
         ]) ?>
 </p>
+<?php endif ?>
 
 <?php Pjax::begin(['options' => ['id' =>'pjaxWrap']]); ?>
 <?= GridView::widget([
@@ -35,8 +38,10 @@ $this->title = 'Факультеты';
         ],
         [ // column for grid action buttons
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}{delete}',
-            'buttons' => [
+            'template' => Yii::$app->user->can('createDeleteFaculty') ?
+                    '{update}{delete}' :
+                    '{update}',
+             'buttons' => [
                 'update' => 'actionUpdate',
                 'delete' => 'actionDelete',
             ]

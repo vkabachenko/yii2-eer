@@ -1,7 +1,6 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'support@example.com',
+    'adminEmail' => 'vkabachenko@gmail.com',
     'user.passwordResetTokenExpire' => 3600,
 
     /* расшифровка кодов полей втаблицах.
@@ -13,6 +12,7 @@ return [
         'program.form' => ['очное','заочное'],
         'discipline.kind' => ['дисциплина', 'практика', 'ГИА'],
         'discipline.block' => ['базовый','вариативный','ДПВ'], // см. common/models/Discipline
+        'user.role' => ['студент','инспектор факультета','админ факультета','администратор'],
     ],
 
 
