@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\helpers\Html;
 use common\traits\AttributeTrait;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "program".
@@ -31,6 +32,20 @@ class Program extends \yii\db\ActiveRecord
     // для составления полного имени программы и полного описания программы
     private $defaultAttributes = ['code','name'];
     private $disabledAttributes = ['id','id_faculty'];
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+            'class' => CascadeBehavior::className(),
+            'children' => ['disciplineNames','studentEducations','files']
+                ]
+        ]);
+    }
+
 
     /**
      * @inheritdoc
@@ -91,7 +106,7 @@ class Program extends \yii\db\ActiveRecord
      */
     public function getDisciplineNames()
     {
-        return $this->hasMany(DisciplineName::className(), ['id_program' => 'id']);
+        return $this->hasMany(DisciplineName::className(), ['id_program_main' => 'id']);
     }
 
     /**
@@ -119,7 +134,6 @@ class Program extends \yii\db\ActiveRecord
                ->via('programFiles');
     }
 
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -128,8 +142,6 @@ class Program extends \yii\db\ActiveRecord
             return $this->hasMany(ProgramHeader::className(), ['id_program' => 'id']);
         }
 
-
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -137,6 +149,7 @@ class Program extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StudentEducation::className(), ['id_program' => 'id']);
     }
+
 
     public function getFullName()
     {

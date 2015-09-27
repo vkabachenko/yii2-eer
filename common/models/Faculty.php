@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "faculty".
@@ -17,6 +18,20 @@ use yii\helpers\ArrayHelper;
  */
 class Faculty extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+            'class' => CascadeBehavior::className(),
+            'children' => ['programs']
+                ]
+        ]);
+    }
+
     /**
      * @inheritdoc
      */

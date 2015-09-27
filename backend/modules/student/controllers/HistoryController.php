@@ -3,15 +3,13 @@
 namespace backend\modules\student\controllers;
 
 use common\helpers\YearHelper;
-use common\models\Program;
 use Yii;
-
 use backend\controllers\GridController;
 use yii\data\ActiveDataProvider;
-use common\models\Student;
 use common\models\StudentEducation;
-use yii\helpers\ArrayHelper;
 use yii\web\Response;
+use common\models\Program;
+use yii\helpers\ArrayHelper;
 
 class HistoryController  extends GridController
 {
@@ -65,14 +63,15 @@ class HistoryController  extends GridController
 
     }
 
-    public function actionProgram($id_faculty)
+    public function actionProgram($id)
     {
 
         /* @var $model \common\models\Program */
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $programs = [];
-        $models = Program::find()->where(['id_faculty' => $id_faculty])->all();
+        $models = Program::find()->where(['id_faculty' => $id])->all();
+
         foreach($models as $model) {
             $programs[] = $model->toArray(['id'],['fullName']);
         }

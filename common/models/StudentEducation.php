@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "student_education".
@@ -21,6 +22,21 @@ use Yii;
 class StudentEducation extends \yii\db\ActiveRecord
 {
     private $id_student_cached; // для удаления связанного студента
+
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+                'class' => CascadeBehavior::className(),
+                'children' => ['studentResults']
+            ]
+        ]);
+    }
+
 
     /**
      * @inheritdoc

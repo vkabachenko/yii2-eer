@@ -16,6 +16,7 @@ use Yii;
  */
 class Student extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -30,7 +31,7 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name','email'], 'required'],
             [['name'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 250],
             [['email'], 'email'],
@@ -65,4 +66,35 @@ class Student extends \yii\db\ActiveRecord
     {
         return $this->hasMany(StudentPortfolio::className(), ['id_student' => 'id']);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+/*
+ * Удаляются все записи портфолио.
+ * Поскольку модель Tree не поддерживает удаление корневых элементов,
+ * для удаления не используется стандартный метод delete модели, а
+ * используется DAO.
+ */
+     if (parent::beforeDelete()) {
+ /*
+ * Сначала удаляются все файлы, связанные с портфолио, а затем все записи
+ */
+        $models = $this->studentPortfolios;
+        foreach ($models as $model) {
+            $model->deleteFile();
+        }
+
+        Yii::$app->db->
+            createCommand()->
+            delete('student_portfolio',['id_student' => $this->id])->
+            execute();
+         return true;
+     }
+     else {
+         return false;
+     }
+  }
 }

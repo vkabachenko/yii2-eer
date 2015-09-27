@@ -4,13 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use common\models\Faculty;
-use backend\modules\student\assets\ProgramAsset;
 use common\models\Program;
-
-ProgramAsset::register($this);
-/* @var $this yii\web\View */
-/* @var $model \common\models\StudentEducation */
-/* @var $form yii\widgets\ActiveForm */
 
 $facultyList = Faculty::getFacultyList();
 
@@ -45,6 +39,54 @@ if ($model->isNewRecord) {
 </div>
 
 <?php ActiveForm::end(); ?>
+
+<?php
+$script =
+"
+
+$('#faculties').change(function(){
+
+    var self = $(this);
+
+    var program = $('#program');
+
+    // clear previous data
+    program.children().each(function(index) {
+            $(this).remove();
+    });
+    var id_faculty = self.val();
+            $.ajax({
+            'url' : self.data('url'),
+            'data' : { 'id' : id_faculty }, // request (GET by default)
+            'dataType' : 'json',
+            'success' : fillProgram,
+            'error' : function() {
+                console.log('Error occured while processing ajax request')
+            }
+        });
+});
+
+$('#faculties').change();
+
+// fill program select tag
+function fillProgram(dataArr) {
+
+    $.each(dataArr,function(index,data) {
+        $('<option></option>').
+            appendTo(program).
+            val(data.id).
+            text(data.fullName);
+    })
+
+}
+
+";
+
+$this->registerJs($script);
+
+
+?>
+
 
 <?php require(Yii::$app->basePath.'/views/grid/update.php'); ?>
 

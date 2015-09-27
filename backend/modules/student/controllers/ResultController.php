@@ -10,7 +10,7 @@ use yii\data\ActiveDataProvider;
 use common\helpers\ResultHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use common\helpers\YearHelper;
+
 
 class ResultController extends Controller{
 

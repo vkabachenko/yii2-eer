@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "discipline".
@@ -23,6 +24,20 @@ class Discipline extends \yii\db\ActiveRecord
        decode  discipline.block номер ДПВ = 2
     */
     const DISCIPLINE_CHOICE = 2;
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+                'class' => CascadeBehavior::className(),
+                'children' => ['disciplineSemesters']
+            ]
+        ]);
+    }
+
     /**
      * @inheritdoc
      */
@@ -40,6 +55,7 @@ class Discipline extends \yii\db\ActiveRecord
             [['id_program', 'code', 'kind'], 'required'],
             [['id_program', 'kind', 'block'], 'integer'],
             [['code'], 'string', 'max' => 20],
+            [['id_program', 'code'],'unique','targetAttribute' => ['id_program', 'code']],
         ];
     }
 

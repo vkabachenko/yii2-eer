@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "discipline_name".
@@ -19,6 +20,22 @@ use Yii;
 class DisciplineName extends \yii\db\ActiveRecord
 {
     private $id_discipline_cached; // для удаления связанной дисциплины
+
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+                'class' => CascadeBehavior::className(),
+                'children' => ['files']
+            ]
+        ]);
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -73,7 +90,6 @@ class DisciplineName extends \yii\db\ActiveRecord
         return $this->hasMany(File::className(), ['id' => 'id_file'])
             ->via('disciplineFiles');
     }
-
 
     /**
      * @return \yii\db\ActiveQuery

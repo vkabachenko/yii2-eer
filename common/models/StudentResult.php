@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\CascadeBehavior;
 
 /**
  * This is the model class for table "student_result".
@@ -21,6 +22,20 @@ use Yii;
  */
 class StudentResult extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),[
+            [
+                'class' => CascadeBehavior::className(),
+                'children' => ['files']
+            ]
+        ]);
+    }
+
     /**
      * @inheritdoc
      */
