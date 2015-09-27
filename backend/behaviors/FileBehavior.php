@@ -30,6 +30,7 @@ class FileBehavior extends Behavior
                 'extensions' => ['jpg', 'gif', 'png', 'pdf', 'txt',
                     'doc', 'docx', 'xls', 'xlsx', 'ppt',
                     'pptx', 'zip'],
+                'maxSize' => 2*1024*1024,
             ]
         ];
     }
@@ -38,7 +39,7 @@ class FileBehavior extends Behavior
     public function saveFile()
     {
         $file = UploadedFile::getInstance($this->owner, 'savedFile');
-        if ($file) {
+        if ($file && $file->size) {
             $this->deleteFile();
             $this->owner->{$this->originalNameAttr} = $file->name;
 
