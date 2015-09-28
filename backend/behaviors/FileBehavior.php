@@ -6,6 +6,7 @@ namespace backend\behaviors;
 use yii\base\Behavior;
 use yii\web\UploadedFile;
 use Yii;
+use common\helpers\UploadHelper;
 
 class FileBehavior extends Behavior
 {
@@ -30,7 +31,7 @@ class FileBehavior extends Behavior
                 'extensions' => ['jpg', 'gif', 'png', 'pdf', 'txt',
                     'doc', 'docx', 'xls', 'xlsx', 'ppt',
                     'pptx', 'zip'],
-                'maxSize' => 2*1024*1024,
+                'maxSize' => UploadHelper::fileUploadMaxSize(),
             ]
         ];
     }
