@@ -8,6 +8,7 @@ if ($node->filename) {
                        '/student/portfolio/download',
                        'id' => $node->id,
                        'modelFile' => '\common\models\StudentPortfolio']));
+    echo $form->field($node, 'deleteFlag')->checkbox();
 }
 echo $form->field($node, 'savedFile')->fileInput();
 

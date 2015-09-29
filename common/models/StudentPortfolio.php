@@ -7,9 +7,12 @@ use backend\behaviors\FileBehavior;
 use Yii;
 
 /* @property integer    $id_student */
+/* @property string    $document */
+/* @property string    $filename */
 
 class StudentPortfolio  extends \kartik\tree\models\Tree {
 
+    public $deleteFlag = 0;
 
     /**
      * @inheritdoc
@@ -39,7 +42,7 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
         return array_merge($this->ruleFile(),[
             [['name','collapsed','visible',
               'active','removable','removable_all'], 'safe'],
-
+             ['deleteFlag','boolean']
         ]);
     }
 
@@ -49,7 +52,8 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
     public function attributeLabels()
     {
         return array_merge($this->nameFile(),[
-            'name' => 'Наименование'
+            'name' => 'Наименование',
+            'deleteFlag' => 'Удалить файл'
         ]);
     }
 
@@ -60,7 +64,13 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
     {
         if (parent::beforeSave($insert)) {
             $this->id_student = Yii::$app->session['id_student'];
-            $this->saveFile();
+            if (!$this->deleteFlag)
+                $this->saveFile();
+            else {
+                $this->deleteFile();
+                $this->document = null;
+                $this->filename = null;
+            }
             return true;
         }
         else
