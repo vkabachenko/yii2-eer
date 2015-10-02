@@ -37,6 +37,13 @@ class MainController extends GridController
 
         /* @var $query \yii\db\ActiveQuery */
         /* @var $provider ActiveDataProvider */
+
+        $subQuery = Discipline::find()->
+                    select('*,
+                          cast([[code_last]] as decimal(10,3)) as [[code_last_num]]');
+        $query->innerJoin(['main' => $subQuery], 'main.id = id_discipline');
+
+
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -48,15 +55,18 @@ class MainController extends GridController
             'attributes' => [
                 'name',
                 'disciplineCode'=>[
-                    'asc' => ['discipline.code' => SORT_ASC,'suffix' => SORT_ASC],
-                    'desc' => ['discipline.code' => SORT_DESC,'suffix' => SORT_DESC],
+                    'asc' => ['main.code_first' => SORT_ASC,
+                              'main.code_last_num' => SORT_ASC,
+                              'suffix' => SORT_ASC],
+                    'desc' => ['main.code_first' => SORT_DESC,
+                               'main.code_last_num' => SORT_DESC,
+                               'suffix' => SORT_DESC],
                     'label'=>'DisciplineCode',
                 ]
             ],
             'defaultOrder' => ['disciplineCode' => SORT_ASC,]
         ]);
 
-        $query->joinWith(['idDiscipline']); // для сортировки по disciplineCode
 
         return $provider;
 
@@ -102,7 +112,8 @@ class MainController extends GridController
 
         $disciplines = Discipline::find()->
             where(['block' => Discipline::DISCIPLINE_CHOICE])->
-            orderBy('code')->asArray()->all();
+            select(['id',"concat([[code_first]],'.',[[code_last]]) as code"])->
+            orderBy('cast([[code_last]] as unsigned)')->asArray()->all();
         $disciplines = ArrayHelper::map($disciplines,'id','code');
 
         $disciplineName = new DisciplineName();

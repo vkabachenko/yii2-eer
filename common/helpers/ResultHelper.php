@@ -30,7 +30,8 @@ class ResultHelper {
 
         $query = new Query();
         $query->
-            select(['discipline.code',
+            select(["concat([[discipline.code_first]],'.',[[discipline.code_last]]) as code",
+                'cast([[discipline.code_last]] as decimal(10,3)) as code_last_num',
                 'semester.id_student',
                 'semester.semester',
                 'semester.id_discipline',
@@ -44,7 +45,7 @@ class ResultHelper {
             innerJoin('discipline','semester.id_discipline = discipline.id' )->
             leftJoin(['result' => $result],
                 'semester.id = result.id_discipline_semester')->
-            orderBy('semester.semester, discipline.code');
+            orderBy('semester.semester, discipline.code_first,code_last_num');
 
         return $query;
 

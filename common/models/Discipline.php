@@ -10,7 +10,8 @@ use backend\behaviors\CascadeBehavior;
  *
  * @property integer $id
  * @property integer $id_program
- * @property string $code
+ * @property string $code_first
+ * @property string $code_last
  * @property integer $kind
  * @property integer $block
  *
@@ -52,10 +53,10 @@ class Discipline extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_program', 'code', 'kind'], 'required'],
+            [['id_program', 'code_first', 'kind'], 'required'],
             [['id_program', 'kind', 'block'], 'integer'],
-            [['code'], 'string', 'max' => 20],
-            [['id_program', 'code'],'unique','targetAttribute' => ['id_program', 'code']],
+            [['code_first','code_last'], 'string', 'max' => 20],
+            [['id_program', 'code_first','code_last'],'unique','targetAttribute' => ['id_program', 'code_first','code_last']],
         ];
     }
 
@@ -67,7 +68,8 @@ class Discipline extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_program' => 'Id Program',
-            'code' => 'Шифр',
+            'code_first' => 'Буквенная часть шифра, например, Б1.В.ОД',
+            'code_last' => 'Числовая часть шифра, например, 10.1',
             'kind' => 'Вид',
             'block' => 'Блок',
         ];
@@ -97,6 +99,17 @@ class Discipline extends \yii\db\ActiveRecord
         return $this->hasMany(DisciplineSemester::className(), ['id_discipline' => 'id']);
     }
 
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code_first.($this->code_last ? '.'.$this->code_last : '');
+    }
+
+    /**
+     * @return string
+     */
     public function getFullName()
     {
         if ($this->block == self::DISCIPLINE_CHOICE) {
