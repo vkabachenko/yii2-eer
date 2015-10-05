@@ -2,6 +2,10 @@
 
 namespace frontend\modules\program\helpers;
 
+use common\helpers\YearHelper;
+use common\models\StudentEducation;
+use common\models\User;
+use Yii;
 use common\models\Program;
 use common\models\ProgramFile;
 use yii\base\Object;
@@ -48,10 +52,42 @@ class AccordionContent extends Object
     // link to students related to model
     private function linkStudents()
     {
-            return Html::a('Студенты',
-                ['/student','id_program' => $this->model->id],
-                ['class' => 'programLinks']);
+            if ($this->allowed()) {
+                return Html::a('Студенты',
+                   ['/student','id_program' => $this->model->id],
+                   ['class' => 'programLinks']);
+            }
+            else {
+                return '';
+            }
     }
+
+    // check if user allowed to view students
+    private function allowed()
+    {
+
+        if (Yii::$app->user->can('viewFaculty',['id_faculty' => $this->model->id_faculty])) {
+            return true;
+        }
+        elseif (Yii::$app->user->can('updateStudent')) {
+            $student = StudentEducation::find()->
+                       where([
+                           'id_student' => Yii::$app->user->identity->id_student,
+                           'year' => YearHelper::getYear(),
+                       ])->one();
+            if (!$student) {
+                return false;
+            }
+            else {
+                return $student->id_program == $this->model->id;
+            }
+        }
+        else
+            return false;
+
+    }
+
+    // get list of programs
 
     public function items($id_faculty) {
 

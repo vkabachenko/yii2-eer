@@ -22,6 +22,8 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
             'year' => 'common\actions\YearAction',
+            'login' => 'common\actions\LoginAction',
+            'logout' => 'common\actions\LogoutAction',
         ];
     }
 

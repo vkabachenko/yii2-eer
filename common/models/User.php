@@ -55,17 +55,23 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     public function rules()
     {
         return [
+            //Required
             [['username', 'auth_key', 'password_hash','email', 'role'], 'required'],
             [['password', 'repassword'], 'required'],
             // Trim
             [['username', 'email', 'password', 'repassword'], 'trim'],
             // String
             [['password', 'repassword'], 'string', 'min' => 1, 'max' => 30],
+            //Match
+            [['username'],'match','pattern' => '/^[a-z][\w\d@]*$/i'],
+            [['password', 'repassword'],'match','pattern' => '/^[\S]+$/'],
+            //Type
             [['id_faculty', 'role'], 'integer'],
             [['username'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 250],
             [['auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            //Other
             [['username'], 'unique'],
             [['email'], 'email'],
             [['id_faculty'], 'exist', 'skipOnError' => true, 'targetClass' => Faculty::className(), 'targetAttribute' => ['id_faculty' => 'id']],
@@ -189,6 +195,7 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
+            $this->username = strtolower($this->username);
             $this->setPassword($this->password);
             // Generate auth and secure keys
             $this->generateAuthKey();

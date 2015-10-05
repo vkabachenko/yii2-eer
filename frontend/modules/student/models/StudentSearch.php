@@ -40,12 +40,14 @@ class StudentSearch extends StudentEducation
      *
      * @return ActiveDataProvider
      */
-    public function search($id_program, $params)
+    public function search($id_program, $id_student, $params)
     {
         $query = StudentEducation::find()->
             where([
                 'id_program' => $id_program,
                 'year' => YearHelper::getYear()]);
+
+        $query->andFilterWhere(['id_student' => $id_student]);
 
         $provider = new ActiveDataProvider([
             'query' => $query,

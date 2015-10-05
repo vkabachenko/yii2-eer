@@ -28,7 +28,6 @@ class PortfolioController extends Controller{
                         'allow' => true,
                         'actions' => ['download'],
                         'roles' => ['updateFaculty','updateStudent'],
-                        'matchCallback' => [$this,'checkFile']
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
@@ -76,13 +75,6 @@ class PortfolioController extends Controller{
 
            $id_student = Yii::$app->request->get('id');
            return $this->checkAccess($id_student);
-
-    }
-
-    public function checkFile($rule,$action) {
-
-        $model = StudentPortfolio::findOne(Yii::$app->request->get('id'));
-        return $this->checkAccess($model->id_student);
 
     }
 

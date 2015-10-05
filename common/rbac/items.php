@@ -5,6 +5,7 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'updateStudent',
+            'viewProgramFiles',
         ],
     ],
     'inspector' => [
@@ -12,6 +13,7 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'viewFaculty',
+            'viewProgramFiles',
         ],
     ],
     'localAdmin' => [
@@ -19,7 +21,8 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'updateFaculty',
-            'inspector',
+            'viewFaculty',
+            'viewProgramFiles',
         ],
     ],
     'admin' => [
@@ -27,8 +30,9 @@ return [
         'ruleName' => 'userRole',
         'children' => [
             'createDeleteFaculty',
-            'localAdmin',
-            'student',
+            'updateFaculty',
+            'viewFaculty',
+            'viewProgramFiles',
         ],
     ],
     'updateFaculty' => [
@@ -38,6 +42,10 @@ return [
     'viewFaculty' => [
         'type' => 2,
         'ruleName' => 'isOwnFaculty',
+    ],
+    'viewProgramFiles' => [
+        'type' => 2,
+        'ruleName' => 'isProgramFiles',
     ],
     'createDeleteFaculty' => [
         'type' => 2,

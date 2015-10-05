@@ -72,11 +72,20 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
 
                         if ($disciplineSemester) {
-                            $content .= Html::a($semester,
-                               [
-                                 '/student/result/discipline',
-                                 'id' => $disciplineSemester->id ],
-                                ['style'=>'margin-right:10px;']);
+                            $options = ['style'=>'margin-right:10px;'];
+
+                            if (Yii::$app->user->
+                                can('viewFaculty',['id_faculty' => $model->idProgram->id_faculty])) {
+
+                                $content .= Html::a($semester,
+                                   [
+                                      '/student/result/discipline',
+                                      'id' => $disciplineSemester->id
+                                   ],$options);
+                            }
+                            else {
+                                $content .= Html::tag('span',$semester,$options);
+                            }
                         }
                     }
                     return $content;

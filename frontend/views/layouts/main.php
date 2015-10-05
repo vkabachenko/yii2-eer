@@ -40,8 +40,20 @@ AppAsset::register($this);
                  'url' => ['/site/year'],
                  'linkOptions' => ['id' => 'year']
                 ],
-
             ];
+
+            if (Yii::$app->user->isGuest) {
+                $userItem =
+                    ['label' => 'Авторизация ',
+                    'url' => ['/site/login'],
+                   ];}
+            else {
+                $userItem =
+                    ['label' => Yii::$app->user->identity->username.' - Выход',
+                        'url' => ['/site/logout'],
+                    ];}
+
+            $menuItems[] = $userItem;
 
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

@@ -10,28 +10,6 @@ use yii\filters\AccessControl;
 
 class MainController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['download'],
-                        'roles' => ['updateFaculty'],
-                    ],
-                ],
-                'denyCallback' => function ($rule, $action) {
-                        $this->redirect(['/site/login']);
-                    }
-            ]
-        ];
-
-    }
-
-
-
     /**
      * @inheritdoc
      */
