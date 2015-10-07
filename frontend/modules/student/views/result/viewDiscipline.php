@@ -9,13 +9,13 @@ $this->title = 'Просмотр';
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
-    'url' => ['/program',
+    'url' => ['/program/main/index',
         'id_faculty' => $model->idStudentEducation->idProgram->id_faculty],
 ];
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Дисциплины',
-    'url' => ['/discipline',
+    'url' => ['/discipline/main/index',
         'id_program' => $model->idDisciplineSemester->idDiscipline->id_program],
 ];
 

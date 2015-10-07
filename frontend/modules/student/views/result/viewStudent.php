@@ -9,7 +9,7 @@ $this->title = 'Просмотр';
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
-    'url' => ['/program',
+    'url' => ['/program/main/index',
         'id_faculty' => $model->idStudentEducation->idProgram->id_faculty],
 ];
 

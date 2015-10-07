@@ -11,7 +11,7 @@ use common\models\DisciplineSemester;
 $this->title = 'Дисциплины';
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
-    'url' => ['/program',
+    'url' => ['/program/main/index',
         'id_faculty' => $program->id_faculty],
 ];
 $this->params['breadcrumbs'][] = $this->title;

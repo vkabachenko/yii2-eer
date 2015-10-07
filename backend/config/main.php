@@ -36,6 +36,12 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+        'request' => [
+            'baseUrl' => '/administrator'
+        ],
+        'urlManager'=>[
+            'scriptUrl'=>'/administrator/index.php',
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

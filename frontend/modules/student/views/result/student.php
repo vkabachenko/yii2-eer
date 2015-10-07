@@ -15,7 +15,7 @@ $this->title = 'Результаты';
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
-    'url' => ['/program',
+    'url' => ['/program/main/index',
         'id_faculty' => $program->id_faculty],
 ];
 

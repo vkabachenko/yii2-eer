@@ -13,13 +13,13 @@ $this->title = 'Результаты';
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Образовательные программы',
-    'url' => ['/program',
+    'url' => ['/program/main/index',
         'id_faculty' => $disciplineSemester->idDiscipline->idProgram->id_faculty],
 ];
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Дисциплины',
-    'url' => ['/discipline',
+    'url' => ['/discipline/main/index',
         'id_program' => $disciplineSemester->idDiscipline->id_program],
 ];
 

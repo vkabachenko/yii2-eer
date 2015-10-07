@@ -25,7 +25,7 @@ class AccordionContent extends Object
     {
 
         return Html::a($this->model->fullName,
-                    Url::to(['/discipline','id_program' => $this->model->id,]));
+                    Url::to(['/discipline/main/index','id_program' => $this->model->id,]));
     }
 
     // program description
@@ -54,7 +54,7 @@ class AccordionContent extends Object
     {
             if ($this->allowed()) {
                 return Html::a('Студенты',
-                   ['/student','id_program' => $this->model->id],
+                   ['/student/main/index','id_program' => $this->model->id],
                    ['class' => 'programLinks']);
             }
             else {
