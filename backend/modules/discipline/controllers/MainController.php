@@ -140,15 +140,14 @@ class MainController extends GridController
         $disciplineName = $this->findModel($id);
         $discipline = $disciplineName->idDiscipline;
 
-        if ($disciplineName->load(Yii::$app->request->post()) && $disciplineName->save()) {
-            $discipline->load(Yii::$app->request->post());
-            $discipline->save();
-            return '';
-        } else {
-            return $this->renderAjax('update', [
-                'discipline' => $discipline,
-                'disciplineName' => $disciplineName,
-            ]);
+            if ($disciplineName->load(Yii::$app->request->post()) && $disciplineName->save()
+                && $discipline->load(Yii::$app->request->post()) && $discipline->save()) {
+                return '';
+            } else {
+                return $this->renderAjax('update', [
+                  'discipline' => $discipline,
+                  'disciplineName' => $disciplineName,
+                ]);
         }
     }
 

@@ -83,6 +83,7 @@ AppAsset::register($this);
     Modal::begin([
         'id' => 'modalWindow',
         'header' => '<h2></h2>',
+        'options' => ['data-backdrop' => 'static']
     ]);
 
     Modal::end();

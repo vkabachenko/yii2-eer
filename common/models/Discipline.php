@@ -56,7 +56,12 @@ class Discipline extends \yii\db\ActiveRecord
             [['id_program', 'code_first', 'kind'], 'required'],
             [['id_program', 'kind', 'block'], 'integer'],
             [['code_first','code_last'], 'string', 'max' => 20],
-            [['id_program', 'code_first','code_last'],'unique','targetAttribute' => ['id_program', 'code_first','code_last']],
+            [
+                ['id_program', 'code_first','code_last'],
+                'unique',
+                'targetAttribute' => ['id_program', 'code_first','code_last'],
+                'message' => 'Эта комбинация буквенного и числового шифров уже используется'
+            ],
         ];
     }
 

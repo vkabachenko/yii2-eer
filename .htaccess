@@ -12,7 +12,7 @@
   IndexIgnore */*
 
   # Handle the case of backend
-  RewriteRule ^administrator(/(.*))?$ backend/web/$0 [S=1]
+  RewriteRule ^administrator(/(.*))?$ backend/web/$2 [S=1]
 
   # handle the case of frontend
   RewriteRule .* frontend/web/$0

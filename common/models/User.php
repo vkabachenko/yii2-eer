@@ -56,21 +56,19 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         return [
             //Required
-            [['username', 'auth_key', 'password_hash','email', 'role'], 'required'],
+            [['username', 'email', 'role'], 'required'],
             [['password', 'repassword'], 'required'],
             // Trim
             [['username', 'email', 'password', 'repassword'], 'trim'],
             // String
             [['password', 'repassword'], 'string', 'min' => 1, 'max' => 30],
             //Match
-            [['username'],'match','pattern' => '/^[a-z][\w\d@]*$/i'],
+            [['username'],'match','pattern' => '/^[a-z][\w\.@]*$/i'],
             [['password', 'repassword'],'match','pattern' => '/^[\S]+$/'],
             //Type
             [['id_faculty', 'role'], 'integer'],
             [['username'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 250],
-            [['auth_key'], 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token'], 'string', 'max' => 255],
             //Other
             [['username'], 'unique'],
             [['email'], 'email'],

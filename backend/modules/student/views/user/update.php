@@ -27,6 +27,7 @@ if ($model->isNewRecord) {
 <?= $form->field($model, 'email')->textInput(['maxlength' => true]); ?>
 <?= $form->field($model, 'password')->passwordInput(); ?>
 <?= $form->field($model, 'repassword')->passwordInput(); ?>
+<?= $form->field($model, 'role')->hiddenInput()->label(false); ?>
 
 
 <div class="form-group">

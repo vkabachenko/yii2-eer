@@ -19,7 +19,7 @@ class YearAction  extends Action
             $this->controller->goHome();
         }
         else {
-            return $this->controller->renderFile('@common/views/year.php',
+            return $this->controller->renderAjax('@common/views/year.php',
                                         ['model' => $model]);
         }
 

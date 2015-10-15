@@ -50,6 +50,12 @@ class DisciplineSemester extends \yii\db\ActiveRecord
         return [
             [['id_discipline', 'semester', 'course'], 'required'],
             [['id_discipline', 'semester', 'max_rating','course'], 'integer'],
+            [
+                ['id_discipline', 'semester'],
+                'unique',
+                'targetAttribute' => ['id_discipline', 'semester'],
+                'message' => 'Этот семестр уже введен'
+            ],
         ];
     }
 

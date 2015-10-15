@@ -85,7 +85,7 @@ class Program extends \yii\db\ActiveRecord
         return [
             'code' => 'Шифр',
             'name' => 'Наименование',
-            'level' => 'Ступень высшего образования',
+            'level' => 'Уровень высшего образования',
             'form' => 'Форма обучения',
             'profile' => 'Профиль',
             'standard' => 'Стандарт высшего образования',

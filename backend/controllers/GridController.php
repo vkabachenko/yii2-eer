@@ -8,6 +8,8 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 abstract class GridController extends Controller
 {
@@ -96,13 +98,14 @@ abstract class GridController extends Controller
             $model->$idParentName = $idParent;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return 'Item is succesfully created.'; // alert message
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
             ]);
         }
+
     }
 
     /**
@@ -114,7 +117,6 @@ abstract class GridController extends Controller
     {
         $model = $this->findModel($id);
         /* @var $model \yii\db\ActiveRecord */
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return '';
         } else {
