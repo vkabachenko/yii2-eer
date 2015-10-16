@@ -15,6 +15,7 @@ class MainController extends GridController
 
         $this->_model = 'common\models\User';
         $this->_idParentName = 'id_faculty';
+        $this->_scenarioCreate = 'signup';
 
     }
 

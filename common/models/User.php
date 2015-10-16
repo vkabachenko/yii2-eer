@@ -57,7 +57,8 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
         return [
             //Required
             [['username', 'email', 'role'], 'required'],
-            [['password', 'repassword'], 'required'],
+
+            [['password', 'repassword'], 'required', 'on' => 'signup'],
             // Trim
             [['username', 'email', 'password', 'repassword'], 'trim'],
             // String
@@ -73,7 +74,7 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
             [['username'], 'unique'],
             [['email'], 'email'],
             [['id_faculty'], 'exist', 'skipOnError' => true, 'targetClass' => Faculty::className(), 'targetAttribute' => ['id_faculty' => 'id']],
-            ['repassword', 'compare', 'compareAttribute' => 'password'],
+            ['repassword', 'compare', 'compareAttribute' => 'password','skipOnEmpty' => false],
         ];
     }
 
@@ -194,7 +195,10 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
     {
         if (parent::beforeSave($insert)) {
             $this->username = strtolower($this->username);
-            $this->setPassword($this->password);
+
+            if ($this->password)
+                $this->setPassword($this->password);
+
             // Generate auth and secure keys
             $this->generateAuthKey();
             $this->generateToken();

@@ -17,7 +17,7 @@ class UserController extends GridController
 
         $this->_model = 'common\models\User';
         $this->_idParentName = 'id_student';
-
+        $this->_scenarioCreate = 'signup';
     }
 
     protected function createProvider($query) {

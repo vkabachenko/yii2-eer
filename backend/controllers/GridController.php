@@ -15,6 +15,8 @@ abstract class GridController extends Controller
 {
     protected $_model; // Какая модель используется в контроллере
     protected $_idParentName; // имя id родительской таблицы
+    protected $_scenarioCreate; // сценарии при добавлении
+    protected $_scenarioUpdate; // и редактировании
 
     /**
      * @inheritdoc
@@ -93,6 +95,11 @@ abstract class GridController extends Controller
     {
             /* @var $model \yii\db\ActiveRecord */
         $model = new $this->_model;
+
+        if ($this->_scenarioCreate) {
+            $model->scenario = $this->_scenarioCreate;
+        }
+
         if ($idParent) {
             $idParentName = $this->_idParentName;
             $model->$idParentName = $idParent;
@@ -117,6 +124,11 @@ abstract class GridController extends Controller
     {
         $model = $this->findModel($id);
         /* @var $model \yii\db\ActiveRecord */
+
+        if ($this->_scenarioUpdate) {
+            $model->scenario = $this->_scenarioUpdate;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return '';
         } else {
