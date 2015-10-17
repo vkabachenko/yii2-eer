@@ -15,6 +15,8 @@ class MainController extends Controller
         $searchModel = new DisciplineSearch();
         $dataProvider = $searchModel->search($id_program, Yii::$app->request->queryParams);
 
+        Yii::$app->session->set('disciplinePage',Yii::$app->request->get('page'));
+
         return $this->render('index', [
             'program' => $program,
             'searchModel' => $searchModel,

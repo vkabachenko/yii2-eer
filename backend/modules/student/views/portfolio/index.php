@@ -28,7 +28,9 @@ if (Yii::$app->user->identity->role <> User::ROLE_STUDENT) {
     $this->params['breadcrumbs'][] = [
         'label' => 'Студенты',
         'url' => ['main/index',
-            'idParent' => $student->id_program],
+            'idParent' => $student->id_program,
+            'page' => Yii::$app->session->get('studentPage')
+        ],
     ];
 }
 

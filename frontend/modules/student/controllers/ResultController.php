@@ -5,6 +5,7 @@ namespace frontend\modules\student\controllers;
 
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use common\models\StudentEducation;
 use common\models\StudentResult;
@@ -101,8 +102,12 @@ class ResultController extends Controller
 
              $provider = new ActiveDataProvider([
                  'query' => ResultHelper::StudentResults($id),
-                 'pagination' => false,
+                 'pagination' => [
+                     'pageSize' => 10,
+                 ],
              ]);
+
+             Yii::$app->session->set('studentResultPage',Yii::$app->request->get('page'));
 
              return $this->render('student', [
                  'provider' => $provider,
@@ -118,8 +123,11 @@ class ResultController extends Controller
 
         $provider = new ActiveDataProvider([
             'query' => ResultHelper::DisciplineResults($id),
-            'pagination' => false,
+            'pagination' => [
+                 'pageSize' => 10,
+             ],
         ]);
+        Yii::$app->session->set('disciplineResultPage',Yii::$app->request->get('page'));
 
         return $this->render('discipline', [
             'provider' => $provider,

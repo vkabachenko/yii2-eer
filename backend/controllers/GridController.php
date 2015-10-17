@@ -17,6 +17,7 @@ abstract class GridController extends Controller
     protected $_idParentName; // имя id родительской таблицы
     protected $_scenarioCreate; // сценарии при добавлении
     protected $_scenarioUpdate; // и редактировании
+    protected $_pageName; // название сессионной переменной, сохраняющей позициию текущей страницы в гриде
 
     /**
      * @inheritdoc
@@ -79,6 +80,10 @@ abstract class GridController extends Controller
         }
 
         $provider = $this->createProvider($query);
+
+        if ($this->_pageName) {
+            Yii::$app->session->set($this->_pageName,Yii::$app->request->get('page'));
+        }
 
         return $this->render('index', [
             'provider' => $provider,

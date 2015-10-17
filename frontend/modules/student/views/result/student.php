@@ -22,7 +22,9 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = [
     'label' => 'Студенты',
     'url' => ['main/index',
-        'id_program' => $student->id_program],
+        'id_program' => $student->id_program,
+        'page' => Yii::$app->session->get('studentPage')
+    ],
 ];
 
 $this->params['breadcrumbs'][] = $this->title;

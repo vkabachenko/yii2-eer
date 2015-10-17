@@ -3,9 +3,7 @@
 /* @var $provider yii\data\ActiveDataProvider */
 /* @var $disciplineSemester \common\models\DisciplineSemester */
 
-use common\models\Program;
 use yii\grid\GridView;
-use common\models\Discipline;
 use yii\helpers\Html;
 
 
@@ -20,7 +18,8 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = [
     'label' => 'Дисциплины',
     'url' => ['/discipline/main/index',
-        'id_program' => $disciplineSemester->idDiscipline->id_program],
+        'id_program' => $disciplineSemester->idDiscipline->id_program,
+        'page' => Yii::$app->session->get('disciplinePage')],
 ];
 
 $this->params['breadcrumbs'][] = $this->title;

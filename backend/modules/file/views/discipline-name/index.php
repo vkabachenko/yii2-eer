@@ -28,7 +28,9 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] =  [
     'label' => 'Дисциплины',
     'url' => ['/discipline',
-        'idParent' => $disciplineName->id_program_main]
+        'idParent' => $disciplineName->id_program_main,
+        'page' => Yii::$app->session->get('disciplinePage')
+    ]
 ];
 
 $this->params['breadcrumbs'][] = $this->title;

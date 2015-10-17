@@ -30,6 +30,7 @@ class MainController extends GridController
 
         $this->_model = 'common\models\DisciplineName';
         $this->_idParentName = 'id_program_main';
+        $this->_pageName = 'disciplinePage';
 
     }
 

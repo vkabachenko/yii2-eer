@@ -16,13 +16,16 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = [
     'label' => 'Дисциплины',
     'url' => ['/discipline/main/index',
-        'id_program' => $model->idDisciplineSemester->idDiscipline->id_program],
+        'id_program' => $model->idDisciplineSemester->idDiscipline->id_program,
+        'page' => Yii::$app->session->get('disciplinePage')]
 ];
 
 $this->params['breadcrumbs'][] = [
     'label' => 'Результаты',
     'url' => ['result/discipline',
-        'id' => $model->id_discipline_semester],
+        'id' => $model->id_discipline_semester,
+        'page' => Yii::$app->session->get('disciplineResultPage')
+    ],
 ];
 
 $this->params['breadcrumbs'][] = $this->title;

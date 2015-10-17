@@ -69,6 +69,7 @@ class MainController extends Controller
         $program = Program::findOne($id_program);
         $searchModel = new StudentSearch();
         $dataProvider = $searchModel->search($id_program, $id_student, Yii::$app->request->queryParams);
+        Yii::$app->session->set('studentPage',Yii::$app->request->get('page'));
 
         return $this->render('index', [
             'program' => $program,

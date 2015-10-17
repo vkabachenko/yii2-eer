@@ -18,6 +18,7 @@ class MainController  extends GridController
 
         $this->_model = 'common\models\StudentEducation';
         $this->_idParentName = 'id_program';
+        $this->_pageName = 'studentPage';
 
     }
 
@@ -31,7 +32,7 @@ class MainController  extends GridController
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 5,
             ],
         ]);
 

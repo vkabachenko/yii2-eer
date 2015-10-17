@@ -52,7 +52,7 @@ class StudentSearch extends StudentEducation
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
             ],
         ]);
 
