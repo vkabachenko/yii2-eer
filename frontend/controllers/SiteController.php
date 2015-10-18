@@ -5,12 +5,29 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use common\models\Faculty;
+use bupy7\ajaxfilter\AjaxFilter;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+
+    public function behaviors()
+    {
+        return [
+
+            [
+                'class' => AjaxFilter::className(),
+                'actions' => ['year'],
+            ],
+        ];
+    }
+
 
     /**
      * @inheritdoc

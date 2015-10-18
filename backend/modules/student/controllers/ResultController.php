@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use common\helpers\ResultHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use bupy7\ajaxfilter\AjaxFilter;
 
 
 class ResultController extends Controller{
@@ -30,7 +31,11 @@ class ResultController extends Controller{
                 'denyCallback' => function ($rule, $action) {
                         $this->redirect(['/site/login']);
                     }
-            ]
+            ],
+            'ajax' => [
+                'class' => AjaxFilter::className(),
+                'actions' => ['update','delete'],
+            ],
         ];
 
     }

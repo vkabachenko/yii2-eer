@@ -8,8 +8,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
-use yii\web\Response;
-use yii\widgets\ActiveForm;
+use bupy7\ajaxfilter\AjaxFilter;
 
 abstract class GridController extends Controller
 {
@@ -58,7 +57,11 @@ abstract class GridController extends Controller
                 'denyCallback' => function ($rule, $action) {
                     $this->redirect(['/site/login']);
                 }
-            ]
+            ],
+            'ajax' => [
+                'class' => AjaxFilter::className(),
+                'actions' => ['create','update','delete'],
+            ],
         ];
 
     }

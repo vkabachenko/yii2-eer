@@ -2,16 +2,28 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use common\models\LoginForm;
-use yii\filters\VerbFilter;
+use bupy7\ajaxfilter\AjaxFilter;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+
+            [
+                'class' => AjaxFilter::className(),
+                'actions' => ['year'],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -39,7 +51,7 @@ class SiteController extends Controller
             $this->redirect(['/student/portfolio/index',
                 'id' => Yii::$app->user->identity->id_student]);
         }
-        else {
+       else {
             $this->redirect(['login']);
         }
     }

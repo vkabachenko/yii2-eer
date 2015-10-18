@@ -19,7 +19,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-jui": "~2.0.0",
         "kartik-v/yii2-tree-manager": "@dev",
-        "FortAwesome/Font-Awesome": "*"
+        "FortAwesome/Font-Awesome": "*",
+        "bupy7/yii2-ajaxfilter": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

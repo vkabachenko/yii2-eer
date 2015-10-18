@@ -25,6 +25,7 @@ class HistoryController  extends GridController
                 ],
             ],
             $behaviors['access']['rules'] );
+        $behaviors['ajax']['actions'][] = 'program';
 
         return $behaviors;
     }

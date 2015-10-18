@@ -9,11 +9,25 @@ use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
 use common\models\User;
-use yii\filters\AccessControl;
+use bupy7\ajaxfilter\AjaxFilter;
 
 
 class MainController extends Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+
+            [
+                'class' => AjaxFilter::className(),
+                'actions' => ['program', 'discipline','result'],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc

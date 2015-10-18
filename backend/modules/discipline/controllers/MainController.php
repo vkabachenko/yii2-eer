@@ -21,6 +21,7 @@ class MainController extends GridController
         $behaviors = parent::behaviors();
 
         $behaviors['access']['rules'][0]['actions'][] = 'create-additive';
+        $behaviors['ajax']['actions'][] = 'create-additive';
 
         return $behaviors;
     }
