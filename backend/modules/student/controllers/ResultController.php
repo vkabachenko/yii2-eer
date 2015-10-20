@@ -3,6 +3,7 @@
 namespace backend\modules\student\controllers;
 
 use Yii;
+use yii\base\Model;
 use yii\web\NotFoundHttpException;
 use common\models\StudentEducation;
 use common\models\StudentResult;
@@ -91,28 +92,29 @@ class ResultController extends Controller{
             ]);
     }
 
-    public function actionUpdate($id_student, $id_semester, $id_result = null) {
-
-    // $id_semester - id discipline_semester
-    // $id_result - id student_result или null ,если результата еще нет
-    /* @var $model StudentResult */
+    public function actionUpdate($id_student, $id_semester, $id_result = null)
+    {
 
         if ($id_result) {
-            $model = $this->findModel($id_result);
+            $results = ResultHelper::examList($id_result);
         }
         else {
-            $model = new StudentResult();
-            $model->id_student_education = $id_student;
-            $model->id_discipline_semester = $id_semester;
+            $results = ResultHelper::newExamList($id_student, $id_semester);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return '';
-        } else {
-            return $this->renderAjax('update', [
-                'model' => $model,
-            ]);
-        }
+            if (Model::loadMultiple($results,Yii::$app->request->post()) &&
+                Model::validateMultiple($results)) {
+
+                foreach ($results as $result) {
+                    if ($result->assesment || $result->rating)
+                       $result->save(false);
+                    else
+                        if ($id_result) $result->delete();
+                }
+                return '';
+            }
+
+            return $this->renderAjax('update', ['results' => $results]);
     }
 
 
@@ -129,7 +131,6 @@ class ResultController extends Controller{
                 return '';
             }
         }
-
 
         return $this->renderAjax('delete', [
             'model' => $model,

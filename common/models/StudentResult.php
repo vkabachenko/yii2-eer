@@ -109,9 +109,9 @@ class StudentResult extends \yii\db\ActiveRecord
     }
 
     public function beforeSave($insert) {
+
         if(parent::beforeSave($insert)) {
-            $this->passing_date = $this->passing_date ?
-                date('Y-m-d', strtotime($this->passing_date)) : null;
+            $this->passing_date = static::convertDate($this->passing_date);
             return true;
         } else {
             return false;
@@ -125,6 +125,12 @@ class StudentResult extends \yii\db\ActiveRecord
             $this->passing_date = $date;
         }
         parent::afterFind();
+    }
+
+    public static function convertDate($date) {
+
+        return $date ? date('Y-m-d', strtotime($date)) : null;
+
     }
 
 

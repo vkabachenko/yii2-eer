@@ -91,6 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 function actionUpdate($url,$model,$key) {
+
     $url = Url::to(['update',
         'id_student' => $model['id_student'],
         'id_semester' => $model['id_semester'],
@@ -103,24 +104,32 @@ function actionUpdate($url,$model,$key) {
 }
 
 function actionDelete($url,$model,$key) {
-    $url = Url::to(['delete',
-        'id' => $model['id_result']]);
+  if ($model['id_result']) {
+    $url = Url::to(['delete','id' => $model['id_result']]);
     return Html::a('<span class="glyphicon glyphicon-trash"></span>',
         $url,[
             'class' => 'actionDelete',
             'data-pjax' => '0',
         ]);
+  }
+  else {
+      return '';
+  }
 }
 
 
 // manage files. Not via ajax
 function actionFile($url,$model,$key) {
     /* @var $model yii\db\ActiveRecord */
+  if ($model['id_result']) {
     $url = Url::to(["/file/student-result",'idParent' => $model['id_result']]);
     return Html::a('<span class="glyphicon glyphicon-file"></span>',
         $url,[
             'class' => 'actionFile',
             'data-pjax' => '0',
         ]);
+  } else {
+      return '';
+  }
 }
 ?>

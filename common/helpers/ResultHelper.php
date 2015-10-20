@@ -3,6 +3,8 @@
 namespace common\helpers;
 
 use yii\db\Query;
+use common\models\StudentResult;
+use common\models\StudentEducation;
 
 
 class ResultHelper {
@@ -111,5 +113,90 @@ class ResultHelper {
         return $query;
 
     }
+
+    /*
+     * Экзаменационная ведомость с теми же характеристиками, что и в таблице
+     * student_result c id = id_result
+     */
+
+    public static function examList($id_result)
+    {
+
+        $currentResult = StudentResult::findOne($id_result);
+        $currentStudent = StudentEducation::findOne($currentResult->id_student_education);
+
+        $results = StudentResult::find()->
+            innerJoinWith([
+                'idStudentEducation' => function($query) use ($currentStudent) {
+                        $query->joinWith([
+                            'idStudent' => function($query2) {
+                                    $query2->orderBy('name');
+                                }
+                        ])->
+                            where([
+                                'year' => $currentStudent->year,
+                                'group' => $currentStudent->group
+                            ]);
+                    }
+            ])->
+            where([
+                'id_discipline_semester' => $currentResult->id_discipline_semester,
+                'examiner' => $currentResult->examiner,
+                'passing_date' => StudentResult::convertDate(
+                        $currentResult->passing_date),
+            ])->
+            all();
+
+        return $results;
+    }
+
+    /*
+     * Новая экзаменационная ведомость для студента id_student и
+     * дисциплины id_semester
+     */
+
+    public static function newExamList($id_student, $id_semester)
+    {
+
+        $currentStudent = StudentEducation::findOne($id_student);
+
+        $studentResults = StudentResult::find()->
+                innerJoinWith([
+                    'idStudentEducation' => function($query) use ($currentStudent) {
+                            $query->where([
+                                'year' => $currentStudent->year,
+                                'group' => $currentStudent->group
+                            ]);
+                        }
+                ])->
+                where(['id_discipline_semester' => $id_semester])->
+                select('id_student');
+
+        $students = StudentEducation::find()->
+                joinWith([
+                    'idStudent' => function($query) {
+                            $query->orderBy('name');
+                        }
+                ])->
+                where([
+                    'year' => $currentStudent->year,
+                    'id_program' => $currentStudent->id_program,
+                    'course' => $currentStudent->course,
+                    'group' => $currentStudent->group
+                ])->
+                andWhere(['not in','id_student',$studentResults])->
+                all();
+
+        $results = [];
+        foreach ($students as $student) {
+                $result = new StudentResult();
+                $result->id_student_education = $student->id;
+                $result->id_discipline_semester = $id_semester;
+                $results[] = $result;
+        }
+
+        return $results;
+    }
+
 
 } 
