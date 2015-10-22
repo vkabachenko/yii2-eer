@@ -45,8 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?= TreeView::widget([
-    // single query fetch to render the tree
 
+    'options' => ['id' => 'idPortfolio'],
     'query' => StudentPortfolio::find()->where(['id_student' => $id])->addOrderBy('root, lft'),
     'showIDAttribute' => false,
     'nodeFormOptions' => [
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     'displayValue' => $beginNodeId,
     'isAdmin' => true,         // optional (toggle to enable admin mode)
-    'softDelete' => true,       // defaults to true
+    'softDelete' => false,       // defaults to true
     'multiple' => false,
     'rootOptions' => [
         'label' => '',
@@ -80,5 +80,13 @@ $this->params['breadcrumbs'][] = $this->title;
     'showTooltips' => false,
 ]);
 
-?>
+$script =
+    <<<JS
+
+$('#idPortfolio').treeview("collapseAll");
+
+JS;
+$this->registerJs($script);
+
+
 

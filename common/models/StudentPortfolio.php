@@ -77,4 +77,20 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
             return false;
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+
+            $this->deleteFile();
+            return true;
+
+        }
+        else
+            return false;
+    }
+
 } 

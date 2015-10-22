@@ -43,7 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
 FontAwesomeAsset::register($this);
 
 echo TreeView::widget([
-    // single query fetch to render the tree
+
+    'options' => ['id' => 'idPortfolio'],
     'query' => StudentPortfolio::find()->where(['id_student' => $id,])->addOrderBy('root, lft'),
     'displayValue' => 0,
     'fontAwesome' => true,
@@ -70,5 +71,13 @@ echo TreeView::widget([
     'showTooltips' => false,
 
 ]);
+
+$script =
+    <<<JS
+
+$('#idPortfolio').treeview("collapseAll");
+
+JS;
+$this->registerJs($script);
 
 
