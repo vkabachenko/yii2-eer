@@ -6,6 +6,7 @@
  */
 
 use yii\helpers\Html;
+use himiklab\thumbnail\EasyThumbnailImage;
 
 extract($params);
 
@@ -18,10 +19,37 @@ extract($params);
 <?php
 
 if ($node->filename) {
-echo Html::tag('p',Html::a($node->document,[
-'/student/portfolio/download',
-'id' => $node->id,
-'modelFile' => '\common\models\StudentPortfolio']));
+
+    $img = EasyThumbnailImage::thumbnailImg(
+        Yii::getAlias('@frontend/web/files').'/'.$node->filename,
+        200,
+        200,
+        EasyThumbnailImage::THUMBNAIL_INSET,
+        ['alt' => $node->document]
+    );
+
+    /* Если это не картинка, распознаваемая imagine, то в папке thumbs
+    ищем иконку, имя которой совпадает с расширением файла документа.
+    Если такой иконки нет, подставляем пустую иконку */
+
+    if (strpos($img,'Error') !== false) {
+
+        $thumbName = pathinfo($node->filename, PATHINFO_EXTENSION);
+        $thumbDb =  Yii::getAlias('@frontend/web/thumbs').'/';
+        $files = glob($thumbDb.$thumbName.'.*');
+        $icon = count($files) == 0 ? '_page.png' : basename($files[0]);
+        $icon = '@web/thumbs/'.$icon;
+        $img = Html::img($icon,['alt' => $node->document]);
+
+    }
+
+
+    echo Html::tag('p',Html::a($img,[
+       '/student/portfolio/download',
+       'id' => $node->id,
+       'modelFile' => '\common\models\StudentPortfolio'
+    ]));
+
 }
 
 ?>

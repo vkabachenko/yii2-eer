@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf1768154b56916d44e7dd71b7aa56b8",
+    "hash": "fa38953e1949fd34fc4f5775e70541f9",
+    "content-hash": "4b704dfd6d543fb4dc44bee59a61e23b",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -437,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "153c0e063e59881a375aa310de93551056a03b51"
+                "reference": "c6304f5f7d495b8998cb7f306419cc30e3c1fc11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/153c0e063e59881a375aa310de93551056a03b51",
-                "reference": "153c0e063e59881a375aa310de93551056a03b51",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/c6304f5f7d495b8998cb7f306419cc30e3c1fc11",
+                "reference": "c6304f5f7d495b8998cb7f306419cc30e3c1fc11",
                 "shasum": ""
             },
             "require-dev": {
@@ -477,7 +478,107 @@
                 "font",
                 "icon"
             ],
-            "time": "2015-09-14 06:04:03"
+            "time": "2015-10-07 17:16:25"
+        },
+        {
+            "name": "himiklab/yii2-easy-thumbnail-image-helper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-easy-thumbnail-image-helper.git",
+                "reference": "0013b7ddf9146893cda0e66d4222d433327f8892"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-easy-thumbnail-image-helper/zipball/0013b7ddf9146893cda0e66d4222d433327f8892",
+                "reference": "0013b7ddf9146893cda0e66d4222d433327f8892",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-imagine": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\thumbnail\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab/"
+                }
+            ],
+            "description": "Yii2 helper for creating and caching thumbnails on real time",
+            "keywords": [
+                "helper",
+                "image",
+                "thumbnail",
+                "yii2"
+            ],
+            "time": "2014-11-13 14:51:48"
+        },
+        {
+            "name": "imagine/imagine",
+            "version": "0.5.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "343580fceed1f89220481ac98480e92f47d91e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/343580fceed1f89220481ac98480e92f47d91e6c",
+                "reference": "343580fceed1f89220481ac98480e92f47d91e6c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2014-06-13 10:54:04"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -578,16 +679,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
-            "version": "v1.4.4",
+            "version": "v1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
-                "reference": "c62c8b92e8ee38892cc4e2b29851864a7a20ee01"
+                "reference": "076f49747309f30658085eb008276ecd3370b151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/c62c8b92e8ee38892cc4e2b29851864a7a20ee01",
-                "reference": "c62c8b92e8ee38892cc4e2b29851864a7a20ee01",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/076f49747309f30658085eb008276ecd3370b151",
+                "reference": "076f49747309f30658085eb008276ecd3370b151",
                 "shasum": ""
             },
             "require": {
@@ -621,7 +722,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-07-08 11:36:38"
+            "time": "2015-10-22 14:36:24"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -682,12 +783,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "53e1cc3ff9e0980e25a04e48b57786bb5b0fddf9"
+                "reference": "0941bbce25f08ee8d0fbbb4d3292996d6cfbf63b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/53e1cc3ff9e0980e25a04e48b57786bb5b0fddf9",
-                "reference": "53e1cc3ff9e0980e25a04e48b57786bb5b0fddf9",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/0941bbce25f08ee8d0fbbb4d3292996d6cfbf63b",
+                "reference": "0941bbce25f08ee8d0fbbb4d3292996d6cfbf63b",
                 "shasum": ""
             },
             "require": {
@@ -763,7 +864,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-10-15 09:53:59"
+            "time": "2015-10-23 14:18:59"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -861,6 +962,54 @@
                 "yii2"
             ],
             "time": "2015-09-25 10:48:24"
+        },
+        {
+            "name": "yiisoft/yii2-imagine",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "586c9c99cb541ec4d4d2ec2a206b08a6fd6de888"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/586c9c99cb541ec4d4d2ec2a206b08a6fd6de888",
+                "reference": "586c9c99cb541ec4d4d2ec2a206b08a6fd6de888",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "0.5.*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "time": "2015-09-29 10:49:20"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -997,12 +1146,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "9198c2f7668b9ee494959f8ff7f5f6e6f65379ca"
+                "reference": "f6b2ebd8c462494083bfea6c087f79da36503930"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9198c2f7668b9ee494959f8ff7f5f6e6f65379ca",
-                "reference": "9198c2f7668b9ee494959f8ff7f5f6e6f65379ca",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f6b2ebd8c462494083bfea6c087f79da36503930",
+                "reference": "f6b2ebd8c462494083bfea6c087f79da36503930",
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +1188,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-10-12 15:48:46"
+            "time": "2015-10-19 10:11:20"
         },
         {
             "name": "phpspec/php-diff",

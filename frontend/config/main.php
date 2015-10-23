@@ -9,7 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'thumbnail'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'user' => [
@@ -36,6 +36,10 @@ return [
                 'student/discipline/<id:\d+>' => 'student/result/view-student',
                 'discipline/student/<id:\d+>' => 'student/result/view-discipline',
             ]
+        ],
+        'thumbnail' => [
+            'class' => 'himiklab\thumbnail\EasyThumbnail',
+            'cacheAlias' => 'assets/gallery_thumbnails',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
