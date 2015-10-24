@@ -2,20 +2,39 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
+use common\models\Discipline;
+use common\models\DisciplineName;
 
 /* @var $this yii\web\View */
 /* @var $results[] \common\models\StudentResult */
 /* @var $model \common\models\StudentResult */
+/* @var $discipline \common\models\Discipline */
 /* @var $form yii\widgets\ActiveForm */
 
 $model = $results[0];
+$discipline = $model->idDisciplineSemester->idDiscipline;
 ?>
 
-<h4>Дисциплина: <?= $model->idDisciplineSemester->idDiscipline->fullName ?></h4>
+<h4>Дисциплина: <?= $discipline->fullName ?></h4>
 
 <?php $form = ActiveForm::begin(['id' => 'updateForm']); ?>
 
-<!-- Для первой строки массива моделей вводим дату сдачи и экзаменатора -->
+<!-- Для первой строки массива моделей вводим
+название ДПВ, дату сдачи и экзаменатора -->
+
+<?php if ($discipline->block == Discipline::DISCIPLINE_CHOICE): ?>
+    <?php $disciplineList = DisciplineName::getDisciplineList($discipline->id); ?>
+
+    <?= $form->field($model, "[0]id_discipline_name", ['inputOptions'=>[
+                             'class' => 'disciplineName']])->
+        dropDownList($disciplineList); ?>
+<?php else: ?>
+    <?= $form->field($model, "[0]id_discipline_name", ['inputOptions'=>[
+                             'class' => 'disciplineName']])->
+        hiddenInput()->label(false); ?>
+<?php endif; ?>
+
+
 <?= $form->field($model, "[0]passing_date")
          ->widget(DatePicker::classname(), [
                  'language' => 'ru',
@@ -37,6 +56,11 @@ $model = $results[0];
     for ($i=1; $i < count($results); $i++) {
 
         $item = $results[$i];
+        echo $form->field($item, "[$i]id_discipline_name",
+            ['inputOptions'=>[
+                'class' => 'disciplineNameHidden',
+            ]
+            ])->hiddenInput()->label(false);
         echo $form->field($item, "[$i]passing_date",
                          ['inputOptions'=>[
                            'class' => 'passingDateHidden',
@@ -88,6 +112,16 @@ $model = $results[0];
 $script =
     <<<JS
 
+$('.disciplineName').on('change',function(){
+
+    var value = $(this).val();
+    $('.disciplineNameHidden').each(function() {
+        $(this).val(value);
+    }
+    )
+
+});
+
 $('.passingDate').on('change',function(){
 
     var value = $(this).val();
@@ -108,6 +142,7 @@ $('.examiner').on('change',function(){
 
 });
 
+$('.disciplineName').trigger('change');
 $('.passingDate').trigger('change');
 $('.examiner').trigger('change');
 

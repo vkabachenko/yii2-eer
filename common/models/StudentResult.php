@@ -11,6 +11,7 @@ use backend\behaviors\CascadeBehavior;
  * @property integer $id
  * @property integer $id_student_education
  * @property integer $id_discipline_semester
+ * @property integer $id_discipline_name
  * @property string $passing_date
  * @property string $examiner
  * @property integer $rating
@@ -19,6 +20,7 @@ use backend\behaviors\CascadeBehavior;
  * @property StudentEducation $idStudentEducation
  * @property DisciplineSemester $idDisciplineSemester
  * @property StudentResultFile[] $studentResultFiles
+ * @property DisciplineName $idDisciplineName
  */
 class StudentResult extends \yii\db\ActiveRecord
 {
@@ -51,7 +53,8 @@ class StudentResult extends \yii\db\ActiveRecord
     {
         return [
             [['id_student_education', 'id_discipline_semester'], 'required'],
-            [['id_student_education', 'id_discipline_semester', 'rating'], 'integer'],
+            [['id_student_education', 'id_discipline_semester',
+                'id_discipline_name', 'rating'], 'integer'],
             [['passing_date'], 'date', 'format' => 'dd-MM-yyyy'],
             [['examiner'], 'string', 'max' => 100],
             [['assesment'], 'string', 'max' => 10],
@@ -68,6 +71,7 @@ class StudentResult extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_student_education' => 'Id Student Education',
             'id_discipline_semester' => 'Id Discipline Semester',
+            'id_discipline_name' => 'Дисциплина по выбору',
             'passing_date' => 'Дата сдачи',
             'examiner' => 'Экзаменатор',
             'rating' => 'Рейтинг',
@@ -90,6 +94,15 @@ class StudentResult extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DisciplineSemester::className(), ['id' => 'id_discipline_semester']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdDisciplineName()
+    {
+        return $this->hasOne(DisciplineName::className(), ['id' => 'id_discipline_name']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

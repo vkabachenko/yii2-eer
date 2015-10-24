@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use backend\behaviors\CascadeBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "discipline_name".
@@ -176,6 +177,20 @@ class DisciplineName extends \yii\db\ActiveRecord
             exists()) {
                 Discipline::findOne($this->id_discipline_cached)->delete();
         }
+    }
+
+    /**
+     * @return array
+     * Список названий дисциплин по выбору
+     */
+
+
+    public static function getDisciplineList($id_discipline)
+    {
+
+        $disciplines = static::find()->where(['id_discipline' => $id_discipline])
+                       ->orderBy('suffix')->all();
+        return ArrayHelper::map($disciplines,'id','name');
     }
 
 }

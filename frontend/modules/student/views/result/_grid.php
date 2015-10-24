@@ -11,6 +11,9 @@ use common\models\StudentResultFile;
     <h3>
         Студент: <?= $model->idStudentEducation->studentName ?> Курс: <?= $model->idStudentEducation->course ?>
         Дисциплина: <?= $model->idDisciplineSemester->idDiscipline->fullName ?>
+        <?php if ($model->id_discipline_name): ?>
+           <?= $model->idDisciplineName->name ?>
+        <?php endif; ?>
 
     </h3>
 

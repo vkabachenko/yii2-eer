@@ -115,14 +115,14 @@ class ResultController extends Controller
              ]);
     }
 
-    public function actionDiscipline($id)
+    public function actionDiscipline($id, $id_discipline_name = null)
     {
        // $id - DisciplineSemester
 
         $disciplineSemester = DisciplineSemester::findOne($id);
 
         $provider = new ActiveDataProvider([
-            'query' => ResultHelper::DisciplineResults($id),
+            'query' => ResultHelper::DisciplineResults($id, $id_discipline_name),
             'pagination' => [
                  'pageSize' => 10,
              ],

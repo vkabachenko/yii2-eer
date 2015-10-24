@@ -3,6 +3,7 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 use common\models\DisciplineSemester;
+use common\models\Discipline;
 
 /* @var $program common\models\Program */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
@@ -77,10 +78,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             if (Yii::$app->user->
                                 can('viewFaculty',['id_faculty' => $model->idProgram->id_faculty])) {
 
+                                $id_discipline_name = $model->idDiscipline->block == Discipline::DISCIPLINE_CHOICE ?
+                                                    $model->id : null;
+
                                 $content .= Html::a($semester,
                                    [
                                       '/student/result/discipline',
-                                      'id' => $disciplineSemester->id
+                                      'id' => $disciplineSemester->id,
+                                      'id_discipline_name' => $id_discipline_name
                                    ],$options);
                             }
                             else {

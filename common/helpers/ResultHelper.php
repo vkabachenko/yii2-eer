@@ -53,7 +53,7 @@ class ResultHelper {
 
     }
 
-    public static function DisciplineResults($id)
+    public static function DisciplineResults($id, $id_discipline_name)
     {
         // $id - DisciplineSemester
         $discipline_studied = new Query();
@@ -93,7 +93,8 @@ class ResultHelper {
                 'student_education.id = student_result.id_student_education')->
             innerJoin('discipline_semester',
                 'discipline_semester.id = student_result.id_discipline_semester')->
-            where(['discipline_semester.id' => $id]);
+            where(['discipline_semester.id' => $id,
+                   'student_result.id_discipline_name' => $id_discipline_name]);
 
         $query = new Query();
         $query->
@@ -141,6 +142,7 @@ class ResultHelper {
             ])->
             where([
                 'id_discipline_semester' => $currentResult->id_discipline_semester,
+                'id_discipline_name' => $currentResult->id_discipline_name,
                 'examiner' => $currentResult->examiner,
                 'passing_date' => StudentResult::convertDate(
                         $currentResult->passing_date),
