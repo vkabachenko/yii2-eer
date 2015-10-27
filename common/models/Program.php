@@ -16,6 +16,7 @@ use backend\behaviors\CascadeBehavior;
  * @property string $name
  * @property integer $level
  * @property integer $form
+ * @property integer $duration
  * @property string $profile
  * @property string $standard
  * @property string $comment
@@ -69,11 +70,12 @@ class Program extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_faculty', 'code', 'name', 'level'], 'required'],
+            [['id_faculty', 'code', 'name', 'level', 'duration'], 'required'],
             [['id_faculty', 'level', 'form'], 'integer'],
             [['comment'], 'string'],
             [['code', 'standard'], 'string', 'max' => 50],
-            [['name', 'profile'], 'string', 'max' => 250]
+            [['name', 'profile'], 'string', 'max' => 250],
+            [['duration'], 'integer', 'min' => 1],
         ];
     }
 
@@ -90,6 +92,7 @@ class Program extends \yii\db\ActiveRecord
             'profile' => 'Профиль',
             'standard' => 'Стандарт высшего образования',
             'comment' => 'Дополнительные характеристики',
+            'duration' => 'Длительность обучения, лет'
         ];
     }
 

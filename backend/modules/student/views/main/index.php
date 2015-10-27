@@ -34,11 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class' => 'btn btn-success actionCreate',
         ]) ?>
-    <?php
 
-    // TBD: Перевести всех на след курс
-
-    ?>
+    <?= Html::a('Перевести всех на следующий курс', ['transfer','idParent' =>$idParent ],
+        [
+            'class' => 'btn btn-success actionTransfer',
+        ]) ?>
 </p>
 
 <?php Pjax::begin(['options' => ['id' =>'pjaxWrap']]); ?>
@@ -108,3 +108,21 @@ function actionUser($url,$model,$key) {
 
 
 ?>
+
+<?php
+
+$script =
+    <<<JS
+       $('.actionTransfer').click(function(){
+
+           $.get($(this).attr('href'),function(data) {
+
+              $('#modalWindow .modal-header h2').text('Перевод');
+              $('#modalWindow .modal-body').html(data);
+              $('#modalWindow').modal('show');
+           });
+       return false;
+       });
+JS;
+
+$this->registerJs($script);

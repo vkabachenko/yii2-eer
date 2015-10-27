@@ -13,6 +13,18 @@ use common\models\Program;
 
 class MainController  extends GridController
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['access']['rules'][0]['actions'][] = 'transfer';
+        $behaviors['ajax']['actions'][] = 'transfer';
+
+        return $behaviors;
+    }
 
     public function init() {
 
@@ -80,6 +92,34 @@ class MainController  extends GridController
                 'studentEducation' => $studentEducation,
             ]);
         }
+    }
+
+    /**
+     * Перевести всех на следующий курс
+     */
+    public function actionTransfer($idParent)
+    {
+        if (Yii::$app->request->post('approve')) {
+            /* @var $program Program */
+            $program = Program::findOne($idParent);
+
+            $duration = $program->duration;
+            $year = YearHelper::getYear();
+            $newYear = $year + 1;
+
+            $sql = "insert into student_education (id_student, year, id_program, course)
+                    select id_student, $newYear, id_program, course + 1
+                    from student_education where id_program = $idParent and year = $year
+                    and course < $duration and id_student not in (select id_student from
+                    student_education where id_program = $idParent and year = $newYear)";
+
+            Yii::$app->db->createCommand($sql)->execute();
+            Yii::$app->session->setFlash('success',
+                 "Студенты переведены на следующий курс в $newYear учебном году");
+            $this->redirect(['index','idParent' => $idParent]);
+        }
+
+        return $this->renderAjax('transfer',['idParent' => $idParent]);
     }
 
     /**

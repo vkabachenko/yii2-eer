@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 <?= $form->field($model, 'profile')->textInput(['maxlength' => true]); ?>
 <?= $form->field($model, 'level')->dropDownList(\Yii::$app->params['decode']['program.level']); ?>
 <?= $form->field($model, 'form')->dropDownList(\Yii::$app->params['decode']['program.form']); ?>
+<?= $form->field($model, 'duration'); ?>
 <?= $form->field($model, 'standard')->textInput(['maxlength' => true]); ?>
 <?= $form->field($model, 'comment')->textInput(); ?>
 

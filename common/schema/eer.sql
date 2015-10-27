@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Окт 24 2015 г., 18:42
--- Версия сервера: 5.5.44
+-- Время создания: Окт 27 2015 г., 08:35
+-- Версия сервера: 5.5.46
 -- Версия PHP: 5.4.45-2+deb.sury.org~precise+2
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `program` (
   `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Направление',
   `level` tinyint(4) NOT NULL COMMENT 'Уровень (бакалавриат, etc)',
   `form` tinyint(4) DEFAULT NULL COMMENT 'Форма обучения (очное, etc)',
+  `duration` tinyint(4) NOT NULL,
   `profile` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'профиль образования',
   `standard` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Стандарт, по кот ведется обучение',
   `comment` text COLLATE utf8_unicode_ci COMMENT 'прочая информация',
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -195,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   UNIQUE KEY `id_student_year` (`id_student`,`year`),
   KEY `id_student` (`id_student`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=51 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=60 ;
 
 -- --------------------------------------------------------
 
@@ -256,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `student_result` (
   KEY `id_student_education` (`id_student_education`),
   KEY `id_discipline_semester` (`id_discipline_semester`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=491 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=499 ;
 
 -- --------------------------------------------------------
 
