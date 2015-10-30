@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use common\models\Student;
 use common\models\StudentEducation;
 use common\models\Program;
+use yii\helpers\ArrayHelper;
 
 class MainController  extends GridController
 {
@@ -21,6 +22,9 @@ class MainController  extends GridController
         $behaviors = parent::behaviors();
 
         $behaviors['access']['rules'][0]['actions'][] = 'transfer';
+        $behaviors['access']['rules'][0]['actions'][] = 'group';
+        $behaviors['access']['rules'][0]['actions'][] = 'group-set';
+
         $behaviors['ajax']['actions'][] = 'transfer';
 
         return $behaviors;
@@ -120,6 +124,73 @@ class MainController  extends GridController
         }
 
         return $this->renderAjax('transfer',['idParent' => $idParent]);
+    }
+
+    /**
+     * Рендер формы задать номер группы
+     */
+    public function actionGroup($idParent)
+    {
+        // $idParent - id программы
+
+            $year = YearHelper::getYear();
+
+            $courses = StudentEducation::find()->
+                      where(['id_program' => $idParent,'year' => $year])->
+                      select(['course'])->
+                      groupBy(['course'])->
+                      orderBy('course')->all();
+
+            $course = Yii::$app->request->post('course');
+            $course = $course == null ? $courses[0]->course : $course;
+
+            $courses = ArrayHelper::map($courses,'course','course');
+
+            $students = StudentEducation::find()->
+                innerJoinWith([
+                    'idStudent' => function($query) {
+                            $query->orderBy('name');
+                        }
+                ])->
+                where(['id_program' => $idParent,'year' => $year, 'course' => $course])
+                ->all();
+
+            $students = ArrayHelper::map($students,'id','studentName');
+
+            return $this->render('group',[
+                'idParent' => $idParent,
+                'courses' => $courses,
+                'course' => $course,
+                'students' => $students,
+            ]);
+    }
+
+
+    /**
+     * Задание номера группы для выбранного списка студентов
+     */
+    public function actionGroupSet($idParent)
+    {
+
+        $id_students = Yii::$app->request->post('listChosen');
+        $group = Yii::$app->request->post('group');
+
+        $students = StudentEducation::find()->
+                    where([
+                      'id' => $id_students
+                    ])->all();
+
+        foreach ($students as $student) {
+            /* @var $student StudentEducation */
+            $student->group = $group;
+            $student->save(false);
+        }
+
+        Yii::$app->session->setFlash('success',
+            "Задана группа списку студентов");
+
+        $this->redirect(['index','idParent' => $idParent]);
+
     }
 
     /**
