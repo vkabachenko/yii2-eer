@@ -14,10 +14,26 @@ class MainController extends GridController
         $this->_model = 'common\models\Faculty';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'download' => 'common\actions\DownloadAction',
+        ];
+    }
+
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['access']['rules'] = array_merge([
+            [
+                'allow' => true,
+                'actions' => ['download'],
+                'roles' => ['updateFaculty'],
+            ],
             [
                 'allow' => true,
                 'actions' => ['create','delete'],

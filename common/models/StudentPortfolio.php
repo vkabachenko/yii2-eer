@@ -12,8 +12,6 @@ use Yii;
 
 class StudentPortfolio  extends \kartik\tree\models\Tree {
 
-    public $deleteFlag = 0;
-
     /**
      * @inheritdoc
      */
@@ -42,7 +40,6 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
         return array_merge($this->ruleFile(),[
             [['name','collapsed','visible',
               'active','removable','removable_all'], 'safe'],
-             ['deleteFlag','boolean']
         ]);
     }
 
@@ -53,7 +50,6 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
     {
         return array_merge($this->nameFile(),[
             'name' => 'Наименование',
-            'deleteFlag' => 'Удалить файл'
         ]);
     }
 
@@ -64,30 +60,7 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
     {
         if (parent::beforeSave($insert)) {
             $this->id_student = Yii::$app->session['id_student'];
-            if (!$this->deleteFlag)
-                $this->saveFile();
-            else {
-                $this->deleteFile();
-                $this->document = null;
-                $this->filename = null;
-            }
             return true;
-        }
-        else
-            return false;
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeDelete()
-    {
-        if (parent::beforeDelete()) {
-
-            $this->deleteFile();
-            return true;
-
         }
         else
             return false;

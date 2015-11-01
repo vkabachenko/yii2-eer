@@ -12,14 +12,14 @@ use common\models\StudentEducation;
 
 class DownloadAction extends Action
 {
-    public function run($id, $modelFile = '\common\models\File') {
+    public function run($id, $modelFile = '\common\models\File', $originalName = 'document') {
         /* @var $model File */
         $model = new $modelFile;
         $model = $model->findOne($id);
         $path = Yii::getAlias('@frontend/web/files').'/'.$model->filename;
 
         if ($this->checkFileAccess($model) && file_exists($path)) {
-            return Yii::$app->response->sendFile($path, $model->document);
+            return Yii::$app->response->sendFile($path, $model->{$originalName});
         }
         else {
             throw new NotFoundHttpException('The requested file does not exist.');
@@ -27,7 +27,7 @@ class DownloadAction extends Action
     }
 
     // Доступ на скачивание файла
-    // $ model - file или student_portfolio
+    // $ model - file или student_portfolio или faculty
 
     private function checkFileAccess($model) {
         /* @var $model \yii\db\ActiveRecord */
@@ -35,7 +35,8 @@ class DownloadAction extends Action
             return false;
         if ($model->tableName() == 'student_portfolio')
             return $this-> checkPortfolioAccess($model);
-
+        if ($model->tableName() == 'faculty')
+            return Yii::$app->user->can('updateFaculty',$model->id);
         // Если model - file, то скачивать можно либо файлы в свободном доступе
         // либо тем, у которых есть доступ к соответствующей учебной программе
         /* @var $model File */

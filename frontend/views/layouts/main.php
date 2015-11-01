@@ -27,39 +27,52 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
     <div class="wrap">
+
         <?php
-            NavBar::begin([
-                'brandLabel' => 'Результаты освоения образовательных программ ПсковГУ',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            $menuItems = [
-                ['label' => 'Учебный год '.YearHelper::getEducationYear(),
-                 'url' => ['/site/year'],
-                 'linkOptions' => ['id' => 'year']
-                ],
-            ];
+        NavBar::begin([
+            'brandLabel' => false,
+            'options' => [
+                'id' => 'authMenu',
+                'class' => 'navbar-fixed-top',
+            ],
+        ]);
 
-            if (Yii::$app->user->isGuest) {
-                $userItem =
-                    ['label' => 'Авторизация ',
-                    'url' => ['/site/login'],
-                   ];}
-            else {
-                $userItem =
-                    ['label' => Yii::$app->user->identity->username.' - Выход',
-                        'url' => ['/site/logout'],
-                    ];}
+        if (Yii::$app->user->isGuest) {
+            $msg = Html::a('Авторизация',['/site/login'],['class' => 'navbar-link']);
+        }
+        else {
+            $msg = 'Вы зашли под именем <strong>'.Yii::$app->user->identity->username.'</strong>';
+            $msg .= Html::a('Выход',['/site/logout'],['class' => 'navbar-link']);
+        }
 
-            $menuItems[] = $userItem;
+        echo Html::tag('p',$msg,['class' => "navbar-right"]);
 
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
+
+        NavBar::end();
+        ?>
+
+        <?php
+        NavBar::begin([
+            'brandLabel' => Html::img('/images/gerb.gif',['width' => '60']).
+                '<span>Результаты освоения образовательных программ ПсковГУ</span>',
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'id' => 'mainMenu',
+                'class' => 'navbar-fixed-top',
+            ],
+        ]);
+        $menuItems = [
+            ['label' => YearHelper::getEducationYear(),
+                'url' => ['/site/year'],
+                'linkOptions' => ['id' => 'year']
+            ],
+        ];
+
+        echo Nav::widget([
+            'options' => ['id' => 'mainNav','class' => 'navbar-nav navbar-right'],
+            'items' => $menuItems,
+        ]);
+        NavBar::end();
         ?>
 
         <div class="container">

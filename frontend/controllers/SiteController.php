@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use common\models\Faculty;
 use bupy7\ajaxfilter\AjaxFilter;
@@ -60,8 +61,12 @@ class SiteController extends Controller
             'pagination' => false,
         ]);
 
+        $images = Faculty::find()->where(['is not', 'filename', null])->all();
+        $images = ArrayHelper::map($images,'id','filename');
+
         return $this->render('index', [
                 'provider' => $provider,
+                'images' => $images,
                 ]);
     }
 

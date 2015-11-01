@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Окт 27 2015 г., 08:35
+-- Время создания: Ноя 01 2015 г., 10:22
 -- Версия сервера: 5.5.46
 -- Версия PHP: 5.4.45-2+deb.sury.org~precise+2
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `discipline_file` (
   PRIMARY KEY (`id`),
   KEY `id_file` (`id_file`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -96,6 +96,8 @@ CREATE TABLE IF NOT EXISTS `discipline_semester` (
 CREATE TABLE IF NOT EXISTS `faculty` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Первичный ключ',
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Наименование',
+  `image` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Имя файла эмблемы факультета',
+  `filename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Факультет или иное структурное подразделение' AUTO_INCREMENT=25 ;
 
@@ -112,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `filename` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Уникальное имя файла в системе',
   `free_access` tinyint(1) NOT NULL COMMENT 'Ограничение доступа к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=40 ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `program_file` (
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 

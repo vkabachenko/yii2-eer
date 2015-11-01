@@ -5,12 +5,15 @@ namespace common\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use backend\behaviors\CascadeBehavior;
+use backend\behaviors\FileBehavior;
 
 /**
  * This is the model class for table "faculty".
  *
  * @property integer $id
  * @property string $name
+ * @property string $image
+ * @property string $filename
  *
  * @property Program[] $programs
  * @property StudentEducation[] $studentEducations
@@ -28,7 +31,11 @@ class Faculty extends \yii\db\ActiveRecord
             [
             'class' => CascadeBehavior::className(),
             'children' => ['programs']
-                ]
+                ],
+            [
+                'class' => FileBehavior::className(),
+                'originalNameAttr' => 'image',
+            ]
         ]);
     }
 
@@ -45,10 +52,10 @@ class Faculty extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
+        return array_merge($this->ruleFile(),[
             [['name'], 'required'],
             [['name'], 'string', 'max' => 100]
-        ];
+        ]);
     }
 
     /**
@@ -58,6 +65,8 @@ class Faculty extends \yii\db\ActiveRecord
     {
         return [
             'name' => 'Название',
+            'savedFile' => 'Загрузить файл эмблемы',
+            'deleteFlag' => 'Удалить файл эмблемы'
         ];
     }
 

@@ -1,3 +1,8 @@
+@font-face {
+    font-family:cambria;
+    src:url("../fonts/cambria.ttf");
+}
+
 html,
 body {
     height: 100%;
@@ -88,4 +93,107 @@ a.desc:after {
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
+}
+
+#authMenu {
+
+    height: 30px;
+    margin-bottom: 0;
+}
+
+#authMenu .container{
+    background: #4a1571;
+}
+
+#authMenu p {
+    font-family: cambria;
+    color:#fff;
+    font-style: italic;
+    line-height: 30px;
+    margin:0 15px 0 0;
+}
+
+#authMenu p a {
+    color:#fff;
+    margin-left:20px;
+}
+
+#mainMenu{
+    top:30px;
+}
+
+#mainMenu .container{
+    background: #af7fef;
+}
+
+#mainMenu a.navbar-brand {
+    color:#fff;
+    font-family: cambria;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#mainMenu a.navbar-brand img {
+    position:absolute;
+}
+
+#mainMenu a.navbar-brand span {
+    margin-left:80px;
+}
+
+#mainNav a {
+    color:#fff;
+    font-family: cambria;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#mainNav a:hover {
+    color: #4a1571;
+}
+
+.wrap > .container {
+    padding-right: 0;
+}
+
+.breadcrumb {
+    padding: 30px 0 0 20px;
+    margin-left: 60px;
+}
+
+footer.footer {
+    background: #fff;
+    border-top:none;
+}
+
+footer .container {
+    height: 60px;
+    line-height: 60px;
+    background: #af7fef;
+    color:#fafafa;
+    font-family: cambria;
+    font-weight: bold;
+}
+
+#facultyList {
+    padding: 20px 0 0 80px;
+}
+
+
+.faculty {
+    font-family: cambria;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+
+}
+
+.faculty a {
+    display:table-cell;
+    vertical-align: middle;
+    background: url("../images/embl.gif") no-repeat;
+    background-size: 50px;
+    height:70px;
+    padding-left: 55px;
+    color:#808080;
 }

@@ -102,7 +102,6 @@ class File extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->saveFile();
             $this->title = $this->title ?: $this->document;
             return $this->filename ? true : false;
         } else {
@@ -110,15 +109,5 @@ class File extends \yii\db\ActiveRecord
         }
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function beforeDelete()
-    {
-        if(!parent::beforeDelete())
-            return false;
-        $this->deleteFile(); // удалили модель? удаляем и файл
-        return true;
-    }
 
 }

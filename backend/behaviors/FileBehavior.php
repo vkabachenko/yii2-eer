@@ -7,19 +7,36 @@ use yii\base\Behavior;
 use yii\web\UploadedFile;
 use Yii;
 use common\helpers\UploadHelper;
+use yii\db\ActiveRecord;
 
 class FileBehavior extends Behavior
 {
     public $savedFile;
+    public $deleteFlag = 0;
 
     public $originalNameAttr = 'document';
     public $realNameAttr = 'filename';
     public $savePath = '@frontend/web/files';
 
+
+    /**
+     * @inheritdoc
+     */
+    public function events()
+    {
+        return [
+            ActiveRecord::EVENT_BEFORE_DELETE => 'deleteFile',
+            ActiveRecord::EVENT_BEFORE_INSERT => 'addFile',
+            ActiveRecord::EVENT_BEFORE_UPDATE => 'addFile'
+        ];
+    }
+
+
     public function nameFile()
     {
         return [
-            'savedFile' => 'Загрузить файл'
+            'savedFile' => 'Загрузить файл',
+            'deleteFlag' => 'Удалить файл'
         ];
     }
 
@@ -32,7 +49,8 @@ class FileBehavior extends Behavior
                     'doc', 'docx', 'xls', 'xlsx', 'ppt',
                     'pptx', 'zip'],
                 'maxSize' => UploadHelper::fileUploadMaxSize(),
-            ]
+            ],
+            ['deleteFlag','boolean']
         ];
     }
 
@@ -59,6 +77,17 @@ class FileBehavior extends Behavior
         $path = Yii::getAlias($this->savePath).'/'.$this->owner->{$this->realNameAttr};
         if(is_file($path))
             unlink($path);
+    }
+
+    public function addFile()
+    {
+        if (!$this->deleteFlag)
+            $this->saveFile();
+        else {
+            $this->deleteFile();
+            $this->owner->{$this->originalNameAttr} = null;
+            $this->owner->{$this->realNameAttr} = null;
+        }
     }
 
 } 

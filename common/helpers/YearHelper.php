@@ -37,7 +37,7 @@ class YearHelper extends Object
 
         $year = self::getYear();
         $nextYear = substr($year + 1,2);
-        return "$year/$nextYear";
+        return "$year-$nextYear";
 
     }
 
