@@ -61,7 +61,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model, $key, $index, $column) {
                     return Html::a(Html::encode($model->studentName),
                         ['/student/history/index','idParent' => $model->id_student, ],
-                        ['data-pjax' => '0']);                }
+                        ['data-pjax' => '0','data-toggle' => 'tooltip',
+                            'title' => 'Периоды обучения студента',]);                }
         ],
         'course',
         'group',
@@ -91,6 +92,8 @@ function actionResults($url,$model,$key) {
         $url,[
             'class' => 'actionResult',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Результаты',
         ]);
 }
 
@@ -102,6 +105,8 @@ function actionPortfolio($url,$model,$key) {
         $url,[
             'class' => 'actionPortfolio',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Портфолио',
         ]);
 }
 
@@ -113,6 +118,8 @@ function actionUser($url,$model,$key) {
         $url,[
             'class' => 'actionUser',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Авторизация в системе',
         ]);
 }
 

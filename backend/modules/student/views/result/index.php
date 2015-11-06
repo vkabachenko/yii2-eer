@@ -100,6 +100,8 @@ function actionUpdate($url,$model,$key) {
         $url,[
             'class' => 'actionUpdate',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Редактировать',
         ]);
 }
 
@@ -110,6 +112,8 @@ function actionDelete($url,$model,$key) {
         $url,[
             'class' => 'actionDelete',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Удалить',
         ]);
   }
   else {
@@ -127,6 +131,8 @@ function actionFile($url,$model,$key) {
         $url,[
             'class' => 'actionFile',
             'data-pjax' => '0',
+            'data-toggle' => 'tooltip',
+            'title' => 'Документы',
         ]);
   } else {
       return '';

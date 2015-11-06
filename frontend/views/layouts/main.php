@@ -64,7 +64,7 @@ AppAsset::register($this);
         $menuItems = [
             ['label' => YearHelper::getEducationYear(),
                 'url' => ['/site/year'],
-                'linkOptions' => ['id' => 'year']
+                'linkOptions' => ['id' => 'year','title' => 'Задать учебный год']
             ],
         ];
 

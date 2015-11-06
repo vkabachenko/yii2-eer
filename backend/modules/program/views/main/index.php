@@ -38,7 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model, $key, $index, $column) {
                     return Html::a(Html::encode($model->code),
                         ['/student','idParent' => $model->id, ],
-                        ['data-pjax' => '0']);                }
+                        ['data-pjax' => '0','data-toggle' => 'tooltip',
+                            'title' => 'Перейти к студентам',]);                }
         ],
         [ // column for name attribute as a link
             'attribute' => 'name',
@@ -46,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'value' => function($model, $key, $index, $column) {
                 return Html::a(Html::encode($model->name),
                     ['/discipline','idParent' => $model->id, ],
-                    ['data-pjax' => '0']);                }
+                    ['data-pjax' => '0','data-toggle' => 'tooltip',
+                        'title' => 'Перейти к дисциплинам',]);                }
         ],
         'profile',
         [
@@ -88,6 +90,8 @@ return Html::a('<span class="glyphicon glyphicon-tags"></span>',
 $url,[
 'class' => 'actionName',
 'data-pjax' => '0',
+'data-toggle' => 'tooltip',
+'title' => 'Состав названия программы',
 ]);
 }
 ?>
