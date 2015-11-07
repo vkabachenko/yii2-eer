@@ -20,6 +20,18 @@ class ResultHelper {
                 'student_education.id = student_result.id_student_education')->
             where(['student_education.id' => $id]);
 
+        $program = new Query();
+        $program->
+            select(['student_education.id_program'])->
+            from('student_education')->
+            where(['student_education.id' => $id]);
+
+        $disciplines = new Query();
+        $disciplines->
+            select(['discipline.id'])->
+            from('discipline')->
+            where(['discipline.id_program' => $program]);
+
         $disciplineSemester = new Query();
         $disciplineSemester->
             select(['discipline_semester.*',
@@ -27,8 +39,10 @@ class ResultHelper {
             from('discipline_semester')->
             innerJoin('student_education',
                 'discipline_semester.course = student_education.course')->
-            where(['student_education.id' => $id]);
-
+            where([
+                'student_education.id' => $id,
+                'discipline_semester.id_discipline' => $disciplines,
+            ]);
 
         $query = new Query();
         $query->

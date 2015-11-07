@@ -35,8 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'btn btn-success actionCreate',
         ]) ?>
 
-    <?php if ($provider->totalCount): ?>
-
     <?= Html::a('Перевести всех на следующий курс', ['transfer','idParent' =>$idParent ],
         [
             'class' => 'btn btn-success actionTransfer',
@@ -46,8 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class' => 'btn btn-success',
         ]) ?>
-
-    <?php endif; ?>
 
 </p>
 

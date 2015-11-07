@@ -80,13 +80,4 @@ $this->params['breadcrumbs'][] = $this->title;
     'showTooltips' => false,
 ]);
 
-$script =
-    <<<JS
-
-$('#idPortfolio').treeview("collapseAll");
-
-JS;
-$this->registerJs($script);
-
-
 

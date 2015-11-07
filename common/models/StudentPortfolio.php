@@ -60,6 +60,7 @@ class StudentPortfolio  extends \kartik\tree\models\Tree {
     {
         if (parent::beforeSave($insert)) {
             $this->id_student = Yii::$app->session['id_student'];
+            $this->collapsed = 1;
             return true;
         }
         else

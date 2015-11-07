@@ -141,6 +141,10 @@ class MainController  extends GridController
                       groupBy(['course'])->
                       orderBy('course')->all();
 
+            if (count($courses) == 0) {
+                $this->redirect(['index','idParent' => $idParent]);
+            }
+
             $course = Yii::$app->request->post('course');
             $course = $course == null ? $courses[0]->course : $course;
 
