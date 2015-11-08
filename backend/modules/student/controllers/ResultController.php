@@ -2,6 +2,7 @@
 
 namespace backend\modules\student\controllers;
 
+use common\helpers\YearHelper;
 use Yii;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
@@ -46,8 +47,11 @@ class ResultController extends Controller{
         /* @var $model StudentEducation */
         switch ($action->id) {
           case 'index': {
-              $model = StudentEducation::findOne(Yii::$app->request->get('id'));
-              $id_faculty = $model->idProgram->id_faculty;
+              $model = StudentEducation::find()->where([
+                  'id_student' =>Yii::$app->request->get('id'),
+                  'year' => YearHelper::getYear(),
+                      ])->one();
+              $id_faculty = $model ? $model->idProgram->id_faculty: null;
               break;
             }
             case 'update': {
@@ -76,13 +80,20 @@ class ResultController extends Controller{
     }
 
     public function actionIndex($id) {
-        // $id - in StudentEducation
+        // $id - in Student
 
         /* @var $student StudentEducation */
-        $student = StudentEducation::findOne($id);
+        $student = StudentEducation::find()->where([
+                    'id_student' => $id,
+                    'year' => YearHelper::getYear()
+        ])->one();
+
+        if (!$student) {
+            $this->redirect($this->goHome());
+        }
 
         $provider = new ActiveDataProvider([
-            'query' => ResultHelper::StudentResults($id),
+            'query' => ResultHelper::StudentResults($student->id),
             'pagination' => false,
         ]);
 

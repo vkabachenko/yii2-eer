@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = [
     'label' => 'Результаты',
     'url' => ['/student/result/index',
-        'id' => $student->id],
+        'id' => $student->id_student],
 ];
 
 $this->params['breadcrumbs'][] = $this->title;

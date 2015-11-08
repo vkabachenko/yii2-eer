@@ -16,7 +16,7 @@ class YearAction  extends Action
         $model->year = YearHelper::getYear();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             YearHelper::setYear($model->year );
-            $this->controller->goHome();
+            $this->controller->redirect(Yii::$app->request->referrer);
         }
         else {
             return $this->controller->renderAjax('@common/views/year.php',

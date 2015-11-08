@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 // manage results. Not via ajax
 function actionResults($url,$model,$key) {
     /* @var $model yii\db\ActiveRecord */
-    $url = ["result/index",'id' => $key];
+    $url = ["result/index",'id' => $model->id_student];
     return Html::a('<span class="glyphicon glyphicon-star"></span>',
         $url,[
             'class' => 'actionResult',

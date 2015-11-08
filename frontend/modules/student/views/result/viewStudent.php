@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = [
     'label' => 'Результаты',
     'url' => ['result/index',
-        'id' => $model->id_student_education,
+        'id' => $model->idStudentEducation->id_student,
         'page' => Yii::$app->session->get('studentResultPage')
     ],
 ];

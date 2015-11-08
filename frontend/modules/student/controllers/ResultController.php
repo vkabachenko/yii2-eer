@@ -5,7 +5,7 @@ namespace frontend\modules\student\controllers;
 
 
 use Yii;
-use yii\helpers\Url;
+use common\helpers\YearHelper;
 use yii\web\Controller;
 use common\models\StudentEducation;
 use common\models\StudentResult;
@@ -49,8 +49,11 @@ class ResultController extends Controller
         switch ($action->id) {
             case 'index':
                 /* @var $model StudentEducation */
-                $model = StudentEducation::findOne($id);
-                $id_faculty = $model->idProgram->id_faculty;
+                $model = StudentEducation::find()->where([
+                    'id_student' =>Yii::$app->request->get('id'),
+                    'year' => YearHelper::getYear(),
+                ])->one();
+                $id_faculty = $model ? $model->idProgram->id_faculty: null;
                 break;
             case 'discipline':
                 /* @var $model DisciplineSemester */
@@ -77,9 +80,7 @@ class ResultController extends Controller
 
         switch ($action->id) {
             case 'index':
-                /* @var $model StudentEducation */
-                $model = StudentEducation::findOne($id);
-                $id_student = $model->id_student;
+                $id_student = $action->id;
                 break;
             case 'view-student':
                 /* @var $model StudentResult */
@@ -96,12 +97,19 @@ class ResultController extends Controller
 
     public function actionIndex($id)
     {
-        // $id - StudentEducation
+            // $id - Student
              /* @var $student StudentEducation */
-             $student = StudentEducation::findOne($id);
+            $student = StudentEducation::find()->where([
+                'id_student' => $id,
+                'year' => YearHelper::getYear()
+            ])->one();
+
+            if (!$student) {
+                $this->redirect($this->goHome());
+            }
 
              $provider = new ActiveDataProvider([
-                 'query' => ResultHelper::StudentResults($id),
+                 'query' => ResultHelper::StudentResults($student->id),
                  'pagination' => [
                      'pageSize' => 10,
                  ],
