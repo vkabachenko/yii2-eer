@@ -40,6 +40,11 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
      */
     public $repassword;
 
+    /**
+     * @var integer sendMail
+     */
+
+    public $sendMail = 0;
 
     /**
      * @inheritdoc
@@ -70,6 +75,7 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
             [['id_faculty', 'role'], 'integer'],
             [['username'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 250],
+            [['sendMail'], 'boolean'],
             //Other
             [['username'], 'unique'],
             [['email'], 'email'],
@@ -95,6 +101,7 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
             'facultyName' => 'Факультет',
             'password' => 'Пароль',
             'repassword' => 'Пароль еще раз',
+            'sendMail' => 'Сообщить на email сведения о регистрации'
         ];
     }
 
@@ -202,18 +209,21 @@ class User extends \yii\db\ActiveRecord  implements IdentityInterface
             // Generate auth and secure keys
             $this->generateAuthKey();
             $this->generateToken();
-            // send message
-            Yii::$app->mailer->compose([
-                'html' => 'signup-html',
-                'text' => 'signup-text',
-            ],[
-                'login' => $this->username,
-                'password' => $this->password
-              ])->
-                setFrom(Yii::$app->params['adminEmail'])->
-                setTo($this->email)->
-                setSubject('Регистрация пользователя')->
-                send();
+
+            if ($this->sendMail) {
+                // send message
+                Yii::$app->mailer->compose([
+                    'html' => 'signup-html',
+                    'text' => 'signup-text',
+                ],[
+                    'login' => $this->username,
+                    'password' => $this->password
+                  ])->
+                    setFrom(Yii::$app->params['adminEmail'])->
+                    setTo($this->email)->
+                    setSubject('Регистрация пользователя')->
+                    send();
+            }
             return true;
         }
         return false;

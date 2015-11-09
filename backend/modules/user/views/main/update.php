@@ -30,6 +30,7 @@ use common\models\User;
 $roles =  array_slice(Yii::$app->params['decode']['user.role'],1,2,true);
 ?>
 <?= $form->field($model, 'role')->dropDownList($roles); ?>
+<?= $form->field($model, 'sendMail')->checkbox(); ?>
 
 <div class="form-group">
     <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>

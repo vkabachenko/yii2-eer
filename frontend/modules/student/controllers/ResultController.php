@@ -80,7 +80,7 @@ class ResultController extends Controller
 
         switch ($action->id) {
             case 'index':
-                $id_student = $action->id;
+                $id_student = $id;
                 break;
             case 'view-student':
                 /* @var $model StudentResult */

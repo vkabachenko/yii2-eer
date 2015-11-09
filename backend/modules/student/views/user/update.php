@@ -28,6 +28,7 @@ if ($model->isNewRecord) {
 <?= $form->field($model, 'password')->passwordInput(); ?>
 <?= $form->field($model, 'repassword')->passwordInput(); ?>
 <?= $form->field($model, 'role')->hiddenInput()->label(false); ?>
+<?= $form->field($model, 'sendMail')->checkbox(); ?>
 
 
 <div class="form-group">
