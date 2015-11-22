@@ -146,5 +146,4 @@ class StudentResult extends \yii\db\ActiveRecord
 
     }
 
-
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Ноя 01 2015 г., 10:22
+-- Время создания: Ноя 22 2015 г., 19:54
 -- Версия сервера: 5.5.46
 -- Версия PHP: 5.4.45-2+deb.sury.org~precise+2
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `discipline` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_program_code` (`id_program`,`code_first`,`code_last`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Изучаемые модули' AUTO_INCREMENT=83 ;
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `discipline_file` (
   PRIMARY KEY (`id`),
   KEY `id_file` (`id_file`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы дисциплин (М:М)' AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `discipline_name` (
   PRIMARY KEY (`id`),
   KEY `id_discipline` (`id_discipline`),
   KEY `id_program_main` (`id_program_main`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=94 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Наименование дисциплины (м.б. несколько для ДПВ)' AUTO_INCREMENT=97 ;
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `discipline_semester` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_discipline_semester` (`id_discipline`,`semester`),
   KEY `id_discipline` (`id_discipline`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Семестры изучаемой дисциплины' AUTO_INCREMENT=97 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Семестры изучаемой дисциплины' AUTO_INCREMENT=100 ;
 
 -- --------------------------------------------------------
 
@@ -97,9 +97,9 @@ CREATE TABLE IF NOT EXISTS `faculty` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Первичный ключ',
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Наименование',
   `image` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Имя файла эмблемы факультета',
-  `filename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `filename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'имя файла в папке files',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Факультет или иное структурное подразделение' AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Факультет или иное структурное подразделение' AUTO_INCREMENT=26 ;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `file` (
   `filename` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Уникальное имя файла в системе',
   `free_access` tinyint(1) NOT NULL COMMENT 'Ограничение доступа к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Хранимые файлы' AUTO_INCREMENT=39 ;
 
 -- --------------------------------------------------------
 
@@ -129,13 +129,13 @@ CREATE TABLE IF NOT EXISTS `program` (
   `name` varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Направление',
   `level` tinyint(4) NOT NULL COMMENT 'Уровень (бакалавриат, etc)',
   `form` tinyint(4) DEFAULT NULL COMMENT 'Форма обучения (очное, etc)',
-  `duration` tinyint(4) NOT NULL,
+  `duration` tinyint(4) NOT NULL COMMENT 'Длительность обучения',
   `profile` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'профиль образования',
   `standard` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Стандарт, по кот ведется обучение',
   `comment` text COLLATE utf8_unicode_ci COMMENT 'прочая информация',
   PRIMARY KEY (`id`),
   KEY `id_faculty` (`id_faculty`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Образовательная программа' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Образовательная программа' AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `program_file` (
   PRIMARY KEY (`id`),
   KEY `id_program` (`id_program`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы образовательной программы (М:М)' AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `email` varchar(250) COLLATE utf8_unicode_ci NOT NULL COMMENT 'email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Студент (физлицо)' AUTO_INCREMENT=24 ;
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `student_education` (
   UNIQUE KEY `id_student_year` (`id_student`,`year`),
   KEY `id_student` (`id_student`),
   KEY `id_program` (`id_program`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Годы обучения студента' AUTO_INCREMENT=53 ;
 
 -- --------------------------------------------------------
 
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `student_portfolio` (
   KEY `tbl_tree_NK4` (`lvl`),
   KEY `tbl_tree_NK5` (`active`),
   KEY `id_student` (`id_student`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=206 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Портфолио студента' AUTO_INCREMENT=214 ;
 
 -- --------------------------------------------------------
 
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `student_result` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор',
   `id_student_education` int(11) NOT NULL COMMENT 'Ид студент - год обучения',
   `id_discipline_semester` int(11) NOT NULL COMMENT 'Ид дисциплина - семестр',
-  `id_discipline_name` int(11) DEFAULT NULL COMMENT 'Для дисциплин по выбору',
+  `id_discipline_name` int(11) DEFAULT NULL,
   `passing_date` date DEFAULT NULL COMMENT 'Дата сдачи',
   `examiner` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Экзаменатор',
   `rating` int(11) DEFAULT NULL COMMENT 'Рейтинг',
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `student_result` (
   KEY `id_student_education` (`id_student_education`),
   KEY `id_discipline_semester` (`id_discipline_semester`),
   KEY `id_discipline_name` (`id_discipline_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=499 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Результаты изучения дисциплины' AUTO_INCREMENT=486 ;
 
 -- --------------------------------------------------------
 
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `student_result_file` (
   PRIMARY KEY (`id`),
   KEY `id_student_result` (`id_student_result`),
   KEY `id_file` (`id_file`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Файлы результатов изучения дисциплины (М:М)' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   KEY `id_faculty` (`id_faculty`),
   KEY `id_student` (`id_student`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Пользователи сайта' AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Пользователи сайта' AUTO_INCREMENT=32 ;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -364,9 +364,9 @@ ALTER TABLE `student_portfolio`
 -- Ограничения внешнего ключа таблицы `student_result`
 --
 ALTER TABLE `student_result`
+  ADD CONSTRAINT `student_result_ibfk_7` FOREIGN KEY (`id_discipline_name`) REFERENCES `discipline_name` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `student_result_ibfk_4` FOREIGN KEY (`id_student_education`) REFERENCES `student_education` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_result_ibfk_5` FOREIGN KEY (`id_discipline_semester`) REFERENCES `discipline_semester` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_result_ibfk_6` FOREIGN KEY (`id_discipline_name`) REFERENCES `discipline_name` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `student_result_ibfk_5` FOREIGN KEY (`id_discipline_semester`) REFERENCES `discipline_semester` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `student_result_file`

@@ -113,7 +113,10 @@ class MainController extends GridController
         /* @var $disciplineName DisciplineName */
 
         $disciplines = Discipline::find()->
-            where(['block' => Discipline::DISCIPLINE_CHOICE])->
+            where([
+                'block' => Discipline::DISCIPLINE_CHOICE,
+                'id_program' => $idParent,
+            ])->
             select(['id',"concat([[code_first]],'.',[[code_last]]) as code"])->
             orderBy('cast([[code_last]] as unsigned)')->asArray()->all();
         $disciplines = ArrayHelper::map($disciplines,'id','code');
