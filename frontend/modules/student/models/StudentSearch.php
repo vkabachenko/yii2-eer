@@ -53,6 +53,7 @@ class StudentSearch extends StudentEducation
             'query' => $query,
             'pagination' => [
                 'pageSize' => 10,
+                'pageSizeParam' => false,
             ],
         ]);
 

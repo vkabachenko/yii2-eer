@@ -64,6 +64,7 @@ class DisciplineSearch extends DisciplineName
             'query' => $query,
             'pagination' => [
                 'pageSize' => 10,
+                'pageSizeParam' => false,
             ],
         ]);
 

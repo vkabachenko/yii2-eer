@@ -112,6 +112,7 @@ class ResultController extends Controller
                  'query' => ResultHelper::StudentResults($student->id),
                  'pagination' => [
                      'pageSize' => 10,
+                     'pageSizeParam' => false,
                  ],
              ]);
 
@@ -133,6 +134,7 @@ class ResultController extends Controller
             'query' => ResultHelper::DisciplineResults($id, $id_discipline_name),
             'pagination' => [
                  'pageSize' => 10,
+                 'pageSizeParam' => false,
              ],
         ]);
         Yii::$app->session->set('disciplineResultPage',Yii::$app->request->get('page'));
