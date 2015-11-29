@@ -10,6 +10,8 @@ use common\models\StudentEducation;
 use common\helpers\YearHelper;
 use common\models\User;
 
+$this->registerCss("#idPortfolio-detail h3 { display: none }");
+
 /* @var $student StudentEducation */
 $student = StudentEducation::find()->where([
                    'id_student' => $id,
@@ -54,11 +56,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'enctype'=>'multipart/form-data',
     ],
     'displayValue' => $beginNodeId,
-    'isAdmin' => true,         // optional (toggle to enable admin mode)
+    'isAdmin' => false,         // optional (toggle to enable admin mode)
     'softDelete' => false,       // defaults to true
     'multiple' => false,
     'rootOptions' => [
         'label' => '',
+    ],
+    'iconEditSettings' => [
+        'show' => 'none'
     ],
     'mainTemplate' =>
         '<div class="row">
