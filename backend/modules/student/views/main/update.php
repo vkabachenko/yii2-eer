@@ -17,8 +17,11 @@ use yii\widgets\ActiveForm;
 <?= $form->field($studentEducation, 'course')->textInput(); ?>
 <?= $form->field($studentEducation, 'group')->textInput(['maxlength' => true]); ?>
 
-<div class="form-group">
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+<div class="form-group submitBlock">
+    <?= Html::submitButton('Сохранить', [
+        'class' => 'btn btn-success',
+        'name' => 'submitButton'
+    ]) ?>
 </div>
 
 <?php ActiveForm::end(); ?>

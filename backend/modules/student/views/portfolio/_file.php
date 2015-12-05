@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
+use kartik\file\FileInput;
 
 if ($node->filename) {
     echo Html::tag('p',Html::a($node->document,[
@@ -10,5 +10,10 @@ if ($node->filename) {
                        'modelFile' => '\common\models\StudentPortfolio']));
     echo $form->field($node, 'deleteFlag')->checkbox();
 }
-echo $form->field($node, 'savedFile')->fileInput();
+echo $form->field($node, 'savedFile')->widget(FileInput::classname(),
+    [
+        'pluginOptions' => [
+            'showCaption' => false,
+        ]
+    ]);
 

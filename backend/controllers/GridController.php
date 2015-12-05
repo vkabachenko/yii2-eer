@@ -137,7 +137,8 @@ abstract class GridController extends Controller
             $model->scenario = $this->_scenarioUpdate;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save() &&
+            Yii::$app->request->post('submitButton') !== null) {
             return '';
         } else {
             return $this->renderAjax('update', [

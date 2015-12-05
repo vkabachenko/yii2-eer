@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Faculty */
@@ -28,11 +29,18 @@ if ($model->filename) {
     ]));
     echo $form->field($model, 'deleteFlag')->checkbox();
 }
-echo $form->field($model, 'savedFile')->fileInput();
+echo $form->field($model, 'savedFile')->widget(FileInput::classname(),
+[
+    'pluginOptions' => [
+        'showCaption' => false,
+    ]
+]);
 ?>
-
-<div class="form-group">
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+<div class="form-group submitBlock">
+    <?= Html::submitButton('Сохранить', [
+        'class' => 'btn btn-success',
+        'name' => 'submitButton'
+    ]) ?>
 </div>
 
 <?php ActiveForm::end(); ?>

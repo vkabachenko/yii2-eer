@@ -31,8 +31,11 @@ if ($model->isNewRecord) {
 <?= $form->field($model, 'sendMail')->checkbox(); ?>
 
 
-<div class="form-group">
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+<div class="form-group submitBlock">
+    <?= Html::submitButton('Сохранить', [
+        'class' => 'btn btn-success',
+        'name' => 'submitButton'
+    ]) ?>
 </div>
 
 <?php ActiveForm::end(); ?>

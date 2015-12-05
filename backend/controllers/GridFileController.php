@@ -48,12 +48,13 @@ abstract class GridFileController extends GridController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $this->linkParent($idParent, $model);
-            return 'Item is succesfully created.'; // alert message
-        } else {
-            return $this->renderAjax('update', [
-                'model' => $model,
-            ]);
+            if (Yii::$app->request->post('submitButton') !== null) {
+                return 'Item is succesfully created.'; // alert message
+            }
         }
+        return $this->renderAjax('update', [
+            'model' => $model,
+        ]);
     }
 
     protected function createProvider($query) {
