@@ -45,7 +45,7 @@ if ($model->isNewRecord) {
 
 <?php
 $script =
-"
+    <<<JS
 
 $('#faculties').change(function(){
 
@@ -78,12 +78,13 @@ function fillProgram(dataArr) {
         $('<option></option>').
             appendTo(program).
             val(data.id).
-            text(data.fullName);
+            text(data.fullName).
+            prop('selected',data.id == $model->id_program);
     })
 
 }
 
-";
+JS;
 
 $this->registerJs($script);
 
