@@ -10,20 +10,28 @@ use yii\base\Action;
 class YearAction  extends Action
 {
 
-    public function run() {
+    public function run($to=null) {
 
-        $model = new YearForm();
-        $model->year = YearHelper::getYear();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            YearHelper::setYear($model->year );
-            $this->controller->redirect(Yii::$app->request->referrer);
+        if ($to) {
+            $this->newYear($to);
         }
         else {
-            return $this->controller->renderAjax('@common/views/year.php',
-                                        ['model' => $model]);
+            $model = new YearForm();
+            $model->year = YearHelper::getYear();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $this->newYear($model->year);
+            }
+            else {
+                return $this->controller->renderAjax('@common/views/year.php',
+                    ['model' => $model]);
+            }
         }
+    }
 
-
+    private function newYear($year)
+    {
+        YearHelper::setYear($year);
+        $this->controller->redirect(Yii::$app->request->referrer);
     }
 
 } 

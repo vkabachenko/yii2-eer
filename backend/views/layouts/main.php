@@ -36,11 +36,7 @@ AppAsset::register($this);
                 ],
             ]);
         $menuItems = [
-            ['label' => 'Учебный год '.YearHelper::getEducationYear(),
-                'url' => ['/site/year'],
-                'linkOptions' => ['id' => 'year']
-            ],
-
+            YearHelper::getDropDownArray('Учебный год')
         ];
 
         if (! Yii::$app->user->isGuest) {

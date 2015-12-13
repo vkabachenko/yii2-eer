@@ -17,22 +17,6 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-
-    public function behaviors()
-    {
-        return [
-
-            [
-                'class' => AjaxFilter::className(),
-                'actions' => ['year'],
-            ],
-        ];
-    }
-
-
-    /**
-     * @inheritdoc
-     */
     public function actions()
     {
         return [

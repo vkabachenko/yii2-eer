@@ -61,16 +61,10 @@ AppAsset::register($this);
                 'class' => 'navbar-fixed-top',
             ],
         ]);
-        $menuItems = [
-            ['label' => YearHelper::getEducationYear(),
-                'url' => ['/site/year'],
-                'linkOptions' => ['id' => 'year','title' => 'Задать учебный год']
-            ],
-        ];
 
         echo Nav::widget([
             'options' => ['id' => 'mainNav','class' => 'navbar-nav navbar-right'],
-            'items' => $menuItems,
+            'items' => [YearHelper::getDropDownArray()],
         ]);
         NavBar::end();
         ?>

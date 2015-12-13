@@ -152,6 +152,18 @@ a.desc:after {
     color: #4a1571;
 }
 
+#mainNav .dropdown-menu a {
+    color:#4a1571;
+    font-family: cambria;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#mainNav .dropdown-menu a:hover {
+    background-color:#4a1571;
+    color: #fff;
+}
+
 .wrap > .container {
     padding-right: 0;
 }
