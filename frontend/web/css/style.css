@@ -1,0 +1,158 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* Colors */
+
+/* Colors */
+body {
+    background-color: rgba(211, 209, 235, 0.12);
+    font-family: "Open Sans", sans-serif;
+}
+
+@media only screen and (max-width : 768px) {
+    .navbar-brand .brand_text {
+        display: none;
+    }
+}
+
+.navbar {
+    background-color: #113e6a;
+    border: none;
+    min-height: 55px;
+    padding-top: 2px;
+}
+
+.navbar .navbar-brand {
+    background: url('../images/logo2.png') no-repeat left center;
+    padding-left: 50px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-inverse .navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav .auth_btn {
+    background-color: #60b4a7;
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 10px 10px;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav .auth_btn:hover {
+    background-color: rgba(96, 180, 167, 0.78);
+}
+
+.navbar-nav > li > a {
+	color: white;
+	font-weight: bold;
+}
+
+.navbar-nav > .dropdown.open > a,
+.navbar-nav > .dropdown > a:hover,
+.navbar-nav > .dropdown > a:focus,
+.navbar-nav > .dropdown > .dropdown-menu > li :hover
+ {
+	border-radius: 3px;
+	background-color: #1F5181;
+}
+
+.navbar-nav > .dropdown > .dropdown-menu > li :hover {
+	color: white;
+	border-radius: 0;
+}
+
+
+
+.jumbotron {
+    margin-bottom: 0;
+    padding: 70px 0 20px 0;
+    background-color: #fff;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.6);
+    text-align: left;
+}
+
+.jumbotron .breadcrumb {
+    background-color: #fff;
+    border: 1px solid #60b4a7;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+}
+
+.jumbotron .container h2,
+h3 {
+    color: #245c8d;
+    font-family: Arial, sans-serif;
+}
+
+.jumbotron .container h2 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.jumbotron .container h3 {
+    margin: 10px 0 0 0;
+    color: #6585a3;
+    padding-left: 10px;
+}
+
+/* Main page */
+
+.jumbotron + .container {
+	padding-top: 20px;
+}
+
+.faculty {
+    border-bottom: 1px solid #60b4a7;
+    padding: 5px 0;
+}
+
+.faculty a {
+    color: #002951;
+	background: no-repeat left center;
+	background-size: 30px;
+	padding: 15px 40px;
+	display: block;
+}
+
+/* Accorderon */
+.ui-accordion .ui-accordion-header, .ui-accordion-content {
+    background: transparent;
+    border-color: #60b4a7;
+}
+
+.ui-accordion .ui-accordion-header a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #113e6a;
+	font-weight: bold;
+}
+
+
+.ui-accordion .ui-accordion-content .row {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(121, 121, 121, 0.29);
+}
+
+.ui-accordion .ui-accordion-content .row:nth-last-child(2) {
+    border: none;
+}
+
+.ui-accordion .ui-accordion-content .row.program_links {
+    border-top: 1px solid #60b4a7;
+    border-bottom: none;
+}
+
+.ui-accordion .ui-accordion-content .row.program_links a {
+    color: #337ab7;
+}
+
+/*Discipline grid*/
+
+
+
+.footer {
+    background: transparent;
+    color: rgba(0, 0, 0, 0.66);
+}

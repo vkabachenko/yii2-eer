@@ -53,8 +53,8 @@ AppAsset::register($this);
 
         <?php
         NavBar::begin([
-            'brandLabel' => Html::img('/images/gerb.gif',['width' => '60']).
-                '<span>Результаты освоения образовательных программ ПсковГУ</span>',
+            'brandLabel' => //Html::img('/images/gerb.gif',['width' => '60']).
+                '<span class="brand_text">Результаты освоения образовательных программ</span>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'id' => 'mainMenu',
@@ -68,14 +68,18 @@ AppAsset::register($this);
         ]);
         NavBar::end();
         ?>
-
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-        </div>
+		<div class="jumbotron">
+			<div class="container">
+				<?= Breadcrumbs::widget([
+					'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+				]) ?>
+			</div>
+		</div>
+			<div class="container">
+			
+				<?= Alert::widget() ?>				
+				<?= $content ?>
+			</div>
     </div>
 
     <footer class="footer">
@@ -97,6 +101,9 @@ AppAsset::register($this);
     ?>
 
     <?php $this->endBody() ?>
+	<script>
+		$('.injumb').appendTo('.jumbotron>.container'); 
+	</script>
 </body>
 </html>
 <?php $this->endPage() ?>

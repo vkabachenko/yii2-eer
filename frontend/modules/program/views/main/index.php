@@ -13,8 +13,8 @@ AccordionAsset::register($this);
 $this->title = 'Образовательные программы';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2',$this->title);
-echo Html::tag('h3','Факультет: '.$faculty->name);
+echo Html::tag('h2 class="injumb"',$this->title);
+echo Html::tag('h3 class="injumb"',$faculty->name);
 
     $accordion = new AccordionContent();
     $items = $accordion->items($faculty->id);
@@ -36,4 +36,4 @@ else {
 }
 
 
-
+?>
