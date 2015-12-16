@@ -30,44 +30,48 @@ AppAsset::register($this);
 
         <?php
         NavBar::begin([
-            'brandLabel' => false,
-            'options' => [
-                'id' => 'authMenu',
-                'class' => 'navbar-fixed-top',
+            'brandLabel' => '<span class="brand_text">Результаты освоения образовательных программ</span>',
+			'brandUrl' => Yii::$app->homeUrl,
+			'options' => [
+				'id' => 'mainMenu',
+				'class' => 'navbar-fixed-top',
             ],
         ]);
-
+		
+		$menuItems = [
+			[YearHelper::getDropDownArray()],
+		];
+		
         if (Yii::$app->user->isGuest) {
-            $msg = Html::a('Авторизация',['/site/login'],['class' => 'navbar-link']);
+            //$msg = Html::a('Войти',['/site/login'],['class' => 'navbar-link']);
+			$msg = 
+				['label' => 'Войти',
+				'url' => ['/site/login'],
+				'class' => 'navbar-link',
+				];
         }
         else {
-            $msg = 'Вы зашли под именем <strong>'.Yii::$app->user->identity->username.'</strong>';
-            $msg .= Html::a('Выход',['/site/logout'],['class' => 'navbar-link']);
+            //$msg = 'Вы зашли под именем <strong>'.Yii::$app->user->identity->username.'</strong>';
+            //$msg .= Html::a('Выход',['/site/logout'],['class' => 'navbar-link']);
+			$msg = 
+				['label' => Yii::$app->user->identity->username.' Выход',
+				'url' => ['/site/logout'],
+				'class' => 'navbar-link',
+				];
         }
-
-        echo Html::tag('p',$msg,['class' => "navbar-right"]);
-
-
-        NavBar::end();
-        ?>
-
-        <?php
-        NavBar::begin([
-            'brandLabel' => //Html::img('/images/gerb.gif',['width' => '60']).
-                '<span class="brand_text">Результаты освоения образовательных программ</span>',
-            'brandUrl' => Yii::$app->homeUrl,
-            'options' => [
-                'id' => 'mainMenu',
-                'class' => 'navbar-fixed-top',
-            ],
-        ]);
+		
+		$menuItems[] = $msg;
+		
+        //echo Html::tag('p',$msg,['class' => "navbar-nav navbar-right"]);
 
         echo Nav::widget([
             'options' => ['id' => 'mainNav','class' => 'navbar-nav navbar-right'],
-            'items' => [YearHelper::getDropDownArray()],
+            'items' => $menuItems,
         ]);
+		
         NavBar::end();
         ?>
+		
 		<div class="jumbotron">
 			<div class="container">
 				<?= Breadcrumbs::widget([
