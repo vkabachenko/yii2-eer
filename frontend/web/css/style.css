@@ -110,13 +110,13 @@ h3 {
 
 .faculty a {
     color: #002951;
-	background: no-repeat left center;
+	background: url("../images/embl.gif")no-repeat left center;
 	background-size: 30px;
 	padding: 15px 40px;
 	display: block;
 }
 
-/* Accorderon */
+/* Accordion */
 .ui-accordion .ui-accordion-header, .ui-accordion-content {
     background: transparent;
     border-color: #60b4a7;

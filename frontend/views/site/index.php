@@ -9,7 +9,8 @@ use yii\helpers\Html;
 /* @var $images[] string */
 
 $this->title = 'Факультеты';
-echo Html::tag('h2 class="injumb"',$this->title);
+
+$this->params['header'] = $this->title;
 ?>
 
     <?= ListView::widget([

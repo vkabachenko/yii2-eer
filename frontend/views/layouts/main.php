@@ -39,21 +39,18 @@ AppAsset::register($this);
         ]);
 		
 		$menuItems = [
-			[YearHelper::getDropDownArray()],
+			YearHelper::getDropDownArray(),
 		];
 		
         if (Yii::$app->user->isGuest) {
-            //$msg = Html::a('Войти',['/site/login'],['class' => 'navbar-link']);
-			$msg = 
+			$msg =
 				['label' => 'Войти',
 				'url' => ['/site/login'],
 				'class' => 'navbar-link',
 				];
         }
         else {
-            //$msg = 'Вы зашли под именем <strong>'.Yii::$app->user->identity->username.'</strong>';
-            //$msg .= Html::a('Выход',['/site/logout'],['class' => 'navbar-link']);
-			$msg = 
+			$msg =
 				['label' => Yii::$app->user->identity->username.' Выход',
 				'url' => ['/site/logout'],
 				'class' => 'navbar-link',
@@ -62,8 +59,6 @@ AppAsset::register($this);
 		
 		$menuItems[] = $msg;
 		
-        //echo Html::tag('p',$msg,['class' => "navbar-nav navbar-right"]);
-
         echo Nav::widget([
             'options' => ['id' => 'mainNav','class' => 'navbar-nav navbar-right'],
             'items' => $menuItems,
@@ -77,6 +72,11 @@ AppAsset::register($this);
 				<?= Breadcrumbs::widget([
 					'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 				]) ?>
+
+                <?php if (isset($this->params['header'])) {
+                    echo Html::tag('h2',$this->params['header']);
+                }
+                ?>
 			</div>
 		</div>
 			<div class="container">
@@ -105,9 +105,8 @@ AppAsset::register($this);
     ?>
 
     <?php $this->endBody() ?>
-	<script>
-		$('.injumb').appendTo('.jumbotron>.container'); 
-	</script>
+
+
 </body>
 </html>
 <?php $this->endPage() ?>
