@@ -49,6 +49,11 @@ body {
 	font-weight: bold;
 }
 
+.navbar-toggle > span {
+	background-color: white;
+}
+
+#mainNav li:last-child :hover,
 .navbar-nav > .dropdown.open > a,
 .navbar-nav > .dropdown > a:hover,
 .navbar-nav > .dropdown > a:focus,
@@ -122,13 +127,16 @@ h3 {
     border-color: #60b4a7;
 }
 
-.ui-accordion .ui-accordion-header a {
+.ui-accordion .ui-accordion-header span {
     padding-top: 10px;
     padding-bottom: 10px;
     color: #113e6a;
 	font-weight: bold;
 }
 
+.ui-accordion .ui-accordion-content {
+	background-color: transparent;
+}
 
 .ui-accordion .ui-accordion-content .row {
     padding: 5px 0;
@@ -139,12 +147,12 @@ h3 {
     border: none;
 }
 
-.ui-accordion .ui-accordion-content .row.program_links {
+.ui-accordion .ui-accordion-content .program_links {
     border-top: 1px solid #60b4a7;
     border-bottom: none;
 }
 
-.ui-accordion .ui-accordion-content .row.program_links a {
+.ui-accordion .ui-accordion-content .program_links a {
     color: #337ab7;
 }
 
