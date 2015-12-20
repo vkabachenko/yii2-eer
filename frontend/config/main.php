@@ -73,7 +73,4 @@ return [
         ],
     ],
     'params' => $params,
-    'params' => [
-        'icon-framework' => 'fa',  // Font Awesome Icon framework
-    ],
 ];

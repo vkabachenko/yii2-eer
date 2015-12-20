@@ -4,7 +4,6 @@ namespace frontend\modules\program\helpers;
 
 use common\helpers\YearHelper;
 use common\models\StudentEducation;
-use common\models\User;
 use Yii;
 use common\models\Program;
 use common\models\ProgramFile;
@@ -21,14 +20,7 @@ class AccordionContent extends Object
 
     // create Disciplines link
 
-    private function disciplinesLink()
-    {
-
-        return Html::a($this->model->fullName,
-                    Url::to(['/discipline/main/index','id_program' => $this->model->id,]));
-    }
-
-	private function disciplinesLnk()
+	private function disciplinesLink()
 	{
 		return Html::a('Дисциплины',
 			['/discipline/main/index','id_program' => $this->model->id],
@@ -41,7 +33,7 @@ class AccordionContent extends Object
     {
 
         return $this->model->fullContent.Html::Tag('div', 
-		$this->linkFiles().$this->linkStudents().$this->disciplinesLnk(),
+		$this->linkFiles().$this->linkStudents().$this->disciplinesLink(),
 		['class' => 'row program_links']
 		);
 
@@ -109,7 +101,7 @@ class AccordionContent extends Object
         foreach($models as $model) {
             $this->model = $model;
             $items[] = [
-                'header' => $this->disciplinesLink(),
+                'header' => $this->model->fullName,
                 'content' => $this->programContent(),
             ];
         }

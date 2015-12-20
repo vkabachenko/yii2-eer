@@ -14,6 +14,6 @@ return [
         'discipline.block' => ['базовый','вариативный','ДПВ'], // см. common/models/Discipline
         'user.role' => ['студент','инспектор факультета','админ факультета','администратор'],
     ],
-
+    'icon-framework' => 'fa',  // Font Awesome Icon framework
 
 ];
