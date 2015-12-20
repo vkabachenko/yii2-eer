@@ -36,10 +36,10 @@ trait ProgramTrait
             if ($value) {
                 if ($isLabel) {
                     $label = Html::tag('span',$labels[$attribute],
-                        ['class' => 'programContent col-sm-6 col-xs-5']);
+                        ['class' => 'programContent col-xs-12']);
                     $content .= Html::tag('div', $label.
                         Html::tag('span', $value,
-                            ['class' => 'col-sm-5']),
+                            ['class' => 'col-xs-12']),
                         ['class' => 'row']);
                 } else {
                     $content .= $value.' ';
