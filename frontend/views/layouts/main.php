@@ -7,10 +7,12 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use common\helpers\YearHelper;
 use yii\bootstrap\Modal;
+use kartik\icons\Icon;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+Icon::map($this);
 AppAsset::register($this);
 
 ?>
@@ -44,14 +46,14 @@ AppAsset::register($this);
 		
         if (Yii::$app->user->isGuest) {
 			$msg =
-				['label' => 'Войти',
+				['label' => 'Войти '.Icon::show('sign-in'),
 				'url' => ['/site/login'],
 				'class' => 'navbar-link',
 				];
         }
         else {
 			$msg =
-				['label' => Yii::$app->user->identity->username.' Выход',
+				['label' => Yii::$app->user->identity->username.' '.Icon::show('sign-out'),
 				'url' => ['/site/logout'],
 				'class' => 'navbar-link',
 				];
@@ -62,6 +64,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['id' => 'mainNav','class' => 'navbar-nav navbar-right'],
             'items' => $menuItems,
+			'encodeLabels' => false,
         ]);
 		
         NavBar::end();

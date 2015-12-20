@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-fileinput": "@dev",
         "FortAwesome/Font-Awesome": "*",
         "bupy7/yii2-ajaxfilter": "dev-master",
-        "himiklab/yii2-easy-thumbnail-image-helper" : "*"
+        "himiklab/yii2-easy-thumbnail-image-helper" : "*",
+        "kartik-v/yii2-icons": "^1.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

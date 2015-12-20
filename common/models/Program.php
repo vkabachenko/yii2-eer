@@ -188,11 +188,12 @@ class Program extends \yii\db\ActiveRecord
         foreach($attributes as $attribute) {
             if ($this->$attribute !== null) {
                 $label = $isLabel ? Html::tag('span',$labels[$attribute],
-                    ['class' => 'programContent'])
+                    ['class' => 'programContent col-sm-6 col-xs-5'])
                     : '';
-                $content .= $label.
-                    $this->attributeValue($this, $attribute).
-                    $betweenAttr;
+                $content .= Html::tag('div', $label.
+					Html::tag('span', $this->attributeValue($this, $attribute),
+						['class' => 'col-sm-5']),
+				['class' => 'row']);
             }
         }
         return $content;

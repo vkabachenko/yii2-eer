@@ -28,11 +28,22 @@ class AccordionContent extends Object
                     Url::to(['/discipline/main/index','id_program' => $this->model->id,]));
     }
 
+	private function disciplinesLnk()
+	{
+		return Html::a('Дисциплины',
+			['/discipline/main/index','id_program' => $this->model->id],
+			['class' => 'col-sm-3']
+		);
+	}
+	
     // program description
     private function programContent()
     {
 
-        return $this->model->fullContent.$this->linkFiles().$this->linkStudents();
+        return $this->model->fullContent.Html::Tag('div', 
+		$this->linkFiles().$this->linkStudents().$this->disciplinesLnk(),
+		['class' => 'row program_links']
+		);
 
     }
 
@@ -42,7 +53,7 @@ class AccordionContent extends Object
         if (ProgramFile::find()->where(['id_program' => $this->model->id])->exists()) {
             return Html::a('Документы',
                         ['/file/main/program','id' => $this->model->id],
-                        ['class' => 'linkedFiles']);
+                        ['class' => 'linkedFiles col-sm-3']);
         }
         else {
             return '';
@@ -55,7 +66,7 @@ class AccordionContent extends Object
             if ($this->allowed()) {
                 return Html::a('Студенты',
                    ['/student/main/index','id_program' => $this->model->id],
-                   ['class' => 'programLinks']);
+                   ['class' => 'programLinks col-sm-3']);
             }
             else {
                 return '';

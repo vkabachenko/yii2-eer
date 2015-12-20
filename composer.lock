@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "96006814a6976a87ac0b9baa9b34c258",
-    "content-hash": "d8ae71c34c8ea5255d1dd8fd704d1c0b",
+    "hash": "52333e255e4cd87b91398f5f21626b26",
+    "content-hash": "495638962f4f89fa48cf5018e251a4a8",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -334,6 +334,44 @@
             "time": "2015-03-20 11:07:08"
         },
         {
+            "name": "components/flag-icon-css",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/flag-icon-css.git",
+                "reference": "3cd183cb1729d26482080db9a60fb589ba383cfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/3cd183cb1729d26482080db9a60fb589ba383cfc",
+                "reference": "3cd183cb1729d26482080db9a60fb589ba383cfc",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "name": "flag-icon-css",
+                    "files": [
+                        "less/**",
+                        "css/**",
+                        "flags/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Panayiotis Lipiridis (Lipis)",
+                    "email": "lipiridis@gmail.com"
+                }
+            ],
+            "description": "CSS for vector based country flags",
+            "time": "2015-12-09 00:21:08"
+        },
+        {
             "name": "creocoder/yii2-nested-sets",
             "version": "0.9.0",
             "source": {
@@ -427,7 +465,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/ac14003ffc6b4a99b0d64d72c0c63278f72a8c71",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/1c9beb741dff2dd73e7ba50d98b16f36bd8c7815",
                 "reference": "ac14003ffc6b4a99b0d64d72c0c63278f72a8c71",
                 "shasum": ""
             },
@@ -614,6 +652,54 @@
             "time": "2015-11-18 17:56:04"
         },
         {
+            "name": "kartik-v/yii2-icons",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-icons.git",
+                "reference": "58100d3278799e7a13771de6e6ca2865fb60454d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-icons/zipball/58100d3278799e7a13771de6e6ca2865fb60454d",
+                "reference": "58100d3278799e7a13771de6e6ca2865fb60454d",
+                "shasum": ""
+            },
+            "require": {
+                "components/flag-icon-css": "*",
+                "fortawesome/font-awesome": "*",
+                "kartik-v/yii2-krajee-base": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\icons\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://demos.krajee.com/"
+                }
+            ],
+            "description": "Set of icon frameworks for use in Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-icons",
+            "keywords": [
+                "extension",
+                "font",
+                "icon",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-12-13 16:27:46"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.7.9",
             "source": {
@@ -669,7 +755,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/faed0a18d5b6f976a6b93824052daccc9568bdfa",
+                "url": "https://api.github.com/repos/kartik-v/yii2-tree-manager/zipball/c7e3a9358bb6efb92bebb5c0f137f50dedb041dd",
                 "reference": "faed0a18d5b6f976a6b93824052daccc9568bdfa",
                 "shasum": ""
             },
@@ -870,7 +956,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2ea5184e4438d50a2a56150b3013bc8b54ba52bc",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/655c076b829a3d18735b94818f77c265ae599a2b",
                 "reference": "2ea5184e4438d50a2a56150b3013bc8b54ba52bc",
                 "shasum": ""
             },
@@ -964,7 +1050,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/f74b454bb60d91aafb9391512d4f7d2332e42146",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/7de7d5d63d655c0c69764f80f2dfc549e9b1d9f0",
                 "reference": "f74b454bb60d91aafb9391512d4f7d2332e42146",
                 "shasum": ""
             },
@@ -1014,7 +1100,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/87cd1f2e0dd454a837607de612b1057840effe8b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/574dcb1d101ae55be230e0c00a2428af6ec4c5c1",
                 "reference": "87cd1f2e0dd454a837607de612b1057840effe8b",
                 "shasum": ""
             },
@@ -1109,7 +1195,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/022637087b4f8b0d321e697cc0a01b09cd2d7345",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/7ab7ff56bd54500212523e38f5fe3b9210325041",
                 "reference": "022637087b4f8b0d321e697cc0a01b09cd2d7345",
                 "shasum": ""
             },
@@ -1159,7 +1245,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/745a045c905cc595ca5698f5cd78fd7a8944c706",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/2cca1bb86444a6438b0720f8c60120a400982366",
                 "reference": "745a045c905cc595ca5698f5cd78fd7a8944c706",
                 "shasum": ""
             },
@@ -1367,7 +1453,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/10bf9cf3dbb3cd30e29da059d778d3c55573cde0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/4d6056e3ec68d3db21e9a1878e5dcb7f418b1aaa",
                 "reference": "10bf9cf3dbb3cd30e29da059d778d3c55573cde0",
                 "shasum": ""
             },
@@ -1414,7 +1500,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/9d7b306ebdeef792adb796e5db1e57e068a5041a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/186c77214e0a4b75f10380b4e6e5f82788922cb7",
                 "reference": "9d7b306ebdeef792adb796e5db1e57e068a5041a",
                 "shasum": ""
             },
@@ -1461,7 +1547,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/754825cb7ef605f552b4f507fe25fa94645312f6",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/177847f7b4ed07698a42d1e5f01bc792871210fb",
                 "reference": "754825cb7ef605f552b4f507fe25fa94645312f6",
                 "shasum": ""
             },
