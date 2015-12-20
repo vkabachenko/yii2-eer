@@ -3,8 +3,7 @@
 namespace common\models;
 
 use Yii;
-use yii\helpers\Html;
-use common\traits\AttributeTrait;
+use common\traits\ProgramTrait;
 use backend\behaviors\CascadeBehavior;
 
 /**
@@ -29,10 +28,7 @@ use backend\behaviors\CascadeBehavior;
 class Program extends \yii\db\ActiveRecord
 {
 
-    use AttributeTrait;
-    // для составления полного имени программы и полного описания программы
-    private $defaultAttributes = ['code','name'];
-    private $disabledAttributes = ['id','id_faculty'];
+    use ProgramTrait;
 
     /**
      * @inheritdoc
@@ -164,43 +160,5 @@ class Program extends \yii\db\ActiveRecord
 
         return $this->concatAttributes($attributes);
     }
-
-    public function getFullContent()
-    {
-
-        $attributes = $this->availableAttributes();
-        return $this->concatAttributes($attributes, true);
-
-    }
-
-    public function availableAttributes() {
-
-        return array_diff($this->attributes(),
-            $this->defaultAttributes, $this->disabledAttributes);
-
-    }
-
-
-    private function concatAttributes($attributes, $isLabel=false, $betweenAttr = " " )
-    {
-        $labels = $this->attributeLabels();
-        $content = '';
-        foreach($attributes as $attribute) {
-            if ($this->$attribute !== null) {
-                if ($isLabel) {
-                    $label = Html::tag('span',$labels[$attribute],
-                        ['class' => 'programContent col-sm-6 col-xs-5']);
-                    $content .= Html::tag('div', $label.
-				    	Html::tag('span', $this->attributeValue($this, $attribute),
-					    	['class' => 'col-sm-5']),
-				    ['class' => 'row']);
-                } else {
-                    $content .= $this->attributeValue($this, $attribute).$betweenAttr;
-                }
-            }
-        }
-        return $content;
-    }
-
 
 }
