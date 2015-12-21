@@ -8,6 +8,7 @@ use common\widgets\Alert;
 use common\helpers\YearHelper;
 use yii\bootstrap\Modal;
 use kartik\icons\Icon;
+use frontend\widgets\JumboWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -76,10 +77,7 @@ AppAsset::register($this);
 					'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 				]) ?>
 
-                <?php if (isset($this->params['header'])) {
-                    echo Html::tag('h2',$this->params['header']);
-                }
-                ?>
+                <?= JumboWidget::widget(); ?>
 			</div>
 		</div>
 			<div class="container">

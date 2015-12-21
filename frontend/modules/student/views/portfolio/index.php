@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = [
 ];
 
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['model'] = $student;
 
 ?>
 
-<h2>Портфолио</h2>
 <h3>
     Студент: <?= $student->studentName ?> Курс: <?= $student->course ?> Программа: <?= $student->idProgram->fullName ?>
 </h3>

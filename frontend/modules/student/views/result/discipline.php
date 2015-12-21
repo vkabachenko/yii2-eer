@@ -23,10 +23,9 @@ $this->params['breadcrumbs'][] = [
 ];
 
 $this->params['breadcrumbs'][] = $this->title;
-
+$this->params['model'] = $disciplineSemester;
 ?>
 
-    <h2>Результаты</h2>
     <h3>
         Дисциплина: <?=  $disciplineSemester->idDiscipline->fullName ?> Семестр: <?=  $disciplineSemester->semester ?>
     </h3>

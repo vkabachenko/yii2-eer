@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = [
         'id_faculty' => $program->id_faculty],
 ];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['model'] = $program;
 ?>
 
-<h2>Дисциплины</h2>
 <h3>
-    Образовательная программа: <?= "$program->fullName" ?>
+    Образовательная программа: <?= $program->fullName ?>
 </h3>
 
 <?= GridView::widget([

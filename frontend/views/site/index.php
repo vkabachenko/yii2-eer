@@ -10,7 +10,6 @@ use yii\helpers\Html;
 
 $this->title = 'Факультеты';
 
-$this->params['header'] = $this->title;
 ?>
 
     <?= ListView::widget([

@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = [
         'id_faculty' => $program->id_faculty],
 ];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['model'] = $program;
 ?>
 
-<h2>Студенты</h2>
 <h3>
     Образовательная программа: <?= "$program->fullName" ?>
 </h3>

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use common\models\StudentResultFile;
 
 /* @var $model StudentResult */
+$this->params['model'] = $model;
 
 ?>
 
