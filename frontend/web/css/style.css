@@ -122,20 +122,23 @@ h3 {
 }
 
 /* Accordion */
-.ui-accordion .ui-accordion-header, .ui-accordion-content {
-    background: transparent;
+
+.ui-accordion .ui-accordion-header, .ui-accordion-content, .ui-widget-content {
+	background: transparent;
     border-color: #60b4a7;
 }
 
-.ui-accordion .ui-accordion-header span {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.ui-accordion .ui-accordion-header {
     color: #113e6a;
 	font-weight: bold;
 }
 
 .ui-accordion .ui-accordion-content {
 	background-color: transparent;
+}
+
+.ui-accordion .ui-widget-content {
+	background: none;
 }
 
 .ui-accordion .ui-accordion-content .row {
@@ -147,6 +150,11 @@ h3 {
     border: none;
 }
 
+.ui-accordion .ui-accordion-content .programContent {
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
 .ui-accordion .ui-accordion-content .program_links {
     border-top: 1px solid #60b4a7;
     border-bottom: none;
@@ -155,7 +163,6 @@ h3 {
 .ui-accordion .ui-accordion-content .program_links a {
     color: #337ab7;
 }
-
 /*Discipline grid*/
 
 
