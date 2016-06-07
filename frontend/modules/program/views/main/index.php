@@ -25,7 +25,8 @@ else {
     echo Accordion::widget([
          'items' => $items,
          'clientOptions' => [
-            'event' => 'mouseover'
+            'event' => 'mouseover',
+			'heightStyle' => 'content'
          ],
          'options' => [
              'id' => 'accordionContainer'

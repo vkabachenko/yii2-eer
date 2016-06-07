@@ -1,14 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 /* Colors */
-
+@contrast: #18855F;
 /* Colors */
 body {
     background-color: rgba(211, 209, 235, 0.12);
     font-family: "Open Sans", sans-serif;
 }
 
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width : 590px) {
     .navbar-brand .brand_text {
         display: none;
     }
@@ -33,7 +33,7 @@ body {
 }
 
 .navbar-inverse .navbar-nav .auth_btn {
-    background-color: #60b4a7;
+    background-color: #18855F;
     border-radius: 3px;
     margin-top: 5px;
     padding: 10px 10px;
@@ -51,6 +51,11 @@ body {
 
 .navbar-toggle > span {
 	background-color: white;
+}
+
+.navbar-nav .open .dropdown-menu {
+	background-color: white;
+	border-radius: 0;
 }
 
 #mainNav li:last-child :hover,
@@ -72,7 +77,7 @@ body {
 
 .jumbotron {
     margin-bottom: 0;
-    padding: 70px 0 20px 0;
+    padding: 70px 0 10px 0;
     background-color: #fff;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.6);
     text-align: left;
@@ -80,7 +85,7 @@ body {
 
 .jumbotron .breadcrumb {
     background-color: #fff;
-    border: 1px solid #60b4a7;
+    border: 1px solid #18855F;
     margin: 0 0 10px 0;
     padding: 5px 10px;
 }
@@ -94,12 +99,16 @@ h3 {
 .jumbotron .container h2 {
     font-weight: bold;
     margin: 0;
+	
+}
+
+.jumbotron .container .faculty_emblem {
+	margin-right: 7px;
 }
 
 .jumbotron .container h3 {
     margin: 10px 0 0 0;
     color: #6585a3;
-    padding-left: 10px;
 }
 
 /* Main page */
@@ -109,7 +118,7 @@ h3 {
 }
 
 .faculty {
-    border-bottom: 1px solid #60b4a7;
+    border-bottom: 1px solid #18855F;
     padding: 5px 0;
 }
 
@@ -121,48 +130,71 @@ h3 {
 	display: block;
 }
 
+
+
 /* Accordion */
 
 .ui-accordion .ui-accordion-header, .ui-accordion-content, .ui-widget-content {
-	background: transparent;
-    border-color: #60b4a7;
+	background: #18855F;
+    border-color: #18855F;
 }
 
 .ui-accordion .ui-accordion-header {
-    color: #113e6a;
+    #color: #113e6a;
+	color: white;
 	font-weight: bold;
+	font-size: 1.05em !important;
 }
 
 .ui-accordion .ui-accordion-content {
-	background-color: transparent;
+	border: 1px solid #18855F;
+	display: flex;
+	flex-flow: column nowrap;
+	
 }
 
 .ui-accordion .ui-widget-content {
 	background: none;
-}
-
-.ui-accordion .ui-accordion-content .row {
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(121, 121, 121, 0.29);
-}
-
-.ui-accordion .ui-accordion-content .row:nth-last-child(2) {
-    border: none;
+	color: #113e6a;
 }
 
 .ui-accordion .ui-accordion-content .programContent {
+	padding-right: 5px;
 	font-weight: bold;
-	padding-bottom: 5px;
+}
+
+.ui-accordion .ui-accordion-content div {
+	padding-bottom: 10px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	border-bottom: 1px dotted #396590;
+}
+
+.ui-accordion .ui-accordion-content div:nth-last-child(2) {
+	border-bottom: none;
 }
 
 .ui-accordion .ui-accordion-content .program_links {
-    border-top: 1px solid #60b4a7;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	padding-top: 10px;
+	border-top: 1px solid #18855F;
     border-bottom: none;
 }
 
 .ui-accordion .ui-accordion-content .program_links a {
-    color: #337ab7;
+	background-color: #396590;
+	color: white;
+	padding: 1px 9px 3px 9px;
+	border-radius: 4px;
 }
+
+.ui-state-default .ui-icon {
+	background-image: url('../images/ui-icons_ffffff_256x240.png') !important;
+}
+
 /*Discipline grid*/
 
 
