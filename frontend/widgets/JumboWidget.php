@@ -22,7 +22,7 @@ class JumboWidget extends Widget {
             $facultyLink = Html::a(Html::img('/files/'.$faculty->filename,[
                     'alt' => $faculty->name,
                     'width' => $dimensions,
-                    'height' => $dimensions
+					'class' => 'faculty_emblem'
                 ]),
                 ['/program/main/index','id_faculty' => $faculty->id]);
         }
