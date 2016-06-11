@@ -19,10 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $program;
 ?>
 
-<h3>
-    Образовательная программа: <?= $program->fullName ?>
+<h3 class="to_jumbotron">
+     <?= $program->fullName ?> <!--Этим заголовком нужно заменить "Дисциплины" в jumbotron-->
 </h3>
-
+<p class="semestr_note">Выберите семестр для просмотра журнала<p>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,

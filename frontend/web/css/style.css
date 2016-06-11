@@ -1,17 +1,28 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-/* Colors */
-@contrast: #18855F;
-/* Colors */
+@viewport {
+    width: device-width;
+}
+
 body {
     background-color: rgba(211, 209, 235, 0.12);
     font-family: "Open Sans", sans-serif;
+	font-size: 1.5em;
 }
 
+a {
+	color: #3A6690;
+}
 @media only screen and (max-width : 590px) {
     .navbar-brand .brand_text {
         display: none;
     }
+}
+
+@media only screen and (min-width: 591px) and (max-width: 992px) {
+	.navbar-brand .brand_text {
+		font-size: 16px;
+	}
 }
 
 .navbar {
@@ -90,6 +101,10 @@ body {
     padding: 5px 10px;
 }
 
+.breadcrumb > .active {
+	color: #A3670F;
+}
+
 .jumbotron .container h2,
 h3 {
     color: #245c8d;
@@ -99,7 +114,7 @@ h3 {
 .jumbotron .container h2 {
     font-weight: bold;
     margin: 0;
-	
+	font-size: 1.5em;
 }
 
 .jumbotron .container .faculty_emblem {
@@ -197,7 +212,51 @@ h3 {
 
 /*Discipline grid*/
 
+.semestr_note {
+	font-size: 14px;
+	color: #999;
+	text-align: right;
+}
 
+.grid-view {
+	overflow: auto;
+}
+
+.table thead tr:first-child {
+	background-color: #18855F;
+	color: white;
+	
+}
+
+.table-bordered {
+	border-radius: 4px !important;
+}
+
+.table-bordered thead tr:first-child th{
+	border-right-color: white !important;
+}
+
+.table-bordered thead tr:first-child th:last-child {
+	border-right-color: #18855F !important;
+}
+
+.table thead tr:first-child th a{
+	color: white;
+}
+
+.table, .table *  {
+	border-color: #18855F !important;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background-color: #18855F;
+	border-color: #18855F;
+}
+
+.pagination > li > a, .pagination > li > span {
+	color: #3A6690;
+}
+/*Discipline END*/
 
 .footer {
     background: transparent;
