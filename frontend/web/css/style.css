@@ -126,6 +126,28 @@ h3 {
     color: #6585a3;
 }
 
+/*Auth page*/
+label, .has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline, .has-success.radio label, .has-success.checkbox label, .has-success.radio-inline label, .has-success.checkbox-inline label {
+	color: #1F5181;
+}
+
+.btn-primary {
+	background-color: #18855F;
+	border-color: #18855F;
+}
+
+.btn-primary:hover {
+	background-color: #329572;
+	border-color: #329572;
+}
+
+.form-control {
+	border: 1px solid #18855F;
+	box-shadow: none;
+}
+/*Auth page END*/
+
+
 /* Main page */
 
 .jumbotron + .container {
