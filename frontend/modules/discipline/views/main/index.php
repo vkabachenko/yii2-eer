@@ -20,7 +20,6 @@ $this->params['model'] = $program;
 $this->params['header'] = $program->fullName;
 ?>
 
-<p class="semestr_note">Выберите семестр для просмотра журнала<p>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -32,7 +31,10 @@ $this->params['header'] = $program->fullName;
             'value' => function($model, $key, $index, $column) {
                 return Html::a($model->name,
                     ['/file/main/discipline','id' => $model->id],
-                    ['class' => 'linkedFiles']);
+                    ['class' => 'linkedFiles',
+                     'data-toggle' => 'tooltip',
+                     'title' => 'Документы',
+                    ]);
                 }
         ],
         [
@@ -71,7 +73,10 @@ $this->params['header'] = $program->fullName;
                             ]);
 
                         if ($disciplineSemester) {
-                            $options = ['style'=>'margin-right:10px;'];
+                            $options = ['style'=>'margin-right:10px;',
+                                        'data-toggle' => 'tooltip',
+                                        'title' => 'Результаты',
+                                       ];
 
                             if (Yii::$app->user->
                                 can('viewFaculty',['id_faculty' => $model->idProgram->id_faculty])) {

@@ -23,9 +23,10 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/modalLink.js',
+        'js/tips.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }
