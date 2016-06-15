@@ -6,12 +6,12 @@ use common\models\StudentResultFile;
 
 /* @var $model StudentResult */
 $this->params['model'] = $model;
+$this->params['header'] = $model->idDisciplineSemester->idDiscipline->fullName;
 
 ?>
 
     <h3>
-        Студент: <?= $model->idStudentEducation->studentName ?> Курс: <?= $model->idStudentEducation->course ?>
-        Дисциплина: <?= $model->idDisciplineSemester->idDiscipline->fullName ?>
+        <?= $model->idStudentEducation->studentName ?>, <?= $model->idStudentEducation->course ?> курс
         <?php if ($model->id_discipline_name): ?>
            <?= $model->idDisciplineName->name ?>
         <?php endif; ?>

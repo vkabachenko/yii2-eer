@@ -29,13 +29,9 @@ $this->params['breadcrumbs'][] = [
 
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $student;
+$this->params['header'] = $student->studentName;
 
 ?>
-
-    <h3>
-        Студент: <?= $student->studentName ?> Курс: <?= $student->course ?>
-    </h3>
-
 
 <?= GridView::widget([
     'dataProvider' => $provider,

@@ -16,11 +16,8 @@ $this->params['breadcrumbs'][] = [
 ];
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $program;
+$this->params['header'] = $program->fullName;
 ?>
-
-<h3>
-    Образовательная программа: <?= "$program->fullName" ?>
-</h3>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -28,7 +25,7 @@ $this->params['model'] = $program;
     'columns' => [
         [
             'attribute' => 'id',
-            'header' => '№ п/п',
+            'header' => '№/Результ.',
             'format' => 'raw',
             'value' => function($model, $key, $index, $column) {
                     return Html::a($index + 1,[
