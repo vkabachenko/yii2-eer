@@ -11,6 +11,7 @@ body {
 }
 
 a {
+	#color: #3A6690;
 	color: #3A6690;
 }
 @media only screen and (max-width : 590px) {
@@ -272,6 +273,8 @@ label, .has-success .help-block, .has-success .control-label, .has-success .radi
 .table, .table *  {
 	border-color: #18855F !important;
 }
+
+
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
 	background-color: #18855F;

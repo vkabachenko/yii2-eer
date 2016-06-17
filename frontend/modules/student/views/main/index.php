@@ -30,7 +30,10 @@ $this->params['header'] = $program->fullName;
             'value' => function($model, $key, $index, $column) {
                     return Html::a($index + 1,[
                         '/student/result/index',
-                        'id' => $model->id_student]);
+                        'id' => $model->id_student],
+						['data-toggle' => 'tooltip',
+						 'title' => 'Результаты',
+						]);
                 }
         ],
         [
@@ -39,7 +42,10 @@ $this->params['header'] = $program->fullName;
             'value' => function($model, $key, $index, $column) {
                     return Html::a($model->studentName,[
                         '/student/portfolio/index',
-                        'id' => $model->id_student]);
+                        'id' => $model->id_student],
+						['data-toggle' => 'tooltip',
+						 'title' => 'Портфолио',
+						]);
                 }
         ],
         'course',
