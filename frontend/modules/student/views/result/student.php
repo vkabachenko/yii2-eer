@@ -35,6 +35,7 @@ $this->params['header'] = "{$student->studentName}, {$student->course} курс"
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+	'summary' => '',
     'columns' => [
         [
             'attribute' => 'code',
