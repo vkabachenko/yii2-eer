@@ -31,11 +31,11 @@ $this->params['breadcrumbs'][] = [
 
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $student;
-
+$this->params['header'] = $student->idProgram->fullName;
 ?>
 
 <h3>
-    Студент: <?= $student->studentName ?> Курс: <?= $student->course ?> Программа: <?= $student->idProgram->fullName ?>
+    <?= $student->studentName ?>, <?= $student->course ?> курс
 </h3>
 
 <?php
