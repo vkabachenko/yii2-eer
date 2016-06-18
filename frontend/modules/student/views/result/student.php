@@ -35,6 +35,7 @@ $this->params['header'] = "{$student->studentName}, {$student->course} курс"
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+	'summary' => '',
     'columns' => [
         [
             'attribute' => 'code',
@@ -43,7 +44,11 @@ $this->params['header'] = "{$student->studentName}, {$student->course} курс"
             'value' => function($model, $key, $index, $column) {
                            $disciplineName = Discipline::findOne($model['id_discipline'])->fullName;
                            if ($model['id_result']) {
-                               return Html::a($disciplineName,['result/view-student','id' => $model['id_result']]);
+                               return Html::a($disciplineName,['result/view-student','id' => $model['id_result']],
+							   ['data-toggle' => 'tooltip',
+							    'title' => 'Подробнее',
+							   //В надобности этой подсказки я сомневаюсь
+							   ]);
                            }
                            else {
                                return $disciplineName;

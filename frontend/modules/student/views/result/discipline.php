@@ -24,15 +24,12 @@ $this->params['breadcrumbs'][] = [
 
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $disciplineSemester;
+$this->params['header'] = "{$disciplineSemester->idDiscipline->fullName}, {$disciplineSemester->semester} семестр";
 ?>
-
-    <h3>
-        Дисциплина: <?=  $disciplineSemester->idDiscipline->fullName ?> Семестр: <?=  $disciplineSemester->semester ?>
-    </h3>
-
 
 <?= GridView::widget([
     'dataProvider' => $provider,
+	'summary' => '',
     'columns' => [
         [
             'attribute' => 'code',
