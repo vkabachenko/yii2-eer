@@ -284,6 +284,18 @@ label, .has-success .help-block, .has-success .control-label, .has-success .radi
 .pagination > li > a, .pagination > li > span {
 	color: #3A6690;
 }
+
+@media only screen and (max-width : 450px) {
+	.hide450 {
+		display: none;
+	}
+}
+
+@media only screen and (max-width : 370px) {
+	.hide370 {
+		display: none;
+	}
+}
 /* Discipline grid end*/
 
 .footer {

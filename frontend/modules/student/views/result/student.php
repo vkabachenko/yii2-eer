@@ -57,10 +57,14 @@ $this->params['header'] = "{$program->name}, {$student->studentName}, {$student-
         [
             'attribute' => 'semester',
             'header' => 'Семестр',
+			'contentOptions' => ['class' => 'hide450'],
+			'headerOptions' => ['class' => 'hide450']
         ],
         [
             'attribute' => 'assesment',
             'header' => 'Оценка',
+			'contentOptions' => ['class' => 'hide370'],
+			'headerOptions' => ['class' => 'hide370']
         ],
         [
             'attribute' => 'rating',

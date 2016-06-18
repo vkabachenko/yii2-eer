@@ -48,8 +48,12 @@ $this->params['header'] = $program->fullName;
 						]);
                 }
         ],
-        'course',
-        'group',
+		'course',
+		 
+		
+		'group',
+		 
+		
     ],
     'summary' => ''
 ]);
