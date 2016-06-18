@@ -22,6 +22,9 @@ $this->params['header'] = $program->fullName;
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
+	'tableOptions' => [
+	'class' => 'table table-striped table-bordered studentsGrid'
+	],
     'columns' => [
         [
             'attribute' => 'id',
@@ -49,11 +52,7 @@ $this->params['header'] = $program->fullName;
                 }
         ],
 		'course',
-		 
-		
-		'group',
-		 
-		
+		'group'
     ],
     'summary' => ''
 ]);
