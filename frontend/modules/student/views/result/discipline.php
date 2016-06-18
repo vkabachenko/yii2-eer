@@ -6,7 +6,6 @@
 use yii\grid\GridView;
 use yii\helpers\Html;
 
-
 $this->title = 'Результаты';
 
 $this->params['breadcrumbs'][] = [
@@ -24,7 +23,7 @@ $this->params['breadcrumbs'][] = [
 
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $disciplineSemester;
-$this->params['header'] = "{$disciplineSemester->idDiscipline->fullName}, {$disciplineSemester->semester} семестр";
+$this->params['header'] = "{$disciplineSemester->idDiscipline->idProgram->name}, {$disciplineSemester->idDiscipline->fullName}, {$disciplineSemester->semester} семестр";
 ?>
 
 <?= GridView::widget([
@@ -37,7 +36,10 @@ $this->params['header'] = "{$disciplineSemester->idDiscipline->fullName}, {$disc
             'header' => 'Студент',
             'value' => function($model, $key, $index, $column) {
                            if ($model['id_result']) {
-                               return Html::a($model['name'],['result/view-discipline','id' => $model['id_result']]);
+                               return Html::a($model['name'],['result/view-discipline','id' => $model['id_result']],
+							   ['data-toggle' => 'tooltip',
+							    'title' => 'Подробнее',
+							   ]);
                            }
                            else {
                                return $model['name'];
