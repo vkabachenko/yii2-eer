@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = [
 
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['model'] = $student;
-$this->params['header'] = "{$student->studentName}, {$student->course} курс";
+$this->params['header'] = "{$program->name}, {$student->studentName}, {$student->course} курс";
 
 ?>
 
@@ -47,7 +47,6 @@ $this->params['header'] = "{$student->studentName}, {$student->course} курс"
                                return Html::a($disciplineName,['result/view-student','id' => $model['id_result']],
 							   ['data-toggle' => 'tooltip',
 							    'title' => 'Подробнее',
-							   //В надобности этой подсказки я сомневаюсь
 							   ]);
                            }
                            else {
