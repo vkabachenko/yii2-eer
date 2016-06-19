@@ -118,6 +118,11 @@ h3 {
 	font-size: 1.5em;
 }
 
+.jumbotron .container h3 {
+	font-size: 1.1em;
+
+}
+
 .jumbotron .container .faculty_emblem {
 	margin-right: 7px;
 }
@@ -283,6 +288,42 @@ label, .has-success .help-block, .has-success .control-label, .has-success .radi
 
 .pagination > li > a, .pagination > li > span {
 	color: #3A6690;
+}
+
+@media only screen and (max-width : 580px) {
+	.disciplinesGrid > tbody > tr > td:nth-child(1), .disciplinesGrid > thead > tr > th:nth-child(1), .disciplinesGrid > thead > tr > td:nth-child(1){
+		display: none;
+	}
+}
+
+@media only screen and (max-width : 500px) {
+	.disciplinesGrid > tbody > tr > td:nth-child(3), .disciplinesGrid > thead > tr > th:nth-child(3), .disciplinesGrid > thead > tr > td:nth-child(3){
+		display: none;
+	}
+}
+
+@media only screen and (max-width : 450px) {
+	.studResult > tbody > tr > td:nth-child(2), .studResult > thead > tr > th:nth-child(2){
+		display: none;
+	}
+	
+	.studentsGrid > tbody > tr > td:nth-child(3), .studentsGrid > thead > tr > th:nth-child(3), .studentsGrid > thead > tr > td:nth-child(3){
+		display: none;
+	}
+	
+	.disciplinesGrid > tbody > tr > td:nth-child(4), .disciplinesGrid > thead > tr > th:nth-child(4), .disciplinesGrid > thead > tr > td:nth-child(4){
+		display: none;
+	}
+}
+
+@media only screen and (max-width : 370px) {
+	.studResult > tbody > tr > td:nth-child(3), .studResult > thead > tr > th:nth-child(3){
+		display: none;
+	}
+	
+	.studentsGrid > tbody > tr > td:nth-child(4), .studentsGrid > thead > tr > th:nth-child(4), .studentsGrid > thead > tr > td:nth-child(4){
+		display: none;
+	}
 }
 /* Discipline grid end*/
 

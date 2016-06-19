@@ -6,17 +6,17 @@ use common\models\StudentResultFile;
 
 /* @var $model StudentResult */
 $this->params['model'] = $model;
-$this->params['header'] = $model->idDisciplineSemester->idDiscipline->fullName;
+$this->params['header'] = "{$model->idDisciplineSemester->idDiscipline->fullName} <h3>{$model->idStudentEducation->studentName}, {$model->idStudentEducation->course} курс </h3>";
 
 ?>
 
-    <h3>
+<!--<h3>
         <?= $model->idStudentEducation->studentName ?>, <?= $model->idStudentEducation->course ?> курс
         <?php if ($model->id_discipline_name): ?>
            <?= $model->idDisciplineName->name ?>
         <?php endif; ?>
 
-    </h3>
+    </h3>-->
 
 <?= DetailView::widget([
     'model' => $model,
