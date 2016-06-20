@@ -118,18 +118,14 @@ h3 {
 	font-size: 1.5em;
 }
 
-.jumbotron .container h3 {
-	font-size: 1.1em;
-
-}
-
 .jumbotron .container .faculty_emblem {
 	margin-right: 7px;
 }
 
 .jumbotron .container h3 {
     margin: 10px 0 0 0;
-    color: #6585a3;
+    font-size: 1em;
+    font-weight: bold;
 }
 /* Jumbotron end*/
 
